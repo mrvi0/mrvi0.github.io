@@ -97,13 +97,34 @@ button:hover {
     width: 20px; /* Ширина иконки */
     height: 20px; /* Высота иконки */
 }
+
+
 .powered-by {
     margin-top: 20px;
     text-align: center;
-    opacity: 0; /* Начальное состояние невидимо */
-    animation: fadeIn 1s forwards; /* Анимация появления */
+    padding: 12px 48px;
+    color: #ffffff;
+    background: linear-gradient(to right, #4d4d4d 0, white 10%, #4d4d4d 20%);
+    background-position: 0;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 3s infinite linear;
+    animation-fill-mode: forwards;
+    -webkit-text-size-adjust: none;
+    font-weight: 600;
+    font-size: 16px;
+    text-decoration: none;
+    white-space: nowrap
 }
 
+@keyframes shine{
+  0%{background-position: 0}
+    
+  60%{background-position: 180px}
+    
+  100%{background-position: 180px}
+    
+}
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -118,21 +139,7 @@ button:hover {
 .mr-vi {
     color: #5ebdf1; /* Цвет текста для Mr Vi */
     font-weight: bold; /* Жирный текст */
-    background: linear-gradient(to right, #095fab 10%, #25abe8 50%, #57d75b 60%);
-    background-size: auto auto;
-    background-clip: border-box;
-    background-size: 200% auto;
-    color: #fff;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: textclip 1.5s linear infinite;
-    display: inline-block;
+    font-size: 20px;
+    
 }
 
-
-@keyframes textclip {
-    to {
-      background-position: 200% center;
-    }
-  }
