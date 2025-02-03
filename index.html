@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Динамическая страница</title>
+</head>
+<body>
+    <h1>Введите данные</h1>
+    <form id="dataForm">
+        <label for="name">Имя:</label>
+        <input type="text" id="name" name="name"><br>
+
+        <label for="link">Ссылка на Telegram:</label>
+        <input type="text" id="link" name="link"><br>
+
+        <!-- Добавьте дополнительные поля по мере необходимости -->
+        
+        <input type="submit" value="Сгенерировать ссылку">
+    </form>
+
+    <div id="output"></div>
+
+    <script>
+        document.getElementById('dataForm').onsubmit = function(event) {
+            event.preventDefault(); // Предотвращаем отправку формы
+
+            const name = document.getElementById('name').value;
+            const link = document.getElementById('link').value;
+
+            // Генерируем URL с параметрами
+            const params = new URLSearchParams({ name, link });
+            const url = `${window.location.href}?${params.toString()}`;
+
+            // Отображаем данные
+            document.getElementById('output').innerHTML = `
+                <h2>Ваши данные:</h2>
+                <p>Имя: ${name}</p>
+                <p>Ссылка на Telegram: <a href="${link}">${link}</a></p>
+                <p>Сгенерированный URL: <a href="${url}">${url}</a></p>
+            `;
+        };
+
+        // Обработка URL-параметров при загрузке страницы
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('name') && urlParams.has('link')) {
+            const name = urlParams.get('name');
+            const link = urlParams.get('link');
+            document.getElementById('output').innerHTML = `
+                <h2>Ваши данные:</h2>
+                <p>Имя: ${name}</p>
+                <p>Ссылка на Telegram: <a href="${link}">${link}</a></p>
+            `;
+        }
+    </script>
+</body>
+</html>
