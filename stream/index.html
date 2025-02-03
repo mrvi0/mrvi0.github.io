@@ -2,158 +2,112 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="600">
-    <title>Анимация выезда, покачивания и спускания элемента</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/main.css">
+    <title>Генерация URL</title>
     
-    <style>
-        @font-face{
-            font-family: 'Teko';
-            src: 'teko.ttf';
-        }
-        body{
-            font-family: 'Teko', sans-serif;
-        }
-        .div_telegram {
-            width: 270px;
-            height: 80px;
-            position: fixed;
-            bottom: -100px;
-            right: 20px;
-            background-image: url("bg_tg.png");
-            background-size: cover;
-            background-color: #5ebdf1;
-            padding: 10px;
-            color: white;
-            text-align: center;
-            opacity: 0;
-            animation: slideInDown 1s forwards, shake 5s infinite alternate, slideOutDown 1s 10s forwards;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            letter-spacing: .2em;
-            border-radius: 5px;
-        }
-        /* Применение задержки для rectangle1 */
-        .div_boosty {
-            width: 270px;
-            height: 80px;
-            position: fixed;
-            bottom: -100px;
-            right: 20px;
-            background-image: url("bg_boosty.png");
-            background-size: cover;
-            background-color: #f8a12f;
-            padding: 10px;
-            color: white;
-            text-align: center;
-            opacity: 0;
-            animation: slideInDown-delayed 1s forwards 300s, shake 5s infinite alternate, slideOutDown-delayed 1s 310s forwards;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            letter-spacing: .2em;
-            border-radius: 5px;
-        }
-        .tg{
-            background-color: rgba(0, 0, 0, .3);
-            line-height: 1.3em;
-            padding: 5px 30px;
-            font-size: 30px;
-            border-radius: 10px;
-        }
-        .boosty{
-            background-color: rgba(0, 0, 0, .3);
-            line-height: 1.2em;
-            padding: 5px 5px;
-            font-size: 30px;
-            border-radius: 10px;
-        }
-        .desc{
-            margin-top: 10px;
-        }
-        @keyframes slideInDown {
-            0% {
-                bottom: -100px;
-                opacity: 0;
-            }
-            100% {
-                bottom: 20px;
-                opacity: 1;
-            }
-        }
-
-        @keyframes shake {
-            0% {
-                transform: translateY(0);
-            }
-            25% {
-                transform: translateY(-5px);
-            }
-            50% {
-                transform: translateY(5px);
-            }
-            75% {
-                transform: translateY(-5px);
-            }
-            100% {
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideOutDown {
-            0% {
-                bottom: 20px;
-                opacity: 1;
-            }
-            70% {
-                opacity: 1;
-            }
-            100% {
-                bottom: -170px;
-                opacity: 0;
-            }
-        }
-
-        /* Новые ключевые кадры анимации для rectangle1 */
-        @keyframes slideInDown-delayed {
-            0% {
-                bottom: -100px;
-                opacity: 0;
-            }
-            100% {
-                bottom: 20px;
-                opacity: 1;
-            }
-        }
-
-        @keyframes slideOutDown-delayed {
-            0% {
-                bottom: 20px;
-                opacity: 1;
-            }
-            70% {
-                opacity: 1;
-            }
-            100% {
-                bottom: -170px;
-                opacity: 0;
-            }
-        }
-
-        
-    </style>
 </head>
-
 <body>
-    <div class="div_telegram">
-        <div class="tg">T.ME/B4DCAT404</div>
-        <div class="desc">КАНАЛ В ТЕЛЕГЕ</div>
+    <h1>Генерация блоков</h1>
+    <form id="dataForm">
+        
+        <div id="blocksContainer"></div>
+
+        <!-- Поле для настройки задержки между блоками -->
+        <label for="blockDelay">Задержка между блоками (в секундах):<span style="cursor: pointer;" title="Это время, которое пройдет между исчезновением одного блока и появлением следующего. Применяется ко всем блокам, кроме первого.">❔</span></label>
+        <input type="number" id="blockDelay" min="1" value="60"><br><br>
+
+        <!-- Кнопка добавления нового блока -->
+        <button type="button" id="addBlock">Добавить новый блок</button><br><br>
+
+        <!-- Кнопка генерации ссылки -->
+        <button type="submit" id="generateLink">Сгенерировать ссылку</button>
+    </form>
+
+    <div id="output"></div>
+    <div class="powered-by">
+        <p>Powered by <a href="https://twitch.tv/f_4_t_c_a_t" class="mr-vi" target="_blank">Mr Vi</a></p>
     </div>
-    <div class="div_boosty">
-        <div class="boosty">BOOSTY.TO/B4DCAT404</div>
-        <div class="desc">САБКА ПО РУССКИ</div>
-    </div>
+    <script>
+       document.getElementById('addBlock').onclick = function() {
+           const blocksContainer = document.getElementById('blocksContainer');
+            
+           // Создаем новый блок
+           const newBlock = document.createElement('div');
+           newBlock.className = 'blockInput';
+           newBlock.innerHTML = `
+               <label for="link">Заголовок:</label>
+               <input type="text" class="link"><br>
+
+               <label for="description">Описание:</label>
+               <input type="text" class="description"><br>
+
+               <label for="color">Цвет блока:</label>
+               <input type="color" class="color color-input" value="#5ebdf1"><br>
+
+               <!-- Задержка будет только для последующих блоков -->
+               <input type="hidden" class="delay" value="" required> <!-- Скрытое поле для задержки -->
+               
+               <!-- Кнопка для удаления блока -->
+               <button type='button' class='removeBlock'>Удалить блок</button>`;
+           
+           blocksContainer.appendChild(newBlock);
+       };
+
+       // Удаление блока
+       document.getElementById('blocksContainer').addEventListener('click', function(event) {
+           if (event.target.classList.contains('removeBlock')) {
+               event.target.parentElement.remove();
+           }
+       });
+
+       // Генерация ссылки
+       document.getElementById('dataForm').onsubmit = function(event) {
+           event.preventDefault(); // Предотвращаем отправку формы
+
+           const blocks = [];
+           const blockInputs = document.querySelectorAll('.blockInput');
+
+           blockInputs.forEach(block => {
+               const link = encodeURIComponent(block.querySelector('.link').value);
+               const description = encodeURIComponent(block.querySelector('.description').value);
+               const color = encodeURIComponent(block.querySelector('.color').value);
+               
+               // Устанавливаем задержку для первого блока в '0'
+               const delay = (blocks.length === 0) ? '0' : document.getElementById('blockDelay').value;
+
+               blocks.push({ link, description, color, delay });
+           });
+
+           // Получаем задержку между блоками
+           const blockDelay = parseInt(document.getElementById('blockDelay').value);
+
+           // Рассчитываем время обновления страницы
+           const animationTimePerBlock = 6; // Время анимации одного блока (появление + исчезновение)
+           const totalAnimationTime = animationTimePerBlock * blocks.length + blockDelay * (blocks.length - 1) + blockDelay;
+
+           // Генерируем параметры для URL
+           const params = blocks.map((block, index) => 
+               `block${index}=${JSON.stringify(block)}`
+           ).join('&');
+
+           // Генерируем ссылку с рассчитанным временем обновления страницы
+           const generatedUrl = `${window.location.origin}/display.html?${params}&refreshRate=${totalAnimationTime}`;
+
+           // Отображаем сгенерированную ссылку в виде поля ввода
+           document.getElementById('output').innerHTML = `
+               <div class='link-container'>
+                   <input type='text' value='${generatedUrl}' class='link-input' readonly />
+               </div>`;
+       };
+
+       function copyToClipboard(text) {
+          navigator.clipboard.writeText(text).then(() => {
+              alert("Ссылка скопирована в буфер обмена!");
+          }, (err) => {
+              console.error("Ошибка при копировании текста:", err);
+          });
+      }
+   </script>
 </body>
 </html>
