@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="600">
+    <title>Анимация выезда, покачивания и спускания элемента</title>
+    
+    <style>
+        @font-face{
+            font-family: 'Teko';
+            src: 'teko.ttf';
+        }
+        body{
+            font-family: 'Teko', sans-serif;
+        }
+        .div_telegram {
+            width: 270px;
+            height: 80px;
+            position: fixed;
+            bottom: -100px;
+            right: 20px;
+            background-image: url("bg_tg.png");
+            background-size: cover;
+            background-color: #5ebdf1;
+            padding: 10px;
+            color: white;
+            text-align: center;
+            opacity: 0;
+            animation: slideInDown 1s forwards, shake 5s infinite alternate, slideOutDown 1s 10s forwards;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            letter-spacing: .2em;
+            border-radius: 5px;
+        }
+        /* Применение задержки для rectangle1 */
+        .div_boosty {
+            width: 270px;
+            height: 80px;
+            position: fixed;
+            bottom: -100px;
+            right: 20px;
+            background-image: url("bg_boosty.png");
+            background-size: cover;
+            background-color: #f8a12f;
+            padding: 10px;
+            color: white;
+            text-align: center;
+            opacity: 0;
+            animation: slideInDown-delayed 1s forwards 300s, shake 5s infinite alternate, slideOutDown-delayed 1s 310s forwards;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            letter-spacing: .2em;
+            border-radius: 5px;
+        }
+        .tg{
+            background-color: rgba(0, 0, 0, .3);
+            line-height: 1.3em;
+            padding: 5px 30px;
+            font-size: 30px;
+            border-radius: 10px;
+        }
+        .boosty{
+            background-color: rgba(0, 0, 0, .3);
+            line-height: 1.2em;
+            padding: 5px 5px;
+            font-size: 30px;
+            border-radius: 10px;
+        }
+        .desc{
+            margin-top: 10px;
+        }
+        @keyframes slideInDown {
+            0% {
+                bottom: -100px;
+                opacity: 0;
+            }
+            100% {
+                bottom: 20px;
+                opacity: 1;
+            }
+        }
+
+        @keyframes shake {
+            0% {
+                transform: translateY(0);
+            }
+            25% {
+                transform: translateY(-5px);
+            }
+            50% {
+                transform: translateY(5px);
+            }
+            75% {
+                transform: translateY(-5px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideOutDown {
+            0% {
+                bottom: 20px;
+                opacity: 1;
+            }
+            70% {
+                opacity: 1;
+            }
+            100% {
+                bottom: -170px;
+                opacity: 0;
+            }
+        }
+
+        /* Новые ключевые кадры анимации для rectangle1 */
+        @keyframes slideInDown-delayed {
+            0% {
+                bottom: -100px;
+                opacity: 0;
+            }
+            100% {
+                bottom: 20px;
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOutDown-delayed {
+            0% {
+                bottom: 20px;
+                opacity: 1;
+            }
+            70% {
+                opacity: 1;
+            }
+            100% {
+                bottom: -170px;
+                opacity: 0;
+            }
+        }
+
+        
+    </style>
+</head>
+
+<body>
+    <div class="div_telegram">
+        <div class="tg">T.ME/B4DCAT404</div>
+        <div class="desc">КАНАЛ В ТЕЛЕГЕ</div>
+    </div>
+    <div class="div_boosty">
+        <div class="boosty">BOOSTY.TO/B4DCAT404</div>
+        <div class="desc">САБКА ПО РУССКИ</div>
+    </div>
+</body>
+</html>
