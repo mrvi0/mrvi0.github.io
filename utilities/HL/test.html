@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Генерация JSON из XLSX</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/9.5.6/jsoneditor.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/9.5.6/jsoneditor.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #jsoneditor {
+            width: 100%;
+            height: 800px;
+            border: 1px solid #ccc;
+        }
+        .settings {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <script src="js/DnD.js"></script>
+    <h1>Загрузите XLSX файл для генерации JSON</h1>
+    <div id="drop-area">
+        <label for="upload">Перетащите файл сюда или нажмите, чтобы выбрать файл:</label>
+        <input type="file" id="upload" accept=".xlsx" style="display: none;" />
+    </div>
+    <button id="convert">Сгенерировать JSON</button>
+    <pre id="output"></pre>
+    
+    <div class="settings">
+        <h2>Настройки</h2>
+        <div>
+            <label>
+                <input type="checkbox" id="fillConcurentsCheckbox"> Включить fill_concurents
+            </label>
+            <select id="fillConcurents">
+                <option value="mode">mode</option>
+                <option value="median">median</option>
+                <option value="mean">mean</option>
+                <option value="nearest">nearest</option>
+            </select>
+        </div>
+        <div>
+            <label>
+                <input type="checkbox" id="salesTempoDepthCheckbox"> Включить sales_tempo_depth
+            </label>
+            <label>sales_tempo_depth:</label>
+            <label>
+                <input type="radio" name="salesTempoDepth" value="auto" checked> auto
+            </label>
+            <label>
+                <input type="radio" name="salesTempoDepth" value="manual"> manual
+            </label>
+            <input type="text" id="manualInput" placeholder="Введите значение" disabled>
+        </div>
+        <div>
+            <label for="combination">Выберите комбинации:</label>
+            <select id="combination" >
+                <option value="RO">RO</option>
+                <option value="BB">BB</option>
+                <option value="HB">HB</option>
+                <option value="FB">FB</option>
+                <option value="AI">AI</option>
+            </select>
+        </div>
+    </div>
+
+    <div id="jsoneditor"></div>
+
+    <script>
+        const container = document.getElementById("jsoneditor");
+        const options = {
+            mode: 'code'
+        };
+        const editor = new JSONEditor(container, options);
+
+        // Обработчик для радиокнопок
+        document.querySelectorAll('input[name="salesTempoDepth"]').forEach((elem) => {
+            elem.addEventListener("change", function() {
+                const manualInput = document.getElementById('manualInput');
+                manualInput.disabled = this.value === "auto";
+            });
+        });
+
+        document.getElementById('convert').addEventListener('click', function() {
+            const fileInput = document.getElementById('upload');
+            const file = fileInput.files[0];
+
+            if (!file) {
+                alert("Пожалуйста, выберите файл.");
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const data = new Uint8Array(e.target.result);
+                const workbook = XLSX.read(data, { type: 'array' });
+
+                // Получаем лист "Сопоставление номеров"
+                const sheetName = "Сопоставление номеров";
+                const worksheet = workbook.Sheets[sheetName];
+
+                if (!worksheet) {
+                    alert(`Лист с названием "${sheetName}" не найден.`);
+                    return;
+                }
+
+                // Получаем лист "Базовый тариф"
+                const baseSheetName = "Базовый тариф";
+                const baseWorksheet = workbook.Sheets[baseSheetName];
+
+                if (!baseWorksheet) {
+                    alert(`Лист с названием "${baseSheetName}" не найден.`);
+                    return;
+                }
+                
+
+                // Получаем лист "Ценовые стратегии"
+                const priceStrategyName = "Ценовые стратегии"
+                const priceStrategyWorksheet = workbook.Sheets[priceStrategyName]
+
+                if (!priceStrategyWorksheet) {
+                    alert(`Лист с названием "${priceStrategyName}" не найден.`);
+                    return;
+                }
+
+                const roomFundWorksheet = workbook.Sheets["Номерной фонд"];
+                if (!roomFundWorksheet) {
+                    alert(`Лист с названием "${roomFundWorksheet}" не найден.`);
+                    return;
+                }
+
+
+                const ratename = baseWorksheet[`B5`] ? baseWorksheet[`B5`].v : ""; // Значение из ячейки B5
+                const persons = baseWorksheet[`E5`] ? baseWorksheet[`E5`].v : ""; // Значение из ячейки E5
+                const baseKey = `${ratename}_${persons}`; // Формируем base_key
+
+                // Получаем значения для tariffs_comb
+                const breakfast = baseWorksheet[`D5`] ? baseWorksheet[`D5`].v : "0"; // Значение из ячейки D5
+                const isRefundableRate = baseWorksheet[`C5`] ? (baseWorksheet[`C5`].v === "Возвратный тариф" ? "1" : "0") : "0"; // Значение из ячейки C5
+                const tariffs_comb = {
+                    [baseKey]: `${breakfast === "Включен в цену" ? "1" : "0"}_${isRefundableRate}_${persons}` // Формируем tariffs_comb
+                };
+
+                const jsonOutput = [];
+                const selfId = worksheet[`C6`] ? worksheet[`C6`].v : "";
+                let rowIndex = 7; // Начинаем с 7-й строки (E7)
+                const profileTitles = [];
+
+                while (true) {
+                    const profileTitleCell = roomFundWorksheet[`E${rowIndex}`];
+                    const profileTitle = profileTitleCell ? profileTitleCell.v : "";
+
+                    if (!profileTitleCell) {
+                        break; // Если ячейка пустая, выходим из цикла
+                    }
+
+                    profileTitles.push(profileTitle);
+                    rowIndex++;
+                }
+
+                // Генерация JSON для каждого профиля
+                profileTitles.forEach((title, index) => {
+                    const json = {
+                        profile_name: `default${index}`
+                        
+                    };
+
+                    // Проверяем, включены ли настройки для fill_concurents
+                    if (document.getElementById('fillConcurentsCheckbox').checked) {
+                        json.fill_concurents = document.getElementById('fillConcurents').value; // Добавляем fill_concurents
+                    }
+
+                    // Проверяем, включены ли настройки для sales_tempo_depth
+                    if (document.getElementById('salesTempoDepthCheckbox').checked) {
+                        const salesTempoDepth = document.querySelector('input[name="salesTempoDepth"]:checked').value;
+                        json.sales_tempo_depth = salesTempoDepth === "auto" ? "auto" : document.getElementById('manualInput').value; // Добавляем sales_tempo_depth
+                    }
+
+                    
+
+                    const min_price = {};
+                    let rowIndex = 4 + index; // Начинаем с строки 5, 6, 7, ...
+                    const startRowIndex = rowIndex; // Запоминаем начальную строку
+
+                    // Проверяем, есть ли данные в строке D5 до столбца O
+                    const hasData = !!priceStrategyWorksheet[XLSX.utils.encode_cell({ c: 3, r: rowIndex })];
+                    if (hasData) {
+                        let columnIndex = 3; // Начинаем с D (4-й столбец)
+                        for (let month = 1; month <= 12; month++) {
+                            const priceCell = priceStrategyWorksheet[XLSX.utils.encode_cell({ c: columnIndex, r: rowIndex })]; // Получаем ячейку
+                            const price = priceCell ? priceCell.v : 0; // Значение ячейки
+                            min_price[month] = [price]; // Добавляем цену в объект с ключом месяца
+                            columnIndex++; // Переходим к следующему месяцу
+                        }
+                    } else {
+                        // Если D5 не пустое, берем одно значение из C для всех месяцев
+                        for (let month = 1; month <= 12; month++) {
+                            const priceCell = priceStrategyWorksheet[XLSX.utils.encode_cell({ c: 2, r: startRowIndex })]; // Получаем ячейку из C5, C6 и т.д.
+                            const price = priceCell ? priceCell.v : 0; // Значение ячейки
+                            min_price[month] = [price]; // Добавляем одно значение в объект с ключом месяца
+                            
+                        }
+                    }
+                    const select = document.getElementById('combination');
+                    const selectedValue = select.options[select.selectedIndex].value;
+                    const combinations = {
+                        'RO': ['0_1_2', '0_1_1', '0_0_2', '0_0_1'],
+                        'BB': ['1_1_2', '1_1_1', '1_0_2', '1_0_1'],
+                        'HB': ['2_1_2', '2_1_1', '2_0_2', '2_0_1'],
+                        'FB': ['3_1_2', '3_1_1', '3_0_2', '3_0_1'],
+                        'AI': ['4_1_2', '4_1_1', '4_0_2', '4_0_1']
+                    };
+                    const combinationList = [];
+                    if (selectedValue === 'RO') {
+                        combinationList.push(...combinations.RO);
+                    } else if (selectedValue === 'BB') {
+                        combinationList.push(...combinations.BB, ...combinations.RO);
+                    } else if (selectedValue === 'HB') {
+                        combinationList.push(...combinations.HB, ...combinations.BB, ...combinations.RO);
+                    } else if (selectedValue === 'FB') {
+                        combinationList.push(...combinations.FB, ...combinations.HB, ...combinations.BB, ...combinations.RO);
+                    } else if (selectedValue === 'AI') {
+                        combinationList.push(...combinations.AI, ...combinations.FB, ...combinations.HB, ...combinations.BB, ...combinations.RO);
+                    }
+                    
+                    json.level = 5; // Устанавливаем уровень
+                    json.concurents_coef = 1; // Устанавливаем коэффициент конкурентов
+                    json.base_key = baseKey; // Добавляем base_key
+                    json.tariffs_comb= { [baseKey]: tariffs_comb[baseKey] }, // Добавляем tariffs_comb
+                    json.combinations_list = combinationList;
+                     // Добавляем combination_list
+                    json.min_price = min_price; // Добавляем min_price
+                    json.intercept = { // Добавляем intercept
+                       [baseKey]: 0
+                    },
+                    json.profile_title = title; // Устанавливаем название профиля
+                    json.parsing = {
+                        selfID: selfId,
+                        concurents: []
+                    };
+                    json.categorys = [
+                        {
+                            standart_category:{
+                                history: [],
+                                forecast_history: [],
+                                title: []
+                            }
+                        }
+                    ];
+                    // Извлекаем ключи и значения для concurents
+                    columnIndex = 2; // Начинаем с C (3-й столбец)
+                    let isFirstKey = true; // Флаг для первого ключа
+
+                    while (true) {
+                        const keyCell = worksheet[XLSX.utils.encode_cell({ c: columnIndex, r: 5 })]; // Ключи из 6-й строки
+                        const key = keyCell ? keyCell.v : "";
+                        const hotelTitleCell = worksheet[XLSX.utils.encode_cell({ c: columnIndex, r: 4 })]; // Заголовок отеля из 5-й строки
+                        const hotelTitle = hotelTitleCell ? hotelTitleCell.v : "";
+                        const hotelCategoryCell = worksheet[XLSX.utils.encode_cell({ c: columnIndex, r: 6 + index })]; // Категория отеля из 7 строки
+                        const hotelCategory = hotelCategoryCell ? hotelCategoryCell.v : "";
+
+                        if (!keyCell) {
+                            break; // Если ячейка пустая, выходим из цикла
+                        }
+
+                        // Получаем значение для текущего профиля
+                        const valueCell = worksheet[XLSX.utils.encode_cell({ c: columnIndex, r: rowIndex + index - 1 })]; // Значение из строки
+                        const value = valueCell ? valueCell.v : "";
+
+                        // Добавляем объект в массив concurents только если есть значение для standart_category
+                        if (hotelCategory) {
+                            const concurentObject = {
+                                [key]: {
+                                    standart_category: hotelCategory.split(/",\s*"/).map(item => item.trim()), // Разделяем по '","'
+                                    hotel_title: hotelTitle
+                                }
+                            };
+
+                            // Добавляем concurents_influence, если это не первый ключ и hotel_title не "Мой отель" или "My Hotel"
+                            if (!isFirstKey && hotelTitle !== "Мой отель" && hotelTitle !== "My Hotel") {
+                                concurentObject[key].concurents_influence = 1;
+                            }
+
+                            json.parsing.concurents.push(concurentObject);
+                        }
+
+                        columnIndex++; // Переходим к следующему столбцу
+                        isFirstKey = false; // Устанавливаем флаг, что это не первый ключ
+                    }
+
+                    jsonOutput.push(json); // Добавляем объект JSON в массив
+                });
+
+                // Выводим результат в JSONEditor
+                editor.set(jsonOutput);
+            };
+            reader.readAsArrayBuffer(file);
+        });
+    </script>
+    
+</body>
+</html>
