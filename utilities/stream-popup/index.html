@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../src/css/main.css">
     <title>Генерация URL</title>
     
 </head>
@@ -20,6 +20,49 @@
         <!-- Кнопка добавления нового блока -->
         <button type="button" id="addBlock">Добавить новый блок</button><br><br>
 
+        <br>
+        <div class="direction-select">
+            <label for="direction">Направление:</label>
+            <select id="direction" name="direction">
+                <option value="right-down" selected>Вправо вниз</option>
+                <option value="left-up">Влево вверх</option>
+                <option value="right-up">Вправо вверх</option>
+                <option value="left-down">Влево вниз</option>
+            </select>
+        </div>
+        <!-- <div class="direction-select-container">
+            <div class="direction-select">
+                <input type="radio" id="right-down" name="direction" value="right-down" checked>
+                <label for="right-down">
+                    <svg width="30px" height="30px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9.66411 6.8359L3.414 0.585785L0.585571 3.41421L6.83568 9.66432L4.00002 12.5L5.50002 14H14V5.49999L12.5 3.99999L9.66411 6.8359Z" fill="#000000"/>
+                        </svg>
+                </label>
+        
+                <input type="radio" id='left-up' name='direction' value='left-up'>
+                <label for = 'left-up'>  
+                    <svg width="30px" height="30px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2 2V10.5L3.5 12L6.33579 9.16421L12.5858 15.4142L15.4142 12.5858L9.16421 6.33579L12 3.5L10.5 2H2Z" fill="#000000"/>
+                        </svg>
+                </label>
+        
+                <input type='radio'id ='right-up'name ='direction'value ='right-up'/>  
+                <label for = 'right-up'>  
+                    <svg width="30px" height="30px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14 2H5.50003L4.00003 3.5L6.83581 6.33579L0.585815 12.5858L3.41424 15.4142L9.66424 9.16421L12.5 12L14 10.5L14 2Z" fill="#000000"/>
+                        </svg>
+                </label >
+                
+                <input type ="radio"id ="left-down"name ="direction"value ="left-down"/>  
+                <label for ="left-down">  
+                    <svg width="30px" height="30px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9.16421 9.66421L15.4142 3.41421L12.5858 0.585785L6.33579 6.83578L3.5 4L2 5.5V14H10.5L12 12.5L9.16421 9.66421Z" fill="#000000"/>
+                        </svg> 
+                </label >
+                
+            </div>
+        </div> -->
+        
         <!-- Кнопка генерации ссылки -->
         <button type="submit" id="generateLink">Сгенерировать ссылку</button>
     </form>
@@ -63,43 +106,34 @@
 
        // Генерация ссылки
        document.getElementById('dataForm').onsubmit = function(event) {
-           event.preventDefault(); // Предотвращаем отправку формы
-
-           const blocks = [];
-           const blockInputs = document.querySelectorAll('.blockInput');
-
-           blockInputs.forEach(block => {
-               const link = encodeURIComponent(block.querySelector('.link').value);
-               const description = encodeURIComponent(block.querySelector('.description').value);
-               const color = encodeURIComponent(block.querySelector('.color').value);
-               
-               // Устанавливаем задержку для первого блока в '0'
-               const delay = (blocks.length === 0) ? '0' : document.getElementById('blockDelay').value;
-
-               blocks.push({ link, description, color, delay });
-           });
-
-           // Получаем задержку между блоками
-           const blockDelay = parseInt(document.getElementById('blockDelay').value);
-
-           // Рассчитываем время обновления страницы
-           const animationTimePerBlock = 6; // Время анимации одного блока (появление + исчезновение)
-           const totalAnimationTime = animationTimePerBlock * blocks.length + blockDelay * (blocks.length - 1) + blockDelay;
-
-           // Генерируем параметры для URL
-           const params = blocks.map((block, index) => 
-               `block${index}=${JSON.stringify(block)}`
-           ).join('&');
-
-           // Генерируем ссылку с рассчитанным временем обновления страницы
-           const generatedUrl = `https://mrvi0.github.io/utilities/stream-popup/display.html?${params}&refreshRate=${totalAnimationTime}`;
-
-           // Отображаем сгенерированную ссылку в виде поля ввода
-           document.getElementById('output').innerHTML = `
-               <div class='link-container'>
-                   <input type='text' value='${generatedUrl}' class='link-input' readonly />
-               </div>`;
-       };
+        event.preventDefault();
+    
+        const blocks = [];
+        const blockInputs = document.querySelectorAll('.blockInput');
+    
+        blockInputs.forEach(block => {
+            const link = encodeURIComponent(block.querySelector('.link').value);
+            const description = encodeURIComponent(block.querySelector('.description').value);
+            const color = encodeURIComponent(block.querySelector('.color').value);
+            const delay = (blocks.length === 0) ? '0' : document.getElementById('blockDelay').value;
+    
+            blocks.push({ link, description, color, delay });
+        });
+    
+        const blockDelay = parseInt(document.getElementById('blockDelay').value);
+        const animationTimePerBlock = 6;
+        const totalAnimationTime = animationTimePerBlock * blocks.length + blockDelay * (blocks.length - 1) + blockDelay;
+    
+        const direction = document.getElementById('direction').value; // Получаем выбранное направление
+        const params = blocks.map((block, index) => `block${index}=${JSON.stringify(block)}`).join('&');
+    
+        const generatedUrl = `https://mrvi0.github.io/utilities/stream-popup/display.html?${params}&refreshRate=${totalAnimationTime}&direction=${direction}`;
+    
+        document.getElementById('output').innerHTML = `
+            <div class='link-container'>
+                <input type='text' value='${generatedUrl}' class='link-input' readonly />
+            </div>`;
+    };
 
        function copyToClipboard(text) {
           navigator.clipboard.writeText(text).then(() => {
