@@ -143,3 +143,15 @@ button:hover {
     
 }
 
+
+
+.direction-select {
+    margin-bottom: 20px;
+}
+
+.direction-select select {
+    padding: 10px;
+    border-radius: 4px;
+    border: none;
+}
+
