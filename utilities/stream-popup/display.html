@@ -4,35 +4,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Отображение блоков</title>
-
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        @font-face {
+            font-family: 'Teko'; 
+            src: url(../../src/fonts/teko.ttf); 
         }
+
+        /* Стили и анимации */
         .block {
             width: 270px;
             height: 80px;
             position: fixed;
-            bottom: -100px;
-            right: 20px;
             background-color: #f8a12f;
             padding: 10px;
             color: white;
             text-align: center;
-            opacity: 0;
+            opacity: 0; /* Начальное состояние: прозрачный */
+            visibility: hidden; /* Начальное состояние: скрыт */
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             letter-spacing: .2em;
             border-radius: 5px;
+            transition: opacity 0.5s, visibility 0.5s; /* Плавное появление */
         }
-
-        @keyframes slideInDown {
-            0% { bottom: -100px; opacity: 0; }
-            100% { bottom: 20px; opacity: 1; }
+        .block p:first-child {
+            font-family: 'Teko', sans-serif;
         }
-
+        /* Анимации для разных направлений */
+        @keyframes slideInRightDown {
+            0% { bottom: -100px; opacity: 0; visibility: hidden; }
+            100% { bottom: 20px; opacity: 1; visibility: visible; }
+        }
+        
+        @keyframes slideOutRightDown {
+            0% { bottom: 20px; opacity: 1; visibility: visible; }
+            100% { bottom: -100px; opacity: 0; visibility: hidden; }
+        }
+        
+        @keyframes slideInRightUp {
+            0% { top: -100px; opacity: 0; visibility: hidden; }
+            100% { top: 20px; opacity: 1; visibility: visible; }
+        }
+        
+        @keyframes slideOutRightUp {
+            0% { top: 20px; opacity: 1; visibility: visible; }
+            100% { top: -100px; opacity: 0; visibility: hidden; }
+        }
+        
+        @keyframes slideInLeftDown {
+            0% { bottom: -100px; opacity: 0; visibility: hidden; }
+            100% { bottom: 20px; opacity: 1; visibility: visible; }
+        }
+        
+        @keyframes slideOutLeftDown {
+            0% { bottom: 20px; opacity: 1; visibility: visible; }
+            100% { bottom: -100px; opacity: 0; visibility: hidden; }
+        }
+        
+        @keyframes slideInLeftUp {
+            0% { top: -100px; opacity: 0; visibility: hidden; }
+            100% { top: 20px; opacity: 1; visibility: visible; }
+        }
+        
+        @keyframes slideOutLeftUp {
+            0% { top: 20px; opacity: 1; visibility: visible; }
+            100% { top: -100px; opacity: 0; visibility: hidden; }
+        }
+        
         @keyframes shake {
             0% { transform: translateY(0); }
             25% { transform: translateY(-5px); }
@@ -40,76 +80,102 @@
             75% { transform: translateY(-5px); }
             100% { transform: translateY(0); }
         }
- 
-        @keyframes slideOutDown {
-            0% { bottom: 20px; opacity: 1; }
-            100% { bottom: -100px; opacity: 0; }
-        }
+
+        /* Классы для разных направлений */
+        .right-down { bottom: -100px; right: 20px; }
+        .left-up { top: -100px; left: 20px; }
+        .right-up { top: -100px; right: 20px; }
+        .left-down { bottom: -100px; left: 20px; }
     </style>
 </head>
-
 <body>
     <h1 style="display: none;">Блоки</h1>
-
     <div id="container"></div>
 
     <script>
         // Получаем параметры из URL
         const urlParams = new URLSearchParams(window.location.search);
-        const container = document.getElementById('container');
+        const direction = urlParams.get('direction'); // Получаем направление
+        const refreshRate = urlParams.get('refreshRate'); // Получаем время обновления
 
-        // Извлекаем данные о блоках
-        const blocks = [];
-        urlParams.forEach((value, key) => {
-          if (key.startsWith('block')) {
-              blocks.push(JSON.parse(decodeURIComponent(value)));
-          } else if (key === 'refreshRate') {
-              const refreshRateValue = urlParams.get(key);
-              if (refreshRateValue) {
-                  document.head.insertAdjacentHTML('beforeend', `<meta http-equiv="refresh" content="${refreshRateValue}">`);
-              }
-          }
-        });
+        console.log('Направление:', direction); // Отладочное сообщение
+        console.log('Время обновления:', refreshRate); // Отладочное сообщение
 
-        // Генерация стилей для каждого блока
-        function generateStyles(blocks) {
-          let styles = '';
-          let totalDelay = 0;
-
-          blocks.forEach((block, index) => {
-              const delayIn = totalDelay + parseInt(block.delay); // Задержка для появления
-              const delayOut = delayIn + 5; // Задержка для исчезновения (появление + shake)
-
-              styles += `
-                .block-${index} {
-                    animation:
-                        slideInDown 1s forwards ${delayIn}s,
-                        shake 5s infinite alternate ${delayIn}s,
-                        slideOutDown 1s forwards ${delayOut}s;
-                }
-              `;
-
-              totalDelay = delayOut + 1; // Обновляем общее время (исчезновение + небольшой интервал)
-          });
-
-          return styles;
+        // Добавляем мета-тег для автоматического обновления страницы
+        if (refreshRate) {
+            const metaTag = document.createElement('meta');
+            metaTag.httpEquiv = 'refresh';
+            metaTag.content = refreshRate;
+            document.head.appendChild(metaTag);
+            console.log('Мета-тег добавлен:', metaTag); // Отладочное сообщение
         }
 
-        // Вставляем стили в документ
+        const blocks = [];
+        urlParams.forEach((value, key) => {
+            if (key.startsWith('block')) {
+                try {
+                    const blockData = JSON.parse(decodeURIComponent(value));
+                    blocks.push(blockData);
+                } catch (error) {
+                    console.error('Ошибка при парсинге блока:', error);
+                }
+            }
+        });
+        console.log('Блоки:', blocks); // Отладочное сообщение
+
+        // Показываем блоки для выбранного направления
+        const container = document.getElementById('container');
+        if (!container) {
+            console.error('Контейнер не найден!');
+        } else {
+            console.log('Контейнер найден:', container);
+        }
+
+        // Генерация стилей для анимаций
+        function generateStyles(blocks, direction) {
+            let styles = '';
+            let totalDelay = 0;
+
+            blocks.forEach((block, index) => {
+                const delayIn = totalDelay + parseInt(block.delay);
+                const delayOut = delayIn + 5;
+
+                styles += `
+                    .block-${index}.${direction} {
+                        animation:
+                            slideIn${capitalizeFirstLetter(direction)} 1s forwards ${delayIn}s,
+                            shake 5s infinite alternate ${delayIn}s,
+                            slideOut${capitalizeFirstLetter(direction)} 1s forwards ${delayOut}s;
+                        opacity: 1; /* Показываем блок */
+                        visibility: visible;
+                    }
+                `;
+
+                totalDelay = delayOut + 1;
+            });
+
+            return styles;
+        }
+
+        // Вспомогательная функция для капитализации первой буквы
+        function capitalizeFirstLetter(string) {
+            return string.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join('');
+        }
+
         const styleTag = document.createElement('style');
-        styleTag.textContent = generateStyles(blocks);
+        styleTag.textContent = generateStyles(blocks, direction);
         document.head.appendChild(styleTag);
 
         // Отображение блоков
         blocks.forEach((block, index) => {
-          const div = document.createElement('div');
-          div.className = `block block-${index}`;
-          div.style.backgroundColor = decodeURIComponent(block.color);
-          div.innerHTML = `
-              <p>${decodeURIComponent(block.link)}</a></p>
-              <p>${decodeURIComponent(block.description)}</p>`;
-          
-          container.appendChild(div);
+            const div = document.createElement('div');
+            div.className = `block block-${index} ${direction} debug`; // Добавляем отладочный класс
+            div.style.backgroundColor = decodeURIComponent(block.color);
+            div.innerHTML = `
+                <p>${decodeURIComponent(block.link)}</p>
+                <p>${decodeURIComponent(block.description)}</p>`;
+            
+            container.appendChild(div);
         });
     </script>
 </body>
