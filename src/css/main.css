@@ -1,6 +1,5 @@
 body {
-    background-color: #1e1e1e; /* Темный фон */
-    color: #ffffff; /* Белый текст */
+    
     font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
@@ -155,3 +154,139 @@ button:hover {
     border: none;
 }
 
+
+@font-face {
+    font-family: 'Teko'; 
+    src: url(../../src/fonts/teko.ttf); 
+}
+
+/* Стили и анимации */
+.block {
+    width: 270px;
+    height: 80px;
+    position: fixed;
+    background-color: #f8a12f;
+    /*padding: 10px;*/
+    color: white;
+    text-align: center;
+    opacity: 0; /* Начальное состояние: прозрачный */
+    visibility: hidden; /* Начальное состояние: скрыт */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    transition: opacity 0.5s, visibility 0.5s; /* Плавное появление */
+}
+.block p:first-child {
+    font-family: 'Teko', sans-serif;
+    width: 100%;
+    font-size: 50px;
+    margin: 10px 0 0 0;
+    padding: 0;
+    height: 70px;
+    background-color: #00000033;
+}
+.block p:last-child {
+    font-family: 'Teko', sans-serif;
+    margin:5px 0 0 0;
+    width: 100%;
+}
+/* Анимации для разных направлений */
+@keyframes slideInRightDown {
+    0% { bottom: -100px; opacity: 0; visibility: hidden; }
+    100% { bottom: 20px; opacity: 1; visibility: visible; }
+}
+
+@keyframes slideOutRightDown {
+    0% { bottom: 20px; opacity: 1; visibility: visible; }
+    100% { bottom: -100px; opacity: 0; visibility: hidden; }
+}
+
+@keyframes slideInRightUp {
+    0% { top: -100px; opacity: 0; visibility: hidden; }
+    100% { top: 20px; opacity: 1; visibility: visible; }
+}
+
+@keyframes slideOutRightUp {
+    0% { top: 20px; opacity: 1; visibility: visible; }
+    100% { top: -100px; opacity: 0; visibility: hidden; }
+}
+
+@keyframes slideInLeftDown {
+    0% { bottom: -100px; opacity: 0; visibility: hidden; }
+    100% { bottom: 20px; opacity: 1; visibility: visible; }
+}
+
+@keyframes slideOutLeftDown {
+    0% { bottom: 20px; opacity: 1; visibility: visible; }
+    100% { bottom: -100px; opacity: 0; visibility: hidden; }
+}
+
+@keyframes slideInLeftUp {
+    0% { top: -100px; opacity: 0; visibility: hidden; }
+    100% { top: 20px; opacity: 1; visibility: visible; }
+}
+
+@keyframes slideOutLeftUp {
+    0% { top: 20px; opacity: 1; visibility: visible; }
+    100% { top: -100px; opacity: 0; visibility: hidden; }
+}
+
+@keyframes shake {
+    0% { transform: translateY(0); }
+    25% { transform: translateY(-5px); }
+    50% { transform: translateY(5px); }
+    75% { transform: translateY(-5px); }
+    100% { transform: translateY(0); }
+}
+
+/* Классы для разных направлений */
+.right-down { bottom: -100px; right: 20px; }
+.left-up { top: -100px; left: 20px; }
+.right-up { top: -100px; right: 20px; }
+.left-down { bottom: -100px; left: 20px; }
+
+.none-logo{
+
+}
+.discord-logo::before{
+    content: "";
+    background-image: url(https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/636e0a6ca814282eca7172c6_icon_clyde_white_RGB.svg);
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    opacity: 0.5;
+    position: absolute;
+    z-index: -1;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 100%;
+    height: 100%;
+}
+.tg-logo::before{
+    content: "";
+    background-image: url(https://freelogopng.com/images/all_img/1683044996telegram-logo-png.png);
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    opacity: 0.5;
+    position: absolute;
+    z-index: -1;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 100%;
+    height: 100%;
+}
+.boosty-logo::before{
+    content: "";
+    background-image: url(https://huntplayers.com/assets/boosty.png);
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    
+    opacity: 0.5;
+    position: absolute;
+    z-index: -1;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 100%;
+    height: 100%;
+}
