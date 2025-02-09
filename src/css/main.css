@@ -159,11 +159,16 @@ button:hover {
     font-family: 'Teko'; 
     src: url(../../src/fonts/teko.ttf); 
 }
+.russo-one-regular {
+    font-family: "Russo One", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
 
 /* Стили и анимации */
 .block {
     width: 270px;
-    height: 80px;
+    height: 90px;
     position: fixed;
     background-color: #f8a12f;
     /*padding: 10px;*/
@@ -179,17 +184,20 @@ button:hover {
     transition: opacity 0.5s, visibility 0.5s; /* Плавное появление */
 }
 .block p:first-child {
-    font-family: 'Teko', sans-serif;
-    width: 100%;
-    font-size: 50px;
-    margin: 10px 0 0 0;
+    position: absolute;
+    /* width: 100%; */
+    font-size: 1.5rem;
+    margin: -20px 0 0 0;
     padding: 0;
-    height: 70px;
+    /* line-height: 70px; */
+    padding: 5px 30px;
+    border-radius: 10px;
     background-color: #00000033;
 }
 .block p:last-child {
+    position: absolute;
     font-family: 'Teko', sans-serif;
-    margin:5px 0 0 0;
+    margin:55px 0 0 0;
     width: 100%;
 }
 /* Анимации для разных направлений */
@@ -256,7 +264,7 @@ button:hover {
     background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
-    opacity: 0.5;
+    opacity: 0.3;
     position: absolute;
     z-index: -1;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -269,7 +277,7 @@ button:hover {
     background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
-    opacity: 0.5;
+    opacity: 0.3;
     position: absolute;
     z-index: -1;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -282,8 +290,7 @@ button:hover {
     background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
-    
-    opacity: 0.5;
+    opacity: 0.3;
     position: absolute;
     z-index: -1;
     top: 0; left: 0; right: 0; bottom: 0;

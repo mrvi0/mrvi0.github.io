@@ -10,6 +10,9 @@
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-TPQNM8CC');</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../src/css/main.css">
     
 </head>
@@ -100,7 +103,7 @@
             div.className = `block block-${index} ${direction} ${block.logo}`; // Добавляем отладочный класс
             div.style.backgroundColor = decodeURIComponent(block.color);
             div.innerHTML = `
-                <p>${decodeURIComponent(block.link)}</p>
+                <p class="russo-one-regular">${decodeURIComponent(block.link)}</p>
                 <p>${decodeURIComponent(block.description)}</p>`;
             
             container.appendChild(div);
