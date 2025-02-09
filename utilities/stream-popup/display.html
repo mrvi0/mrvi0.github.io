@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Отображение блоков</title>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-TPQNM8CC');</script>
     <style>
         @font-face {
             font-family: 'Teko'; 
@@ -16,7 +22,7 @@
             height: 80px;
             position: fixed;
             background-color: #f8a12f;
-            padding: 10px;
+            /*padding: 10px;*/
             color: white;
             text-align: center;
             opacity: 0; /* Начальное состояние: прозрачный */
@@ -25,12 +31,22 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            letter-spacing: .2em;
             border-radius: 5px;
             transition: opacity 0.5s, visibility 0.5s; /* Плавное появление */
         }
         .block p:first-child {
             font-family: 'Teko', sans-serif;
+            width: 100%;
+            font-size: 50px;
+            margin: 10px 0 0 0;
+            padding: 0;
+            height: 70px;
+            background-color: #00000033;
+        }
+        .block p:last-child {
+            font-family: 'Teko', sans-serif;
+            margin:5px 0 0 0;
+            width: 100%;
         }
         /* Анимации для разных направлений */
         @keyframes slideInRightDown {

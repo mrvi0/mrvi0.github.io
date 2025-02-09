@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-TPQNM8CC');</script>
+    <!-- End Google Tag Manager -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../src/css/main.css">
@@ -30,38 +37,6 @@
                 <option value="left-down">Влево вниз</option>
             </select>
         </div>
-        <!-- <div class="direction-select-container">
-            <div class="direction-select">
-                <input type="radio" id="right-down" name="direction" value="right-down" checked>
-                <label for="right-down">
-                    <svg width="30px" height="30px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9.66411 6.8359L3.414 0.585785L0.585571 3.41421L6.83568 9.66432L4.00002 12.5L5.50002 14H14V5.49999L12.5 3.99999L9.66411 6.8359Z" fill="#000000"/>
-                        </svg>
-                </label>
-        
-                <input type="radio" id='left-up' name='direction' value='left-up'>
-                <label for = 'left-up'>  
-                    <svg width="30px" height="30px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M2 2V10.5L3.5 12L6.33579 9.16421L12.5858 15.4142L15.4142 12.5858L9.16421 6.33579L12 3.5L10.5 2H2Z" fill="#000000"/>
-                        </svg>
-                </label>
-        
-                <input type='radio'id ='right-up'name ='direction'value ='right-up'/>  
-                <label for = 'right-up'>  
-                    <svg width="30px" height="30px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M14 2H5.50003L4.00003 3.5L6.83581 6.33579L0.585815 12.5858L3.41424 15.4142L9.66424 9.16421L12.5 12L14 10.5L14 2Z" fill="#000000"/>
-                        </svg>
-                </label >
-                
-                <input type ="radio"id ="left-down"name ="direction"value ="left-down"/>  
-                <label for ="left-down">  
-                    <svg width="30px" height="30px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9.16421 9.66421L15.4142 3.41421L12.5858 0.585785L6.33579 6.83578L3.5 4L2 5.5V14H10.5L12 12.5L9.16421 9.66421Z" fill="#000000"/>
-                        </svg> 
-                </label >
-                
-            </div>
-        </div> -->
         
         <!-- Кнопка генерации ссылки -->
         <button type="submit" id="generateLink">Сгенерировать ссылку</button>
@@ -79,20 +54,28 @@
            const newBlock = document.createElement('div');
            newBlock.className = 'blockInput';
            newBlock.innerHTML = `
-               <label for="link">Заголовок:</label>
-               <input type="text" class="link"><br>
+                <label for="link">Заголовок:</label>
+                <input type="text" class="link"><br>
 
-               <label for="description">Описание:</label>
-               <input type="text" class="description"><br>
+                <label for="description">Описание:</label>
+                <input type="text" class="description"><br>
 
-               <label for="color">Цвет блока:</label>
-               <input type="color" class="color color-input" value="#5ebdf1"><br>
-
-               <!-- Задержка будет только для последующих блоков -->
-               <input type="hidden" class="delay" value="" required> <!-- Скрытое поле для задержки -->
+                <label for="color">Цвет блока:</label>
+                <input type="color" class="color color-input" value="#5ebdf1"><br>
+                
+                <p>Логотип</p>
+                <select id="logo" name="logo">
+                    <option value="none-logo" selected>Без logo</option>
+                    <option value="tg-logo">Telegram</option>
+                    <option value="boosty-logo">Boosty</option>
+                    <option value="discord-logo">Discord</option>
+                </select>
+                <br>
+                <!-- Задержка будет только для последующих блоков -->
+                <input type="hidden" class="delay" value="" required> <!-- Скрытое поле для задержки -->
                
-               <!-- Кнопка для удаления блока -->
-               <button type='button' class='removeBlock'>Удалить блок</button>`;
+                <!-- Кнопка для удаления блока -->
+                <button type='button' class='removeBlock'>Удалить блок</button>`;
            
            blocksContainer.appendChild(newBlock);
        };
@@ -116,8 +99,9 @@
             const description = encodeURIComponent(block.querySelector('.description').value);
             const color = encodeURIComponent(block.querySelector('.color').value);
             const delay = (blocks.length === 0) ? '0' : document.getElementById('blockDelay').value;
-    
-            blocks.push({ link, description, color, delay });
+            const logo = block.querySelector('#logo').value;
+
+            blocks.push({ link, description, color,logo, delay });
         });
     
         const blockDelay = parseInt(document.getElementById('blockDelay').value);
