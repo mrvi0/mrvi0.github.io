@@ -12,7 +12,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../src/css/main.css">
-    <title>Генератор pop-up</title>
+    <title>QR Code Generator</title>
     
 </head>
 <body>
@@ -22,43 +22,43 @@
             color: #fff;
         }
     </style>
-    <h1>Генерация блоков</h1>
+    <h1>QR Generator</h1>
     <form id="dataForm">
         
         <div id="blocksContainer"></div>
 
         <!-- Поле для настройки задержки между блоками -->
-        <label for="blockDelay">Задержка между блоками (в секундах):<span style="cursor: pointer;" title="Это время, которое пройдет между исчезновением одного блока и появлением следующего. Применяется ко всем блокам, кроме первого.">❔</span></label>
+        <label for="blockDelay">Delay (seconds):<span style="cursor: pointer;" title="Это время, которое пройдет между исчезновением одного блока и появлением следующего. Применяется ко всем блокам, кроме первого.">❔</span></label>
         <input type="number" id="blockDelay" min="1" value="60"><br><br>
 
         <!-- Кнопка добавления нового блока -->
-        <button type="button" id="addBlock">Добавить новый блок</button><br><br>
+        <button type="button" id="addBlock">Add new QR</button><br><br>
 
         <br>
         <div class="direction-select">
-            <label for="direction">Направление:</label>
+            <label for="direction">Position:</label>
             <select id="direction" name="direction">
-                <option value="right-down" selected>Вправо вниз</option>
-                <option value="left-up">Влево вверх</option>
-                <option value="right-up">Вправо вверх</option>
-                <option value="left-down">Влево вниз</option>
+                <option value="right-down" selected>Bottom Right</option>
+                <option value="left-down">Bottom Left</option>
+                <option value="right-up">Top Right</option>
+                <option value="left-up">Top Left</option>
             </select>
         </div>
         
         <!-- Кнопка генерации ссылки -->
-        <button type="submit" id="generateLink">Сгенерировать ссылку</button>
+        <button type="submit" id="generateLink">Generate Link</button>
     </form>
 
     <div id="output"></div>
     <div class="centerflip">
-        <button class="flippy">Как это работает?</button>
+        <button class="flippy">How it works?</button>
         <div class="flippanel">
             <p>Сервис для генерации блоков позволяет вам создавать интерактивные элементы, которые появляются на странице в выбранном вами направлении. Вот как это работает:
                 <ul>
-                    <li><b><i>Добавление блоков:</i></b> Вы можете добавлять новые блоки с полями для ссылки <i>(типа t.me/B4DCAT, без https://)</i>, описания и цвета.</li>
-                    <li><b><i>Выбор логотипа:</i></b> Добавьте логотип к блоку из предзагруженных вариантов или оставьте без логотипа.</li>
-                    <li><b><i>Выбор направления:</i></b> Выберите сторону, с которой будет появляться каждый блок: вправо вниз, влево вверх, вправо вверх или влево вниз.</li>
-                    <li><b><i>Задержка между блоками:</i></b> Установите время задержки между появлением каждого блока. Обычно добавляют 5мин (300сек)</li>
+                    <li><i>Добавление блоков:</i> Вы можете добавлять новые блоки с полями для ссылки (типа t.me/B4DCAT), описания и цвета.</li>
+                    <li><i>Выбор логотипа:</i> Добавьте логотип к блоку из предзагруженных вариантов или оставьте без логотипа.</li>
+                    <li><i>Выбор направления:</i> Выберите сторону, с которой будет появляться каждый блок: вправо вниз, влево вверх, вправо вверх или влево вниз.</li>
+                    <li><i>Задержка между блоками:</i> Установите время задержки между появлением каждого блока. Обычно добавляют 5мин (300сек)</li>
                 </ul>
             </p>
             <p>После заполнения всех полей вы можете сгенерировать ссылку на страницу display.html, 
@@ -89,28 +89,23 @@
            const newBlock = document.createElement('div');
            newBlock.className = 'blockInput';
            newBlock.innerHTML = `
-                <label for="link">Заголовок:</label>
+                <label for="link">URL:</label>
                 <input type="text" class="link"><br>
 
-                <label for="description">Описание:</label>
+                <label for="description">Desscription:</label>
                 <input type="text" class="description"><br>
 
-                <label for="color">Цвет блока:</label>
+                <label for="color">Background color:</label>
                 <input type="color" class="color color-input" value="#5ebdf1"><br>
                 
-                <p>Логотип</p>
-                <select id="logo" name="logo">
-                    <option value="none-logo" selected>Без logo</option>
-                    <option value="tg-logo">Telegram</option>
-                    <option value="boosty-logo">Boosty</option>
-                    <option value="discord-logo">Discord</option>
-                </select>
+                <label for="duration">Duration:</label>
+                <input type="number" class="duration" value="5"><br>
                 <br>
                 <!-- Задержка будет только для последующих блоков -->
                 <input type="hidden" class="delay" value="" required> <!-- Скрытое поле для задержки -->
                
                 <!-- Кнопка для удаления блока -->
-                <button type='button' class='removeBlock' style="background-color: #f15e5e">Удалить блок</button>`;
+                <button type='button' class='removeBlock' style="background-color: #f15e5e">Delete QR</button>`;
            
            blocksContainer.appendChild(newBlock);
        };
