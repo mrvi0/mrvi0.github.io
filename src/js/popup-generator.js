@@ -13,7 +13,7 @@
            newBlock.className = 'blockInput';
            newBlock.innerHTML = `
                 <label for="link">Заголовок:</label>
-                <input type="text" class="link"><br>
+                <input type="text" class="link" required><br>
 
                 <label for="description">Описание:</label>
                 <input type="text" class="description"><br>
