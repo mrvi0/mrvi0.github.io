@@ -1,0 +1,172 @@
+/* Базовые стили и шрифты */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #1a1a2e; /* Темно-синий фон */
+    color: #e0e0e0; /* Светлый текст */
+    line-height: 1.6;
+    overflow-x: hidden; /* Предотвращаем горизонтальный скролл */
+    min-height: 100vh;
+    display: flex; /* Используем Flexbox для центрирования */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Контейнер для фона tsParticles */
+#tsparticles {
+    position: fixed; /* Фиксируем фон */
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1; /* Отправляем фон назад */
+}
+
+/* Основной контейнер контента */
+.content {
+    text-align: center;
+    padding: 40px 20px;
+    max-width: 800px;
+    margin: auto;
+    background-color: rgba(26, 26, 46, 0.6); /* Полупрозрачный фон для контента */
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1; /* Убеждаемся, что контент над фоном */
+    backdrop-filter: blur(5px); /* Эффект размытия фона под блоком (если поддерживается) */
+}
+
+/* Заголовок */
+h1 {
+    font-size: 3em;
+    margin-bottom: 0.5em;
+    color: #f0f0f0; /* Яркий белый для заголовка */
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+/* Подзаголовок и Typed.js */
+p {
+    font-size: 1.2em;
+    margin-bottom: 1.5em;
+    color: #b3b3cc; /* Чуть приглушенный цвет */
+}
+
+#typed-element {
+    color: #87CEFA; /* Светло-голубой для печатающегося текста */
+    font-family: 'Source Code Pro', monospace; /* Моноширинный шрифт */
+}
+
+.typed-cursor {
+    color: #87CEFA;
+    opacity: 1;
+    animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* Навигация */
+nav h2 {
+    font-size: 1.5em;
+    margin-bottom: 1em;
+    color: #f0f0f0;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap; /* Перенос ссылок на новую строку на маленьких экранах */
+    justify-content: center;
+    gap: 15px; /* Пространство между ссылками */
+}
+
+nav li {
+    margin-bottom: 10px; /* Небольшой отступ снизу для каждого элемента */
+}
+
+nav a {
+    text-decoration: none;
+    color: #e0e0e0;
+    background-color: rgba(135, 206, 250, 0.2); /* Полупрозрачный фон для ссылок */
+    padding: 10px 20px;
+    border-radius: 25px; /* Скругленные углы */
+    transition: all 0.3s ease; /* Плавный переход для hover-эффекта */
+    display: inline-block; /* Чтобы padding работал корректно */
+    border: 1px solid rgba(135, 206, 250, 0.4);
+}
+
+nav a:hover,
+nav a:focus {
+    background-color: rgba(135, 206, 250, 0.5);
+    color: #1a1a2e; /* Темный текст при наведении */
+    transform: translateY(-3px) scale(1.05); /* Небольшой подъем и увеличение */
+    box-shadow: 0 4px 8px rgba(135, 206, 250, 0.3);
+}
+
+/* Футер */
+footer {
+    margin-top: 3em;
+    font-size: 0.9em;
+    color: #b3b3cc;
+}
+
+footer a {
+    color: #87CEFA; /* Светло-голубой для ссылок в футере */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer a:hover,
+footer a:focus {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+/* Анимации появления элементов */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.header-animate {
+    animation: fadeIn 1s ease-out 0.5s forwards;
+    opacity: 0; /* Начальное состояние для анимации */
+}
+
+.nav-animate {
+    animation: fadeIn 1s ease-out 1s forwards;
+    opacity: 0;
+}
+
+.footer-animate {
+    animation: fadeIn 1s ease-out 1.5s forwards;
+    opacity: 0;
+}
+
+/* Адаптивность */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2.2em;
+    }
+    p {
+        font-size: 1em;
+    }
+    nav ul {
+        flex-direction: column; /* Ссылки в столбик на маленьких экранах */
+        gap: 10px;
+    }
+     nav a {
+        padding: 8px 15px;
+    }
+    .content {
+        padding: 20px 15px;
+    }
+}
