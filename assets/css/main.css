@@ -1,0 +1,246 @@
+/* assets/css/main.css */
+
+/* --- Переменные --- */
+:root {
+    --bg-color: #1a1a2e; /* Темно-синий фон */
+    --bg-color-lighter: #2a2a4e; /* Чуть светлее для акцентов */
+    --bg-content: rgba(26, 26, 46, 0.8); /* Фон для блоков контента */
+    --text-color: #e0e0e0; /* Основной светлый текст */
+    --text-color-muted: #b3b3cc; /* Приглушенный текст */
+    --heading-color: #ffffff; /* Заголовки */
+    --link-color: #87CEFA; /* Светло-голубой (LightSkyBlue) */
+    --link-hover-color: #add8e6; /* Светлее при наведении */
+    --accent-color: #ff6347; /* Томатный для акцентов (кнопки, иконки) */
+    --border-color: rgba(135, 206, 250, 0.3); /* Цвет границ */
+    --code-bg: #282c34; /* Фон для блоков кода */
+    --font-main: 'Montserrat', sans-serif;
+    --font-code: 'Source Code Pro', monospace;
+}
+
+/* --- Базовые Стили и Сброс --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.7;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* --- Макет (_layouts/default.html) --- */
+.site-header {
+    background-color: var(--bg-color-lighter);
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.site-nav {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center; /* Или left/right */
+    flex-wrap: wrap;
+}
+
+.site-nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: bold;
+    padding: 0.5rem 0;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.site-nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: var(--link-color);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.site-nav a:hover,
+.site-nav a.active { /* Добавь класс active для текущей страницы (можно через JS или Jekyll) */
+    color: var(--link-color);
+}
+
+.site-nav a:hover::after,
+.site-nav a.active::after {
+    width: 100%;
+}
+
+.site-main {
+    flex: 1; /* Занимает все доступное пространство */
+    max-width: 900px; /* Ограничение ширины контента */
+    width: 90%;
+    margin: 2rem auto; /* Отступы сверху/снизу и центрирование */
+    padding: 2rem;
+    background-color: var(--bg-content);
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(5px);
+}
+
+.site-footer {
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    font-size: 0.9em;
+    color: var(--text-color-muted);
+    border-top: 1px solid var(--border-color);
+    background-color: var(--bg-color-lighter);
+}
+
+.site-footer a {
+    color: var(--link-color);
+}
+
+/* --- Стилизация Контента (Markdown) --- */
+.site-main h1, .site-main h2, .site-main h3, .site-main h4 {
+    color: var(--heading-color);
+    margin-top: 1.5em;
+    margin-bottom: 0.8em;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.site-main h1 { font-size: 2.2em; border-bottom: 2px solid var(--border-color); padding-bottom: 0.3em; }
+.site-main h2 { font-size: 1.8em; border-bottom: 1px solid var(--border-color); padding-bottom: 0.2em;}
+.site-main h3 { font-size: 1.4em; }
+.site-main h4 { font-size: 1.1em; }
+
+.site-main p {
+    margin-bottom: 1.2em;
+}
+
+.site-main a {
+    color: var(--link-color);
+    text-decoration: none;
+    transition: color 0.3s ease, border-bottom-color 0.3s ease;
+    border-bottom: 1px dashed var(--link-color);
+}
+
+.site-main a:hover,
+.site-main a:focus {
+    color: var(--link-hover-color);
+    border-bottom-style: solid;
+    border-bottom-color: var(--link-hover-color);
+}
+
+.site-main ul, .site-main ol {
+    margin-left: 1.5em;
+    margin-bottom: 1.2em;
+}
+
+.site-main li {
+    margin-bottom: 0.5em;
+}
+
+/* Стили для кода */
+.site-main code {
+    font-family: var(--font-code);
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-size: 0.9em;
+    color: var(--text-color);
+}
+
+.site-main pre {
+    background-color: var(--code-bg);
+    color: #abb2bf; /* Цвет текста для темного фона кода (пример) */
+    padding: 1em;
+    border-radius: 5px;
+    overflow-x: auto; /* Горизонтальная прокрутка для длинных строк */
+    margin-bottom: 1.5em;
+    font-family: var(--font-code);
+    font-size: 0.95em;
+    line-height: 1.5;
+}
+
+.site-main pre code {
+    background-color: transparent; /* Убираем фон у code внутри pre */
+    padding: 0;
+    color: inherit; /* Наследуем цвет от pre */
+}
+
+.site-main blockquote {
+    border-left: 4px solid var(--link-color);
+    margin-left: 0;
+    padding-left: 1em;
+    color: var(--text-color-muted);
+    font-style: italic;
+    margin-bottom: 1.5em;
+}
+
+.site-main hr {
+    border: 0;
+    height: 1px;
+    background-color: var(--border-color);
+    margin: 2em 0;
+}
+
+/* --- Стили для индексных страниц (Списки в Wiki/Notes/Projects/Utils) --- */
+.item-list { /* Добавь этот класс к ul/div на индексных страницах */
+    list-style: none;
+    padding: 0;
+}
+
+.item-list li {
+    background-color: var(--bg-color-lighter);
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    border: 1px solid transparent; /* Для плавного появления рамки */
+}
+
+.item-list li:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    border-color: var(--border-color);
+}
+
+.item-list h2, .item-list h3 { /* Заголовки внутри карточек списка */
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    border-bottom: none; /* Убираем стандартные подчеркивания */
+}
+.item-list h2 a, .item-list h3 a {
+    border-bottom: none; /* Убираем подчеркивание у ссылок-заголовков */
+}
+
+.item-list p { /* Описание в карточке */
+    margin-bottom: 0;
+    color: var(--text-color-muted);
+    font-size: 0.95em;
+}
+
+
+/* --- Адаптивность --- */
+@media (max-width: 768px) {
+    .site-main {
+        width: 95%;
+        padding: 1.5rem;
+        margin: 1rem auto;
+    }
+    .site-header {
+        padding: 1rem;
+    }
+    .site-nav {
+        gap: 1rem;
+    }
+    .site-main h1 { font-size: 1.8em; }
+    .site-main h2 { font-size: 1.5em; }
+    .site-main h3 { font-size: 1.2em; }
+}
