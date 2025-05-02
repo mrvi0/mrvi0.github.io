@@ -7,6 +7,10 @@ title: Утилиты
 
 <ul class="item-list">
     <li>
+        <h2><a href="./reame-generator/">Dynamic README Builder</a></h2>
+        <p>Craft eye-catching READMEs with badges, GIFs, and metrics.</p>
+    </li>
+    <li>
         <h2><a href="./stream-popup/">PopUp overlay</a></h2>
         <p>Генератор попапов для стримеров</p>
     </li>
