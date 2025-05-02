@@ -9,7 +9,8 @@
     <title>{{ page.title | default: site.title }}</title>
     <meta name="description" content="{{ page.description | default: site.description }}">
     <!-- {# Сюда можно добавить больше мета-тегов: OpenGraph, Twitter Cards (или использовать плагин jekyll-seo-tag) #} -->
-
+    <meta name="author" content="{{ page.author | default: site.author }}">
+    <meta name="keywords" content="{{ page.keywords | default: site.keywords | join: ', ' }}">
     <!-- {# --- Основные Стили --- #} -->
     <link rel="stylesheet" href="{{ '/assets/css/layout-styles.css' | relative_url }}">
 
