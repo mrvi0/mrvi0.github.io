@@ -1,0 +1,174 @@
+/* assets/css/content-styles.css */
+
+/* Применяем стили только к элементам внутри .site-main контентных страниц */
+/* Можно использовать `.content-page .site-main` для большей специфичности, если нужно */
+
+.site-main h1, .site-main h2, .site-main h3,
+.site-main h4, .site-main h5, .site-main h6 {
+    color: var(--heading-color, #ffffff); /* Используем переменную или значение по умолчанию */
+    margin-top: 1.8em;
+    margin-bottom: 1em;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+/* Особый стиль для H1, если он генерируется из Markdown (а не из макета) */
+.site-main h1:not(.page-title) {
+    font-size: 2em;
+    border-bottom: 2px solid var(--border-color, rgba(135, 206, 250, 0.3));
+    padding-bottom: 0.4em;
+}
+.site-main h2 { font-size: 1.6em; border-bottom: 1px solid var(--border-color, rgba(135, 206, 250, 0.3)); padding-bottom: 0.3em; }
+.site-main h3 { font-size: 1.3em; }
+.site-main h4 { font-size: 1.1em; }
+.site-main h5 { font-size: 1em; font-weight: bold; }
+.site-main h6 { font-size: 0.9em; font-weight: bold; color: var(--text-color-muted, #b3b3cc); }
+
+.site-main p {
+    margin-bottom: 1.2em;
+}
+
+.site-main a {
+    color: var(--link-color, #87CEFA);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--link-color, #87CEFA);
+    transition: color 0.3s ease, border-bottom-color 0.3s ease;
+}
+.site-main a:hover,
+.site-main a:focus {
+    color: var(--link-hover-color, #add8e6);
+    border-bottom-style: solid;
+    border-bottom-color: var(--link-hover-color, #add8e6);
+}
+/* Ссылки внутри заголовков без подчеркивания */
+.site-main h1 a, .site-main h2 a, .site-main h3 a,
+.site-main h4 a, .site-main h5 a, .site-main h6 a {
+    border-bottom: none;
+}
+
+
+.site-main ul, .site-main ol {
+    margin-left: 1.8em;
+    margin-bottom: 1.2em;
+    padding: 0;
+}
+.site-main li {
+    margin-bottom: 0.5em;
+}
+.site-main ul ul, .site-main ol ol,
+.site-main ul ol, .site-main ol ul {
+    margin-top: 0.5em; /* Отступ для вложенных списков */
+}
+
+/* Стили для кода */
+.site-main code { /* Инлайн код */
+    font-family: var(--font-code, monospace);
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-size: 0.9em;
+    color: var(--text-color, #e0e0e0);
+}
+.site-main pre { /* Блок кода */
+    background-color: #282c34; /* Пример фона для блока кода */
+    color: #abb2bf; /* Пример цвета текста для темного фона */
+    padding: 1em;
+    border-radius: 5px;
+    overflow-x: auto; /* Горизонтальная прокрутка */
+    margin-bottom: 1.5em;
+    font-family: var(--font-code, monospace);
+    font-size: 0.95em;
+    line-height: 1.5;
+    border: 1px solid var(--border-color, rgba(135, 206, 250, 0.3));
+}
+.site-main pre code { /* Убираем фон у code внутри pre */
+    background-color: transparent;
+    padding: 0;
+    color: inherit;
+    font-size: inherit; /* Наследуем размер шрифта */
+    border-radius: 0;
+}
+/* Добавь стили для подсветки синтаксиса, если используешь Rouge/Pygments */
+
+.site-main blockquote {
+    border-left: 4px solid var(--link-color, #87CEFA);
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 1em;
+    color: var(--text-color-muted, #b3b3cc);
+    font-style: italic;
+    margin-bottom: 1.5em;
+}
+.site-main blockquote p:last-child {
+    margin-bottom: 0;
+}
+
+.site-main hr {
+    border: 0;
+    height: 1px;
+    background-color: var(--border-color, rgba(135, 206, 250, 0.3));
+    margin: 2.5em 0;
+}
+
+/* Стили для таблиц */
+.site-main table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5em;
+    border: 1px solid var(--border-color, rgba(135, 206, 250, 0.3));
+}
+.site-main th, .site-main td {
+    border: 1px solid var(--border-color, rgba(135, 206, 250, 0.3));
+    padding: 0.6em 0.8em;
+    text-align: left;
+}
+.site-main th {
+    background-color: rgba(255, 255, 255, 0.05);
+    font-weight: bold;
+}
+.site-main tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* Стили для изображений */
+.site-main img {
+    max-width: 100%;
+    height: auto;
+    display: block; /* Чтобы margin auto работал */
+    margin: 1em auto; /* Центрирование */
+    border-radius: 5px; /* Небольшое скругление */
+}
+
+/* Стили для списков определений (dl, dt, dd) */
+.site-main dl { margin-bottom: 1.5em; }
+.site-main dt { font-weight: bold; margin-top: 1em; }
+.site-main dd { margin-left: 1.5em; margin-bottom: 0.5em; }
+
+/* Стили для .item-list (если используешь на индексных страницах) */
+.site-main .item-list { /* Добавляем специфичность .site-main */
+    list-style: none;
+    padding: 0;
+    margin-left: 0; /* Убираем стандартный отступ */
+}
+.site-main .item-list li {
+    background-color: var(--bg-color-lighter, #2a2a4e);
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    border: 1px solid transparent;
+}
+.site-main .item-list li:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    border-color: var(--border-color, rgba(135, 206, 250, 0.3));
+}
+.site-main .item-list h2, .site-main .item-list h3 {
+    margin-top: 0; margin-bottom: 0.5rem; border-bottom: none;
+}
+.site-main .item-list h2 a, .site-main .item-list h3 a {
+    border-bottom: none;
+}
+.site-main .item-list p {
+    margin-bottom: 0; color: var(--text-color-muted, #b3b3cc); font-size: 0.95em;
+}

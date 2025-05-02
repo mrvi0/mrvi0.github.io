@@ -1,163 +1,31 @@
 /* assets/css/layout-styles.css */
-
-/* --- Переменные для общего вида (если нужны) --- */
 :root {
-    --bg-color: #1a1a2e;
-    --bg-color-lighter: #2a2a4e;
-    --text-color: #e0e0e0;
-    --text-color-muted: #b3b3cc;
-    --link-color: #87CEFA;
-    --link-hover-color: #add8e6;
-    --border-color: rgba(135, 206, 250, 0.3);
+    --bg-color: #1a1a2e; /* Темно-синий фон */
+    --bg-color-lighter: #2a2a4e; /* Чуть светлее для акцентов */
+    --text-color: #e0e0e0; /* Основной светлый текст */
+    --text-color-muted: #b3b3cc; /* Приглушенный текст */
+    --heading-color: #ffffff; /* Заголовки (можно использовать и в content-styles) */
+    --link-color: #87CEFA; /* Светло-голубой (LightSkyBlue) */
+    --link-hover-color: #add8e6; /* Светлее при наведении */
+    --border-color: rgba(135, 206, 250, 0.3); /* Цвет границ */
     --font-main: 'Montserrat', sans-serif;
-    --font-code: 'Source Code Pro', monospace; /* Для футера или хедера, если нужно */
+    --font-code: 'Source Code Pro', monospace;
 }
-
-/* --- Базовые Стили и Сброс --- */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    height: 100%;
-}
-
-body {
-    font-family: var(--font-main);
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    line-height: 1.6; /* Базовая высота строки */
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* Занимаем всю высоту */
-}
-
-/* --- Макет (_layouts/defaultV2.html) --- */
-
-.site-header {
-    background-color: var(--bg-color-lighter);
-    padding: 1rem 2rem;
-    border-bottom: 1px solid var(--border-color);
-    flex-shrink: 0; /* Не сжимать хедер */
-}
-
-.site-nav {
-    display: flex;
-    gap: 1.5rem;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.site-nav a {
-    color: var(--text-color);
-    text-decoration: none;
-    font-weight: bold;
-    padding: 0.5rem 0;
-    position: relative;
-    transition: color 0.3s ease;
-}
-
-.site-nav a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: 0;
-    left: 50%;
-    background-color: var(--link-color);
-    transition: all 0.3s ease;
-    transform: translateX(-50%);
-}
-
-.site-nav a:hover,
-.site-nav a.active {
-    color: var(--link-color);
-}
-
-.site-nav a:hover::after,
-.site-nav a.active::after {
-    width: 100%;
-}
-
-/* Основной контейнер контента - МИНИМАЛЬНЫЕ СТИЛИ */
-.site-main {
-    flex: 1 0 auto; /* Занимает все доступное пространство по вертикали */
-    max-width: 1200px; /* Или другая ширина, общая для всех страниц */
-    width: 95%; /* Отступы по бокам */
-    margin: 2rem auto; /* Центрирование и вертикальные отступы */
-    /* ВАЖНО: Нет фона, нет padding, нет border-radius здесь, чтобы не мешать стилям утилит */
-}
-
-/* Стили для заголовка H1, если он показывается из макета */
-.page-title {
-    color: #ffffff; /* Пример цвета */
-    margin-bottom: 1.5rem;
-    text-align: center;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 0.5rem;
-}
-
-/* Стили для рекламного контейнера из макета */
-.ad-container {
-    margin: 1.5rem 0;
-    padding: 1rem;
-    background-color: rgba(255, 255, 255, 0.05); /* Пример легкого фона */
-    border: 1px dashed var(--border-color);
-    border-radius: 5px;
-    min-height: 50px; /* Чтобы пустой блок был виден */
-}
-.ad-container p { /* Стиль для заглушки "Рекламный блок" */
-     margin: 0;
-}
-
-
-.site-footer {
-    text-align: center;
-    padding: 1.5rem;
-    margin-top: auto; /* Прижимаем футер к низу, если контента мало */
-    font-size: 0.9em;
-    color: var(--text-color-muted);
-    border-top: 1px solid var(--border-color);
-    background-color: var(--bg-color-lighter);
-    flex-shrink: 0; /* Не сжимать футер */
-}
-
-.footer-content {
-    /* Можно добавить стили для контейнера внутри футера, если нужно */
-}
-
-.site-footer a {
-    color: var(--link-color);
-    text-decoration: none;
-}
-.site-footer a:hover {
-    text-decoration: underline;
-}
-
-/* Дополнительный контент футера из Front Matter */
-.footer-extra-content {
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px dotted var(--border-color);
-    font-size: 0.9em;
-}
-.footer-extra-content p {
-    margin-bottom: 0.5em;
-}
-
-
-/* --- Адаптивность для МАКЕТА --- */
-@media (max-width: 768px) {
-    .site-main {
-        width: 95%;
-        margin: 1rem auto;
-    }
-    .site-header {
-        padding: 1rem;
-    }
-    .site-nav {
-        gap: 1rem;
-    }
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { height: 100%; }
+body { font-family: var(--font-main); background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; }
+.site-header { background-color: var(--bg-color-lighter); padding: 1rem 2rem; border-bottom: 1px solid var(--border-color); flex-shrink: 0; }
+.site-nav { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
+.site-nav a { color: var(--text-color); text-decoration: none; font-weight: bold; padding: 0.5rem 0; position: relative; transition: color 0.3s ease; }
+.site-nav a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 50%; background-color: var(--link-color); transition: all 0.3s ease; transform: translateX(-50%); }
+.site-nav a:hover, .site-nav a.active { color: var(--link-color); }
+.site-nav a:hover::after, .site-nav a.active::after { width: 100%; }
+.site-main { flex: 1 0 auto; max-width: 900px; /* Ограничение ширины контента */ width: 90%; margin: 2rem auto; }
+.site-footer { text-align: center; padding: 1.5rem; margin-top: auto; font-size: 0.9em; color: var(--text-color-muted); border-top: 1px solid var(--border-color); background-color: var(--bg-color-lighter); flex-shrink: 0; }
+.site-footer a { color: var(--link-color); text-decoration: none; }
+.site-footer a:hover { text-decoration: underline; }
+.footer-extra-content { margin-top: 1rem; padding-top: 1rem; border-top: 1px dotted var(--border-color); font-size: 0.9em; }
+.footer-extra-content p { margin-bottom: 0.5em; }
+.ad-container { margin: 1.5rem 0; padding: 1rem; background-color: rgba(255, 255, 255, 0.05); border: 1px dashed var(--border-color); border-radius: 5px; min-height: 50px; }
+.ad-container p { margin: 0; }
+@media (max-width: 768px) { .site-main { width: 95%; margin: 1rem auto; } .site-header { padding: 1rem; } .site-nav { gap: 1rem; } }
