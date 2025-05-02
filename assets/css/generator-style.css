@@ -33,11 +33,63 @@ button:disabled { background-color: #94d3a2; cursor: not-allowed; opacity: 0.7; 
 #addedBadgesArea { font-family: "SFMono-Regular", Consolas, monospace; background-color: #f6f8fa; font-size: 0.9em; color: #24292e; }
 
 /* --- Стили тултипов --- */
-.tooltip-trigger { display: inline-block; margin-left: 8px; color: #0366d6; cursor: help; position: relative; text-decoration: underline dotted; font-size: 0.9em; font-weight: normal; user-select: none; vertical-align: middle; }
-.tooltip-trigger:hover, .tooltip-trigger:focus { color: #005cc5; outline: none; }
-.tooltip-content { display: none; position: absolute; bottom: calc(100% + 10px); left: 50%; transform: translateX(-50%); width: 320px; /* Чуть шире для контента */ background-color: #24292e; color: #f0f0f0; padding: 15px; border-radius: 6px; box-shadow: 0 5px 15px rgba(0,0,0,0.4); z-index: 100; font-size: 14px; line-height: 1.5; text-align: left; font-weight: normal; cursor: default; text-decoration: none; }
-.tooltip-trigger:hover .tooltip-content, .tooltip-trigger:focus .tooltip-content { display: block; }
-.tooltip-content::after { content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border-width: 7px; border-style: solid; border-color: #24292e transparent transparent transparent; }
+.tooltip-trigger {
+    display: inline-block;
+    margin-left: 8px;
+    color: #0366d6;
+    cursor: help;
+    position: relative; /* ESSENTIAL for positioning the child */
+    text-decoration: underline dotted;
+    font-size: 0.9em;
+    font-weight: normal;
+    user-select: none;
+    vertical-align: middle;
+}
+
+.tooltip-trigger:hover,
+.tooltip-trigger:focus {
+    color: #005cc5;
+    outline: none;
+}
+
+.tooltip-content {
+    display: none; /* ESSENTIAL - hidden by default */
+    position: absolute; /* ESSENTIAL - positioned relative to trigger */
+    bottom: calc(100% + 10px); /* Position above trigger */
+    left: 50%;
+    transform: translateX(-50%); /* Center horizontally */
+    width: 320px;
+    background-color: #24292e;
+    color: #f0f0f0;
+    padding: 15px;
+    border-radius: 6px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+    z-index: 100; /* Ensure it's on top */
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: left;
+    font-weight: normal;
+    cursor: default;
+    text-decoration: none;
+}
+
+/* THE RULE THAT SHOWS THE TOOLTIP */
+.tooltip-trigger:hover .tooltip-content,
+.tooltip-trigger:focus .tooltip-content {
+    display: block; /* ESSENTIAL - show on hover/focus */
+}
+
+/* Arrow */
+.tooltip-content::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 7px;
+    border-style: solid;
+    border-color: #24292e transparent transparent transparent;
+}
 .tooltip-content code { background-color: rgba(255,255,255,0.15); padding: 2px 5px; border-radius: 4px; font-family: monospace; font-size: 0.95em; color: #fff; }
 .tooltip-content pre { background-color: rgba(0,0,0,0.3); padding: 10px; border-radius: 4px; overflow-x: auto; margin: 10px 0; font-size: 0.95em; color: #f0f0f0; white-space: pre-wrap; word-break: break-all; }
 .tooltip-content ul { margin: 10px 0 10px 20px; padding: 0; } .tooltip-content li { margin-bottom: 5px; }
@@ -64,21 +116,27 @@ button:disabled { background-color: #94d3a2; cursor: not-allowed; opacity: 0.7; 
 .title-group { display: flex; gap: 10px; align-items: center; }
 /* Стили для SELECT emoji */
 .title-group .section-emoji {
-    flex: 0 0 65px; /* Ширина для select */
-    font-size: 1rem; /* Стандартный размер шрифта */
-    padding: 8px 6px; /* Паддинг как у инпутов, но чуть меньше по бокам */
-    appearance: none; /* Убираем стандартный вид */
-    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007bff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'); /* Своя стрелка */
-    background-repeat: no-repeat;
-    background-position: right 8px top 50%;
-    background-size: .65em auto;
-    cursor: pointer;
+flex: 0 0 65px; /* Ширина для select */
+font-size: 1rem; /* Стандартный размер шрифта */
+padding: 8px 6px; /* Паддинг как у инпутов, но чуть меньше по бокам */
+appearance: none; /* Убираем стандартный вид */
+background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007bff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'); /* Своя стрелка */
+background-repeat: no-repeat;
+background-position: right 8px top 50%;
+background-size: .65em auto;
+cursor: pointer;
 }
 .title-group .section-title { flex-grow: 1; }
 
 /* Кнопка добавления секции */
 .button-add-section { display: block; width: 100%; margin-top: 5px; margin-bottom: 20px; background-color: #0366d6; padding: 12px 20px; text-align: center; font-weight: 600; margin-right: 0; }
 .button-add-section:hover { background-color: #005cc5; }
+
+/* --- Стили переключателя языка --- */
+.lang-switcher {position: absolute;top: 10px;right: 15px;display: flex;gap: 5px; }
+.lang-button { background-color: rgba(255, 255, 255, 0.1); color: #ccc; border: 1px solid #555; padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 0.85em; font-weight: bold; margin: 0; /* Убираем отступы */ transition: background-color 0.2s, color 0.2s; }
+.lang-button:hover { background-color: rgba(255, 255, 255, 0.2); color: #fff; }
+.lang-button.active { background-color: #fff; color: #24292e; border-color: #fff; cursor: default; }
 
 /* Стили для рекламного блока */
 .ad-block { background-color: #f6f8fa; border: 1px dashed #d1d5da; border-radius: 6px; padding: 15px 20px; margin-top: 25px; text-align: center; }
