@@ -1,7 +1,8 @@
 ---
 layout: defaultV2
 title: Моя Супер Утилита
-author: Mr Vi
+author: Mr Vi 123
+descriptiom: asdjal skdjlka sjdlkasj dlka jslka jdlak sjd
 extra_css:
   - /utilities/my-super-tool/style.css
   - /assets/css/vendor/some-library.css
