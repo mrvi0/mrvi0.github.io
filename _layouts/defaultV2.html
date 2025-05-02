@@ -69,9 +69,6 @@
 
     <footer class="site-footer">
         <div class="footer-content">
-            <!-- {# --- Стандартное Содержимое Футера --- #} -->
-            <p>© 2023-{{ site.time | date: '%Y' }} {{ page.author | default: "Твое Имя/Ник" }}.</p>
-
             <!-- {# --- Дополнительное Содержимое Футера из Front Matter --- #}
             {# Позволяет странице добавить специфичную информацию в футер #} -->
             {% if page.footer_extra %}
@@ -80,6 +77,8 @@
                     <!-- {# Обрабатываем как Markdown #} -->
                 </div>
             {% endif %}
+            <!-- {# --- Стандартное Содержимое Футера --- #} -->
+            <p>© 2023-{{ site.time | date: '%Y' }} {{ page.author | default: "Твое Имя/Ник" }}.</p>
         </div>
     </footer>
 
