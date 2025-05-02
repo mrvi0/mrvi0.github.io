@@ -1,6 +1,7 @@
 ---
 # Можно использовать page как основу, если нет специфики
-layout: page
+layout: defaultV2
+title: "Трекер задач"  <!-- Заголовок страницы -->
 ---
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: "ru" }}">
@@ -23,9 +24,9 @@ layout: page
     {% if page.extra_css %}{% for css_file in page.extra_css %}<link rel="stylesheet" href="{{ css_file | relative_url }}">{% endfor %}{% endif %}
 </head>
 <body class="{{ page.body_class | default: 'tasks-page' }}">
-    <header class="site-header">
+    <!-- <header class="site-header">
          <nav class="site-nav">{% include navigation.html %}</nav>
-    </header>
+    </header> -->
     <main class="site-main">
         {% if page.show_title != false and page.title %}
             <h1 class="page-title">{{ page.title }}</h1>
