@@ -1,215 +1,235 @@
-<!DOCTYPE html>
-<html lang="en"> <!-- Язык по умолчанию - АНГЛИЙСКИЙ -->
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-translate-key="pageTitle">Dynamic README Builder | Boost Your GitHub Profile</title>
-    <meta name="description" content="Craft eye-catching READMEs with badges, GIFs, and metrics. Perfect for GitHub profiles!">
-    <meta name="keywords" content="README generator, GitHub profile, badges, GIFs, metrics, Markdown, dynamic README, open source, developer tools">
-    <link rel="stylesheet" href="/assets/css/generator-style.css">
-    <link rel="icon" href="https://cdn.iconscout.com/icon/free/png-256/free-markdown-logo-icon-download-in-svg-png-gif-file-formats--social-media-pack-logos-icons-2364930.png?f=webp&w=256" type="image/x-icon">
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/dompurify@2.3.8/dist/purify.min.js"></script>
-</head>
-<body>
-    <header>
-        <div class="lang-switcher">
-            <button type="button" data-lang="en" class="lang-button active">EN</button>
-            <button type="button" data-lang="ru" class="lang-button">RU</button>
+---
+# --- Front Matter: Настройки для этой конкретной страницы ---
+
+layout: defaultV2                  # Используем основной макет сайта
+
+# --- Метаданные, специфичные для этой страницы ---
+title: Dynamic README Builder | Boost Your GitHub Profile # Заголовок для тега <title>
+description: Craft eye-catching READMEs with badges, GIFs, and metrics. Perfect for GitHub profiles! # Описание для <meta name="description">
+# Можно добавить и другие метаданные, если твой макет их поддерживает
+# keywords: ["README generator", "GitHub profile", "badges", "Markdown", "dynamic README"]
+
+# --- Подключение ресурсов, нужных ТОЛЬКО для этой страницы ---
+extra_css:
+  - /assets/css/generator-style.css   # Путь к стилям генератора (относительно корня сайта)
+
+extra_js:
+  # --- Библиотеки (важен порядок - библиотеки ДО скрипта, который их использует) ---
+  - https://cdn.jsdelivr.net/npm/marked/marked.min.js        # Внешняя библиотека Marked
+  - https://cdn.jsdelivr.net/npm/dompurify@2.3.8/dist/purify.min.js # Внешняя библиотека DOMPurify
+  # --- Основной скрипт этой утилиты ---
+  - /assets/js/generator-script.js    # Путь к скрипту генератора (относительно корня сайта)
+
+# --- Настройки отображения элементов из макета ---
+# Не показываем заголовок H1 из макета, т.к. у нас есть свой в контенте ниже
+show_title: false
+
+# Не показываем стандартный рекламный блок из макета, т.к. у генератора есть свой
+show_ads: false
+
+# Добавляем специальный класс к <body> для возможности уникальной стилизации
+body_class: readme-generator-page utility-page
+
+# Если нужно добавить что-то уникальное в футер ТОЛЬКО для этой страницы
+# footer_extra: |
+#   README Generator v1.0 - Использует Marked.js и DOMPurify.
+
+---
+
+
+{# 1. Элементы, которые были в ОРИГИНАЛЬНОМ <header> генератора #}
+<div class="lang-switcher" style="margin-bottom: 1rem; text-align: right;"> {# Переключатель языка #}
+    <button type="button" data-lang="en" class="lang-button active">EN</button>
+    <button type="button" data-lang="ru" class="lang-button">RU</button>
+</div>
+
+<h1 data-translate-key="headerTitle" style="text-align: center; margin-bottom: 0.5em;">🚀 Dynamic README Builder</h1> {# Основной заголовок генератора #}
+<p data-translate-key="headerSubtitle" style="text-align: center; margin-bottom: 2em; color: var(--text-color-muted); font-size: 1.1em;">Create unique and informative README.md!</p> {# Подзаголовок генератора #}
+
+
+{# 2. Основной контейнер и все внутренние элементы ОРИГИНАЛЬНОГО <main> генератора #}
+<main class="container">
+    <section class="editor-pane">
+        <h2 data-translate-key="editorTitle">Content Editor</h2>
+
+        <!-- Заголовок проекта -->
+        <div class="form-group static-block">
+            <label for="projTitle" data-translate-key="projTitleLabel">Project name:</label>
+            <input type="text" id="projTitle" data-translate-placeholder-key="projTitlePlaceholder" placeholder="My Amazing Project">
         </div>
-        <h1 data-translate-key="headerTitle">🚀 Dynamic README Builder</h1>
-        <p data-translate-key="headerSubtitle">Create unique and informative README.md!</p>
-    </header>
 
-    <main class="container">
-        <section class="editor-pane">
-            <h2 data-translate-key="editorTitle">Content Editor</h2>
-
-            <!-- Заголовок проекта -->
-            <div class="form-group static-block">
-                <label for="projTitle" data-translate-key="projTitleLabel">Project name:</label>
-                <input type="text" id="projTitle" data-translate-placeholder-key="projTitlePlaceholder" placeholder="My Amazing Project">
+        <!-- Конструктор Бейджей -->
+        <fieldset class="form-group badge-adder static-block">
+            <legend data-translate-key="badgeDesignerLegend">Badge Designer</legend>
+            <div class="form-group">
+                <label for="badgeTypeSelector" data-translate-key="badgeTemplateLabel">Badge Template:</label>
+                <select id="badgeTypeSelector">
+                    <option value="" data-translate-key="badgeSelectDefault">-- Select a template --</option>
+                    <optgroup label="Main"> <option value="simple">Static</option> <option value="custom_url">Own Image URL</option> </optgroup>
+                    <optgroup label="GitHub"> <option value="github_license">License</option> <option value="github_actions">Actions status</option> <option value="github_issues">Issues</option> <option value="github_prs">Pull Requests</option> <option value="github_stars">Stars</option> <option value="github_forks">Forks</option> <option value="github_watchers">Watchers</option> <option value="github_last_commit">Last commit</option> <option value="github_release">Latest release</option> <option value="github_contributors">Contributors</option> <option value="github_repo_size">Repository size</option> <option value="github_downloads">Release Downloads</option> </optgroup>
+                    <optgroup label="NPM"> <option value="npm_version">Version</option> <option value="npm_downloads_m">Downloads (month)</option> <option value="npm_downloads_w">Downloads (week)</option> <option value="npm_downloads_y">Downloads (year)</option> <option value="npm_license">License</option> <option value="bundlephobia_minzip">Size (minzip)</option> <option value="bundlephobia_min">Size (min)</option> </optgroup>
+                    <optgroup label="Quality and CI/CD"> <option value="codecov">Codecov Coverage</option> <option value="codefactor">CodeFactor Grade</option> <option value="sonar_quality">SonarQube Quality Gate</option> <option value="travis_ci">Travis CI</option> <option value="circle_ci">CircleCI</option> </optgroup>
+                    <optgroup label="Size and Dependencies"> <option value="dep_status">David DM (Dependencies)</option> <option value="dep_dev_status">David DM (Dev Dependencies)</option> <option value="snyk_vulnerabilities">Snyk Vulnerabilities</option> </optgroup>
+                    <optgroup label="Social and Support"> <option value="twitter_follow">Twitter Follow</option> <option value="patreon">Patreon</option> <option value="opencollective">Open Collective</option> <option value="discord">Discord</option> </optgroup>
+                    <optgroup label="Other"> <option value="prs_welcome">PRs Welcome</option> </optgroup>
+                </select>
             </div>
-
-            <!-- Конструктор Бейджей -->
-            <fieldset class="form-group badge-adder static-block">
-                <legend data-translate-key="badgeDesignerLegend">Badge Designer</legend>
-                <div class="form-group">
-                    <label for="badgeTypeSelector" data-translate-key="badgeTemplateLabel">Badge Template:</label>
-                    <select id="badgeTypeSelector">
-                        <option value="" data-translate-key="badgeSelectDefault">-- Select a template --</option>
-                        <optgroup label="Main"> <option value="simple">Static</option> <option value="custom_url">Own Image URL</option> </optgroup>
-                        <optgroup label="GitHub"> <option value="github_license">License</option> <option value="github_actions">Actions status</option> <option value="github_issues">Issues</option> <option value="github_prs">Pull Requests</option> <option value="github_stars">Stars</option> <option value="github_forks">Forks</option> <option value="github_watchers">Watchers</option> <option value="github_last_commit">Last commit</option> <option value="github_release">Latest release</option> <option value="github_contributors">Contributors</option> <option value="github_repo_size">Repository size</option> <option value="github_downloads">Release Downloads</option> </optgroup>
-                        <optgroup label="NPM"> <option value="npm_version">Version</option> <option value="npm_downloads_m">Downloads (month)</option> <option value="npm_downloads_w">Downloads (week)</option> <option value="npm_downloads_y">Downloads (year)</option> <option value="npm_license">License</option> <option value="bundlephobia_minzip">Size (minzip)</option> <option value="bundlephobia_min">Size (min)</option> </optgroup>
-                        <optgroup label="Quality and CI/CD"> <option value="codecov">Codecov Coverage</option> <option value="codefactor">CodeFactor Grade</option> <option value="sonar_quality">SonarQube Quality Gate</option> <option value="travis_ci">Travis CI</option> <option value="circle_ci">CircleCI</option> </optgroup>
-                        <optgroup label="Size and Dependencies"> <option value="dep_status">David DM (Dependencies)</option> <option value="dep_dev_status">David DM (Dev Dependencies)</option> <option value="snyk_vulnerabilities">Snyk Vulnerabilities</option> </optgroup>
-                        <optgroup label="Social and Support"> <option value="twitter_follow">Twitter Follow</option> <option value="patreon">Patreon</option> <option value="opencollective">Open Collective</option> <option value="discord">Discord</option> </optgroup>
-                        <optgroup label="Other"> <option value="prs_welcome">PRs Welcome</option> </optgroup>
-                    </select>
-                </div>
-                <div id="badgeParamsContainer" class="form-group">
-                    <p data-translate-key="badgeParamsPlaceholder"><i>Select a template to see the options.</i></p>
-                </div>
-                <button type="button" id="addBadgeButton" class="button-add-badge" disabled data-translate-key="addBadgeButton">Add a badge to the list</button>
-            </fieldset>
-            <div class="form-group static-block">
-                <label for="addedBadgesArea">
-                    <span data-translate-key="addedBadgesLabel">Badges (Markdown):</span>
-                     <!-- СТАТИЧЕСКИЙ ТУЛТИП ДЛЯ БЕЙДЖЕЙ -->
-                     <span class="tooltip-trigger" tabindex="0" data-translate-key="hint">Hint <!-- Текст "Hint" будет изменен JS -->
-                         <!-- Контент этого тултипа НЕ ДОЛЖЕН переводиться JS напрямую, он статичен -->
-                         <div class="tooltip-content">
-                             <p>Paste Markdown for badges here, each on a new line.</p>
-                             <p>Example with link:</p>
-                             <pre>[![Alt Text](Image_URL)](Link_URL)</pre>
-                             <p>Simple badge example:</p>
-                             <pre>![Alt Text](Image_URL)</pre>
-                             <p>Tip: Use the generator above or visit <a href="https://shields.io/badges/" target="_blank" rel="noopener noreferrer">shields.io</a></p>
-                         </div>
-                     </span>
-                </label>
-                <textarea id="addedBadgesArea" rows="6" data-translate-placeholder-key="addedBadgesPlaceholder" placeholder="Badges of your project..."></textarea>
+            <div id="badgeParamsContainer" class="form-group">
+                <p data-translate-key="badgeParamsPlaceholder"><i>Select a template to see the options.</i></p>
             </div>
+            <button type="button" id="addBadgeButton" class="button-add-badge" disabled data-translate-key="addBadgeButton">Add a badge to the list</button>
+        </fieldset>
+        <div class="form-group static-block">
+            <label for="addedBadgesArea">
+                <span data-translate-key="addedBadgesLabel">Badges (Markdown):</span>
+                 <!-- СТАТИЧЕСКИЙ ТУЛТИП ДЛЯ БЕЙДЖЕЙ -->
+                 <span class="tooltip-trigger" tabindex="0" data-translate-key="hint">Hint <!-- Текст "Hint" будет изменен JS -->
+                     <!-- Контент этого тултипа НЕ ДОЛЖЕН переводиться JS напрямую, он статичен -->
+                     <div class="tooltip-content">
+                         <p>Paste Markdown for badges here, each on a new line.</p>
+                         <p>Example with link:</p>
+                         <pre>[![Alt Text](Image_URL)](Link_URL)</pre>
+                         <p>Simple badge example:</p>
+                         <pre>![Alt Text](Image_URL)</pre>
+                         <p>Tip: Use the generator above or visit <a href="https://shields.io/badges/" target="_blank" rel="noopener noreferrer">shields.io</a></p>
+                     </div>
+                 </span>
+            </label>
+            <textarea id="addedBadgesArea" rows="6" data-translate-placeholder-key="addedBadgesPlaceholder" placeholder="Badges of your project..."></textarea>
+        </div>
 
-            <hr class="section-divider">
+        <hr class="section-divider">
 
-            <!-- Контейнер для динамических секций -->
-            <h3 data-translate-key="customSectionsTitle">Custom Sections</h3>
-            <div id="dynamicBlocksContainer"></div>
-            <button type="button" id="addSectionButton" class="button-add-section" data-translate-key="addSectionButton">Add A New Section</button>
+        <!-- Контейнер для динамических секций -->
+        <h3 data-translate-key="customSectionsTitle">Custom Sections</h3>
+        <div id="dynamicBlocksContainer"></div>
+        <button type="button" id="addSectionButton" class="button-add-section" data-translate-key="addSectionButton">Add A New Section</button>
 
-            <hr class="section-divider">
+        <hr class="section-divider">
 
-            <!-- Лицензия -->
-            <div class="form-group static-block">
-                 <label for="licenseText" data-translate-key="licenseTextLabel">The text of the License section:</label>
-                 <input type="text" id="licenseText" data-translate-placeholder-key="licenseTextPlaceholder" placeholder="MIT / See the badge above / See the LICENSE file">
+        <!-- Лицензия -->
+        <div class="form-group static-block">
+             <label for="licenseText" data-translate-key="licenseTextLabel">The text of the License section:</label>
+             <input type="text" id="licenseText" data-translate-placeholder-key="licenseTextPlaceholder" placeholder="MIT / See the badge above / See the LICENSE file">
+         </div>
+
+        <!-- Встроенный Рекламный блок -->
+        <div class="ad-block form-group static-block">
+            <h4 data-translate-key="adTitle">✨ Support Development / Useful Resources ✨</h4>
+            <p><strong data-translate-key="adHostingStrong">🚀 Need reliable hosting?</strong> <span data-translate-key="adHostingTry">Try</span> <a href="https://ruvds.com/ru-rub/pr6841" target="_blank" rel="noopener noreferrer">RuVDS</a>!</p>
+            <a href="https://ruvds.com/ru-rub/pr6841" target="_blank" rel="noopener noreferrer"><img src="https://ruvds.com/wp-content/themes/manual-child/newHeader/img/ruvds_logo.svg" alt="RuVDS Banner"></a>
+            <p class="support-note" data-translate-key="adSupportNote"> (Using partner links helps us keep this tool free. Thank you!) </p>
+        </div>
+
+        <!-- Кнопки -->
+        <div class="action-buttons">
+            <button id="copyMdButton" data-translate-key="copyButton">Copy Markdown</button>
+            <button id="downloadMdButton" data-translate-key="downloadButton">Download .md</button>
+        </div>
+    </section>
+
+    <!-- Preview Pane -->
+    <section class="preview-pane">
+        <h2 data-translate-key="previewTitle">Preview README.md</h2>
+        <div id="previewOutput" class="markdown-body"></div>
+         <h2 data-translate-key="generatedTitle">Generated Markdown</h2>
+         <textarea id="rawMarkdownOutput" rows="15" readonly></textarea>
+    </section>
+</main> 
+
+
+
+<!-- === ШАБЛОН ДИНАМИЧЕСКОГО БЛОКА === -->
+<template id="dynamic-block-template">
+    <div class="dynamic-block">
+        <div class="block-controls">
+             <button type="button" class="move-up" title="Move up" data-translate-title="moveUpTooltip">↑</button>
+             <button type="button" class="move-down" title="Move down" data-translate-title="moveDownTooltip">↓</button>
+             <button type="button" class="remove-block" title="Remove section" data-translate-title="removeSectionTooltip">×</button>
+         </div>
+         <div class="form-group">
+             <label data-translate-key="sectionTitleLabel">Section heading (H2):</label>
+             <div class="title-group">
+                 <select class="section-emoji" title="Select Emoji" data-translate-title="selectEmojiTooltip">
+                     <option value="" data-translate-key="emojiNone">No</option>
+                     <option value="✨">✨ Sparkles</option>
+                     <option value="🚀">🚀 Rocket</option>
+                     <option value="💡">💡 Light Bulb</option>
+                     <option value="🔧">🔧 Wrench</option>
+                     <option value="⚙️">⚙️ Gear</option>
+                     <option value="📚">📚 Books</option>
+                     <option value="📖">📖 Open Book</option>
+                     <option value="📝">📝 Memo</option>
+                     <option value="📋">📋 Clipboard</option>
+                     <option value="📊">📊 Bar Chart</option>
+                     <option value="📈">📈 Chart Increasing</option>
+                     <option value="💻">💻 Laptop</option>
+                     <option value="🛠️">🛠️ Hammer and Wrench</option>
+                     <option value="🤔">🤔 Thinking Face</option>
+                     <option value="✅">✅ Check Mark Button</option>
+                     <option value="❌">❌ Cross Mark</option>
+                     <option value="⚠️">⚠️ Warning</option>
+                     <option value="❓">❓ Question Mark</option>
+                     <option value="ℹ️">ℹ️ Information</option>
+                     <option value="🔗">🔗 Link</option>
+                     <option value="🤝">🤝 Handshake</option>
+                     <option value="🎉">🎉 Party Popper</option>
+                     <option value="🐛">🐛 Bug</option>
+                     <option value="🔥">🔥 Fire</option>
+                     <option value="🌍">🌍 Globe</option>
+                 </select>
+                 <input type="text" class="section-title" placeholder="Section name" data-translate-placeholder-key="sectionTitlePlaceholder">
              </div>
-
-            <!-- Рекламный блок -->
-            <div class="ad-block form-group static-block">
-                <h4 data-translate-key="adTitle">✨ Support Development / Useful Resources ✨</h4>
-                <p><strong data-translate-key="adHostingStrong">🚀 Need reliable hosting?</strong> <span data-translate-key="adHostingTry">Try</span> <a href="https://ruvds.com/ru-rub/pr6841" target="_blank" rel="noopener noreferrer">RuVDS</a>!</p>
-                <a href="https://ruvds.com/ru-rub/pr6841" target="_blank" rel="noopener noreferrer"><img src="https://ruvds.com/wp-content/themes/manual-child/newHeader/img/ruvds_logo.svg" alt="RuVDS Banner"></a>
-                <p class="support-note" data-translate-key="adSupportNote"> (Using partner links helps us keep this tool free. Thank you!) </p>
-            </div>
-
-            <!-- Кнопки -->
-            <div class="action-buttons">
-                <button id="copyMdButton" data-translate-key="copyButton">Copy Markdown</button>
-                <button id="downloadMdButton" data-translate-key="downloadButton">Download .md</button>
-            </div>
-        </section>
-
-        <!-- Preview Pane -->
-        <section class="preview-pane">
-            <h2 data-translate-key="previewTitle">Preview README.md</h2>
-            <div id="previewOutput" class="markdown-body"></div>
-             <h2 data-translate-key="generatedTitle">Generated Markdown</h2>
-             <textarea id="rawMarkdownOutput" rows="15" readonly></textarea>
-        </section>
-    </main>
-
-    <footer>
-        <p data-translate-key="footerMadeWith">Dynamic README Builder - Made with ❤️ and a little Gemini</p>
-        <p><a style="color: #fff" href="https://t.me/b4dcat" target="_blank">B4DCAT</a></p>
-     </footer>
-
-    <!-- === ШАБЛОН ДИНАМИЧЕСКОГО БЛОКА === -->
-    <template id="dynamic-block-template">
-        <div class="dynamic-block">
-            <div class="block-controls">
-                 <button type="button" class="move-up" title="Move up" data-translate-title="moveUpTooltip">↑</button>
-                 <button type="button" class="move-down" title="Move down" data-translate-title="moveDownTooltip">↓</button>
-                 <button type="button" class="remove-block" title="Remove section" data-translate-title="removeSectionTooltip">×</button>
-             </div>
-             <div class="form-group">
-                 <label data-translate-key="sectionTitleLabel">Section heading (H2):</label>
-                 <div class="title-group">
-                     <select class="section-emoji" title="Select Emoji" data-translate-title="selectEmojiTooltip">
-                         <option value="" data-translate-key="emojiNone">No</option>
-                         <option value="✨">✨ Sparkles</option>
-                         <option value="🚀">🚀 Rocket</option>
-                         <option value="💡">💡 Light Bulb</option>
-                         <option value="🔧">🔧 Wrench</option>
-                         <option value="⚙️">⚙️ Gear</option>
-                         <option value="📚">📚 Books</option>
-                         <option value="📖">📖 Open Book</option>
-                         <option value="📝">📝 Memo</option>
-                         <option value="📋">📋 Clipboard</option>
-                         <option value="📊">📊 Bar Chart</option>
-                         <option value="📈">📈 Chart Increasing</option>
-                         <option value="💻">💻 Laptop</option>
-                         <option value="🛠️">🛠️ Hammer and Wrench</option>
-                         <option value="🤔">🤔 Thinking Face</option>
-                         <option value="✅">✅ Check Mark Button</option>
-                         <option value="❌">❌ Cross Mark</option>
-                         <option value="⚠️">⚠️ Warning</option>
-                         <option value="❓">❓ Question Mark</option>
-                         <option value="ℹ️">ℹ️ Information</option>
-                         <option value="🔗">🔗 Link</option>
-                         <option value="🤝">🤝 Handshake</option>
-                         <option value="🎉">🎉 Party Popper</option>
-                         <option value="🐛">🐛 Bug</option>
-                         <option value="🔥">🔥 Fire</option>
-                         <option value="🌍">🌍 Globe</option>
-                     </select>
-                     <input type="text" class="section-title" placeholder="Section name" data-translate-placeholder-key="sectionTitlePlaceholder">
-                 </div>
-             </div>
-             <div class="form-group">
-                 <label>
-                     <span data-translate-key="sectionContentLabel">Section Content:</span>
-                     <!-- ДИНАМИЧЕСКИЙ ТУЛТИП -->
-                     <span class="tooltip-trigger" tabindex="0" data-translate-key="hint">Hint <!-- Текст "Hint" будет изменен JS -->
-                         <!-- КОНТЕНТ ТУЛТИПА - ПОЛНАЯ СПРАВКА НА АНГЛИЙСКОМ -->
-                         <div class="tooltip-content">
-                             <p><strong>The basics of Markdown:</strong></p>
-                             <ul>
-                                 <li><code>**Bold text**</code> → <strong>Bold text</strong></li>
-                                 <li><code>*Italics*</code> or <code>_Italics_</code> → <em>Italics</em></li>
-                                 <li><code>~~Crossed out~~</code> → <del>Crossed out</del></li>
-                                 <li><code>`The inline code`</code> → <code>The inline code</code></li>
-                                 <li><code>[Link text](http://...)</code> → <a href="#" onclick="return false;">Link text</a></li>
-                                 <li><code>![Alt text](Image URL)</code> → (Image)</li>
-                             </ul>
-                             <p><strong>Headlines:</strong></p>
-                             <ul>
-                                 <li><code>### The H3 heade</code></li>
-                                 <li><code>#### The H4 heade</code> (etc. up to H6)</li>
-                             </ul>
-                             <p><strong>Lists:</strong></p>
-                             <p><em>Labeled:</em></p>
-                             <pre>*   Element 1
+         </div>
+         <div class="form-group">
+             <label>
+                 <span data-translate-key="sectionContentLabel">Section Content:</span>
+                 <!-- ДИНАМИЧЕСКИЙ ТУЛТИП -->
+                 <span class="tooltip-trigger" tabindex="0" data-translate-key="hint">Hint <!-- Текст "Hint" будет изменен JS -->
+                     <!-- КОНТЕНТ ТУЛТИПА - ПОЛНАЯ СПРАВКА НА АНГЛИЙСКОМ -->
+                     <div class="tooltip-content">
+                         <p><strong>The basics of Markdown:</strong></p>
+                         <ul>
+                             <li><code>**Bold text**</code> → <strong>Bold text</strong></li>
+                             <li><code>*Italics*</code> or <code>_Italics_</code> → <em>Italics</em></li>
+                             <li><code>~~Crossed out~~</code> → <del>Crossed out</del></li>
+                             <li><code>`The inline code`</code> → <code>The inline code</code></li>
+                             <li><code>[Link text](http://...)</code> → <a href="#" onclick="return false;">Link text</a></li>
+                             <li><code>![Alt text](Image URL)</code> → (Image)</li>
+                         </ul>
+                         <p><strong>Headlines:</strong></p>
+                         <ul>
+                             <li><code>### The H3 heade</code></li>
+                             <li><code>#### The H4 heade</code> (etc. up to H6)</li>
+                         </ul>
+                         <p><strong>Lists:</strong></p>
+                         <p><em>Labeled:</em></p>
+                         <pre>*   Element 1
 *   Element 2
     *   Nested (2 spaces)</pre>
-                             <p><em>Numbered:</em></p>
-                             <pre>1.  The first element
+                         <p><em>Numbered:</em></p>
+                         <pre>1.  The first element
 2.  The second element</pre>
-                             <p><strong>Code blocks (with backlight):</strong></p>
-                             <pre>```javascript
+                         <p><strong>Code blocks (with backlight):</strong></p>
+                         <pre>```javascript
 function greet() {
 console.log("Hello!");
 }
 ```</pre>
-                             <p><strong>Quotes:</strong></p>
-                             <pre>> This is a quote.</pre>
-                             <p><strong>Horizontal line:</strong></p>
-                             <pre>---</pre>
-                             <p><strong>Tables:</strong></p>
-                             <pre>| Title 1 | Title 2 |
+                         <p><strong>Quotes:</strong></p>
+                         <pre>> This is a quote.</pre>
+                         <p><strong>Horizontal line:</strong></p>
+                         <pre>---</pre>
+                         <p><strong>Tables:</strong></p>
+                         <pre>| Title 1 | Title 2 |
 | ----------- | ----------- |
 | Cell 1    | Cell 2    |
 | Cell 3    | Cell 4    |</pre>
-                         </div>
-                     </span>
-                 </label>
-                 <textarea class="section-content" rows="5" placeholder="Write the contents of the section here..." data-translate-placeholder-key="sectionContentPlaceholder"></textarea>
-             </div>
-        </div>
-    </template>
-    <!-- === КОНЕЦ ШАБЛОНА === -->
-
-    <script src="/assets/js/generator-script.js"></script>
-</body>
-</html>
+                     </div>
+                 </span>
+             </label>
+             <textarea class="section-content" rows="5" placeholder="Write the contents of the section here..." data-translate-placeholder-key="sectionContentPlaceholder"></textarea>
+         </div>
+    </div>
+</template>
+<!-- === КОНЕЦ ШАБЛОНА === -->
