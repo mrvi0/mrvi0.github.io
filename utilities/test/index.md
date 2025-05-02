@@ -2,7 +2,7 @@
 layout: defaultV2
 title: Моя Супер Утилита
 author: Mr Vi 123
-descriptiom: asdjal skdjlka sjdlkasj dlka jslka jdlak sjd
+description: asdjal skdjlka sjdlkasj dlka jslka jdlak sjd
 extra_css:
   - /utilities/my-super-tool/style.css
   - /assets/css/vendor/some-library.css
@@ -14,6 +14,7 @@ footer_extra: |
   [**B4DCAT**](https://t.me/B4DCAT).
 
   [B4DCAT HUB](https://t.me/B4DCAT_HUB)
+show_ads: true
 ---
 
 <h1>Полезные Утилиты</h1>
