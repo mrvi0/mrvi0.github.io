@@ -244,3 +244,81 @@ body {
     .site-main h2 { font-size: 1.5em; }
     .site-main h3 { font-size: 1.2em; }
 }
+
+.commit-history {
+    list-style: none;
+    padding: 0;
+    margin-top: 1.5rem;
+}
+
+.commit-history li {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border-color);
+    /* background-color: rgba(255, 255, 255, 0.03);
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 5px; */
+}
+
+.commit-history li:last-child {
+    border-bottom: none;
+}
+
+.commit-info .commit-message {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1.1em;
+    color: var(--heading-color); /* Используем цвет заголовков */
+    border-bottom: none; /* Убираем стандартное подчеркивание */
+}
+.commit-info .commit-message:hover {
+     color: var(--link-hover-color);
+     text-decoration: underline;
+}
+
+
+.commit-meta {
+    font-size: 0.9em;
+    color: var(--text-color-muted);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem; /* Пространство между элементами меты */
+    align-items: center;
+}
+
+.commit-author img {
+    margin-right: 5px;
+}
+
+.commit-author a {
+    color: var(--text-color-muted);
+    border-bottom: 1px dashed var(--text-color-muted);
+}
+.commit-author a:hover {
+    color: var(--link-hover-color);
+    border-bottom-color: var(--link-hover-color);
+}
+
+
+.commit-sha {
+    font-family: var(--font-code);
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 0.1em 0.4em;
+    border-radius: 4px;
+    font-size: 0.9em;
+    color: var(--link-color);
+    border: none;
+}
+.commit-sha:hover {
+    background-color: rgba(135, 206, 250, 0.2);
+    color: var(--link-hover-color);
+}
+
+.error {
+    color: #ff6347; /* Tomato */
+    background-color: rgba(255, 99, 71, 0.1);
+    border: 1px solid rgba(255, 99, 71, 0.5);
+    padding: 1rem;
+    border-radius: 5px;
+}
