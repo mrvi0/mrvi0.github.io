@@ -59,7 +59,7 @@
         {# Управляется через Front Matter `show_ads: true/false` (по умолчанию true) #} -->
         {% if page.show_ads != false %}
             <div id="ad-placeholder" class="ad-container">
-                {# Сюда будет загружаться реклама через JS #}
+                <!-- {# Сюда будет загружаться реклама через JS #} -->
                 <p style="text-align:center; font-size: 0.8em; color: var(--text-color-muted);">Рекламный блок</p>
             </div>
         {% endif %}
@@ -72,7 +72,7 @@
     <footer class="site-footer">
         <div class="footer-content">
             <!-- {# --- Стандартное Содержимое Футера --- #} -->
-            <p>© {{ site.time | date: '%Y' }} {{ site.author | default: "Твое Имя/Ник" }}.</p>
+            <p>© 2023-{{ site.time | date: '%Y' }} {{ site.author | default: "Твое Имя/Ник" }}.</p>
             <p><a href="https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME" target="_blank" rel="noopener noreferrer">Исходный код на GitHub</a></p>
 
             <!-- {# --- Дополнительное Содержимое Футера из Front Matter --- #}

@@ -1,7 +1,7 @@
 ---
 layout: defaultV2
 title: Моя Супер Утилита
-
+author: Mr Vi
 extra_css:
   - /utilities/my-super-tool/style.css
   - /assets/css/vendor/some-library.css
@@ -10,8 +10,9 @@ extra_js:
   - /utilities/my-js-tool/script.js
 js_async: true
 footer_extra: |
-  **Особая информация:** Эта страница использует [специальную библиотеку](link).
-  Связаться с автором: [email@example.com](mailto:email@example.com)
+  [**B4DCAT**](https://t.me/B4DCAT).
+
+  [B4DCAT HUB](https://t.me/B4DCAT_HUB)
 ---
 
 <h1>Полезные Утилиты</h1>
