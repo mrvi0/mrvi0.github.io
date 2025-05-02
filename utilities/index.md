@@ -7,7 +7,7 @@ title: Утилиты
 
 <ul class="item-list">
     <li>
-        <h2><a href="./reame-generator/">Dynamic README Builder</a></h2>
+        <h2><a href="./readme-builder/">Dynamic README Builder</a></h2>
         <p>Craft eye-catching READMEs with badges, GIFs, and metrics.</p>
     </li>
     <li>
