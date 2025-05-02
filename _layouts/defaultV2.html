@@ -1,62 +1,62 @@
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang | default: "ru" }}"> {# Язык страницы/сайта #}
+<html lang="{{ page.lang | default: site.lang | default: "ru" }}">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    {# --- SEO и Метаданные --- #}
+    <!-- {# --- SEO и Метаданные --- #} -->
     <title>{{ page.title | default: site.title }}</title>
     <meta name="description" content="{{ page.description | default: site.description }}">
-    {# Сюда можно добавить больше мета-тегов: OpenGraph, Twitter Cards (или использовать плагин jekyll-seo-tag) #}
+    <!-- {# Сюда можно добавить больше мета-тегов: OpenGraph, Twitter Cards (или использовать плагин jekyll-seo-tag) #} -->
 
-    {# --- Основные Стили --- #}
+    <!-- {# --- Основные Стили --- #} -->
     <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
 
-    {# --- Шрифты (если подключаются глобально) --- #}
+    <!-- {# --- Шрифты (если подключаются глобально) --- #} -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Source+Code+Pro&display=swap" rel="stylesheet">
-    {# Пример подключения локального шрифта, если он нужен глобально #}
-    {# <link rel="preload" href="{{ '/assets/fonts/teko.ttf' | relative_url }}" as="font" type="font/ttf" crossorigin> #}
+    <!-- {# Пример подключения локального шрифта, если он нужен глобально #} -->
+    <!-- {# <link rel="preload" href="{{ '/assets/fonts/teko.ttf' | relative_url }}" as="font" type="font/ttf" crossorigin> #} -->
 
-    {# --- Дополнительные CSS из Front Matter --- #}
-    {# Позволяет странице указать свои специфичные стили #}
+    <!-- {# --- Дополнительные CSS из Front Matter --- #} -->
+    <!-- {# Позволяет странице указать свои специфичные стили #} -->
     {% if page.extra_css %}
         {% for css_file in page.extra_css %}
             <link rel="stylesheet" href="{{ css_file | relative_url }}">
         {% endfor %}
     {% endif %}
 
-    {# --- RSS/Atom Feed (если используется плагин jekyll-feed) --- #}
+    <!-- {# --- RSS/Atom Feed (если используется плагин jekyll-feed) --- #} -->
     {% feed_meta %}
 
 </head>
 
-<body class="{{ page.body_class | default: 'default-layout' }}"> {# Добавляем класс к body из Front Matter #}
+<body class="{{ page.body_class | default: 'default-layout' }}"> <!-- {# Добавляем класс к body из Front Matter #} -->
 
     <header class="site-header">
         <nav class="site-nav">
-            {# Пример навигации (можно вынести в _includes/header.html или _data/navigation.yml) #}
+            <!-- {# Пример навигации (можно вынести в _includes/header.html или _data/navigation.yml) #} -->
             <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>Главная</a>
             <a href="{{ '/wiki/' | relative_url }}" {% if page.url contains '/wiki/' %}class="active"{% endif %}>Вики</a>
             <a href="{{ '/projects/' | relative_url }}" {% if page.url contains '/projects/' %}class="active"{% endif %}>Проекты</a>
             <a href="{{ '/notes/' | relative_url }}" {% if page.url contains '/notes/' %}class="active"{% endif %}>Заметки</a>
             <a href="{{ '/utilities/' | relative_url }}" {% if page.url contains '/utilities/' %}class="active"{% endif %}>Утилиты</a>
-            {# Добавь сюда ссылку на страницу коммитов, если создал #}
+            <!-- {# Добавь сюда ссылку на страницу коммитов, если создал #} -->
             <a href="{{ '/changelog/' | relative_url }}" {% if page.url contains '/changelog/' %}class="active"{% endif %}>Коммиты</a>
         </nav>
     </header>
 
     <main class="site-main">
 
-        {# --- Необязательный Заголовок Страницы (если не в content) --- #}
+        <!-- {# --- Необязательный Заголовок Страницы (если не в content) --- #} -->
         {% if page.show_title != false and page.title %}
             <h1 class="page-title">{{ page.title }}</h1>
         {% endif %}
 
-        {# --- Место для Рекламного Блока --- #}
-        {# Управляется через Front Matter `show_ads: true/false` (по умолчанию true) #}
+        <!-- {# --- Место для Рекламного Блока --- #}
+        {# Управляется через Front Matter `show_ads: true/false` (по умолчанию true) #} -->
         {% if page.show_ads != false %}
             <div id="ad-placeholder" class="ad-container">
                 {# Сюда будет загружаться реклама через JS #}
@@ -64,39 +64,41 @@
             </div>
         {% endif %}
 
-        {# --- Основной Контент Страницы --- #}
+        <!-- {# --- Основной Контент Страницы --- #} -->
         {{ content }}
 
     </main>
 
     <footer class="site-footer">
         <div class="footer-content">
-            {# --- Стандартное Содержимое Футера --- #}
+            <!-- {# --- Стандартное Содержимое Футера --- #} -->
             <p>© {{ site.time | date: '%Y' }} {{ site.author | default: "Твое Имя/Ник" }}.</p>
             <p><a href="https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME" target="_blank" rel="noopener noreferrer">Исходный код на GitHub</a></p>
 
-            {# --- Дополнительное Содержимое Футера из Front Matter --- #}
-            {# Позволяет странице добавить специфичную информацию в футер #}
+            <!-- {# --- Дополнительное Содержимое Футера из Front Matter --- #}
+            {# Позволяет странице добавить специфичную информацию в футер #} -->
             {% if page.footer_extra %}
                 <div class="footer-extra-content">
-                    {{ page.footer_extra | markdownify }} {# Обрабатываем как Markdown #}
+                    {{ page.footer_extra | markdownify }} 
+                    <!-- {# Обрабатываем как Markdown #} -->
                 </div>
             {% endif %}
         </div>
     </footer>
 
-    {# --- Основные Скрипты Сайта (если есть, например, для мобильного меню) --- #}
+    <!-- {# --- Основные Скрипты Сайта (если есть, например, для мобильного меню) --- #}
     {# <script src="{{ '/assets/js/main.js' | relative_url }}"></script> #}
 
     {# --- Дополнительные JS из Front Matter --- #}
-    {# Позволяет странице указать свои специфичные скрипты #}
+    {# Позволяет странице указать свои специфичные скрипты #} -->
     {% if page.extra_js %}
         {% for js_file in page.extra_js %}
-            <script src="{{ js_file | relative_url }}" {% if page.js_async %}async defer{% endif %}></script> {# Опционально: async/defer #}
+            <script src="{{ js_file | relative_url }}" {% if page.js_async %}async defer{% endif %}></script> 
+            <!-- {# Опционально: async/defer #} -->
         {% endfor %}
     {% endif %}
 
-    {# --- Скрипт для Рекламного Блока (если показывается) --- #}
+    <!-- {# --- Скрипт для Рекламного Блока (если показывается) --- #} -->
     {% if page.show_ads != false %}
         <script src="{{ '/assets/js/ads.js' | relative_url }}" async defer></script>
     {% endif %}
