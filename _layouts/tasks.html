@@ -1,0 +1,58 @@
+---
+# Можно использовать page как основу, если нет специфики
+layout: page
+---
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: "ru" }}">
+<head>
+    <!-- Весь <head> из _layouts/page.html -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title | default: site.title }}</title>
+    <meta name="description" content="{{ page.description | default: site.description }}">
+
+    <link rel="stylesheet" href="{{ '/assets/css/layout-styles.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/content-styles.css' | relative_url }}">
+    <!-- Дополнительные стили специально для трекера -->
+    <link rel="stylesheet" href="{{ '/assets/css/task-tracker.css' | relative_url }}"> <!-- !!! НУЖНО СОЗДАТЬ ЭТОТ ФАЙЛ !!! -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Source+Code+Pro&display=swap" rel="stylesheet">
+
+    {% if page.extra_css %}{% for css_file in page.extra_css %}<link rel="stylesheet" href="{{ css_file | relative_url }}">{% endfor %}{% endif %}
+</head>
+<body class="{{ page.body_class | default: 'tasks-page' }}">
+    <header class="site-header">
+         <nav class="site-nav">{% include navigation.html %}</nav>
+    </header>
+    <main class="site-main">
+        {% if page.show_title != false and page.title %}
+            <h1 class="page-title">{{ page.title }}</h1>
+        {% endif %}
+
+        <!-- Место для возможных фильтров (реализуются через JS) -->
+        <div class="task-filters">
+            <!-- Пример фильтров -->
+            <label>Фильтр по проекту: <select id="projectFilter"><option value="all">Все</option></select></label>
+            <label>Приоритет: <select id="priorityFilter"><option value="all">Все</option><option value="High">High</option><option value="Medium">Medium</option><option value="Low">Low</option></select></label>
+            <button id="clearFilters">Сбросить</button>
+        </div>
+
+        <!-- Основной контент (список задач) вставится сюда -->
+        <div class="tasks-container">
+             {{ content }}
+        </div>
+
+    </main>
+    <footer class="site-footer">
+         <!-- Футер как в page.html -->
+         <div class="footer-content">...</div>
+    </footer>
+
+    <!-- JS для фильтров/сортировки (опционально) -->
+    <script src="{{ '/assets/js/task-filters.js' | relative_url }}"></script> <!-- !!! НУЖНО СОЗДАТЬ ЭТОТ ФАЙЛ !!! -->
+    {% if page.extra_js %}{% for js_file in page.extra_js %}<script src="{{ js_file | relative_url }}" {% if page.js_async %}async defer{% endif %}></script>{% endfor %}{% endif %}
+    <!-- Рекламу здесь, вероятно, показывать не нужно -->
+</body>
+</html>
