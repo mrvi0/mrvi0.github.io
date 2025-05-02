@@ -7,7 +7,7 @@ layout: defaultV2                  # Используем основной ма�
 title: Dynamic README Builder | Boost Your GitHub Profile # Заголовок для тега <title>
 description: Craft eye-catching READMEs with badges, GIFs, and metrics. Perfect for GitHub profiles! # Описание для <meta name="description">
 # Можно добавить и другие метаданные, если твой макет их поддерживает
-# keywords: ["README generator", "GitHub profile", "badges", "Markdown", "dynamic README"]
+keywords: [README generator, GitHub profile, badges, GIFs, metrics, Markdown, dynamic README, open source, developer tools]
 
 # --- Подключение ресурсов, нужных ТОЛЬКО для этой страницы ---
 extra_css:
@@ -31,9 +31,10 @@ show_ads: false
 body_class: readme-generator-page utility-page
 
 # Если нужно добавить что-то уникальное в футер ТОЛЬКО для этой страницы
-# footer_extra: |
-#   README Generator v1.0 - Использует Marked.js и DOMPurify.
-
+footer_extra: |
+   README Generator v1.0 - Использует [Marked.js](https://marked.js.org/) и DOMPurify. |
+   [B4DCAT](https://t.me/B4DCAT) | [B4DCAT HUB](https://t.me/B4DCAT_HUB)
+author: Mr Vi
 ---
 <!-- --- Начало основного контента страницы (вставляется вместо {{ content }} в макете) --- -->
 <!-- Весь HTML-код генератора, как и в предыдущем ответе, но с HTML-комментариями -->
@@ -114,14 +115,6 @@ body_class: readme-generator-page utility-page
                  <input type="text" id="licenseText" data-translate-placeholder-key="licenseTextPlaceholder" placeholder="MIT / See the badge above / See the LICENSE file">
              </div>
     
-            <!-- Встроенный Рекламный блок -->
-            <div class="ad-block form-group static-block">
-                <h4 data-translate-key="adTitle">✨ Support Development / Useful Resources ✨</h4>
-                <p><strong data-translate-key="adHostingStrong">🚀 Need reliable hosting?</strong> <span data-translate-key="adHostingTry">Try</span> <a href="https://ruvds.com/ru-rub/pr6841" target="_blank" rel="noopener noreferrer">RuVDS</a>!</p>
-                <a href="https://ruvds.com/ru-rub/pr6841" target="_blank" rel="noopener noreferrer"><img src="https://ruvds.com/wp-content/themes/manual-child/newHeader/img/ruvds_logo.svg" alt="RuVDS Banner"></a>
-                <p class="support-note" data-translate-key="adSupportNote"> (Using partner links helps us keep this tool free. Thank you!) </p>
-            </div>
-    
             <!-- Кнопки -->
             <div class="action-buttons">
                 <button id="copyMdButton" data-translate-key="copyButton">Copy Markdown</button>
@@ -137,7 +130,13 @@ body_class: readme-generator-page utility-page
              <textarea id="rawMarkdownOutput" rows="15" readonly></textarea>
         </section>
     </main> <!-- Конец оригинального <main class="container"> -->
-    
+    <!-- Встроенный Рекламный блок -->
+    <div class="ad-block form-group static-block">
+        <h4 data-translate-key="adTitle">✨ Support Development / Useful Resources ✨</h4>
+        <p><strong data-translate-key="adHostingStrong">🚀 Need reliable hosting?</strong> <span data-translate-key="adHostingTry">Try</span> <a href="https://ruvds.com/ru-rub/pr6841" target="_blank" rel="noopener noreferrer">RuVDS</a>!</p>
+        <a href="https://ruvds.com/ru-rub/pr6841" target="_blank" rel="noopener noreferrer"><img src="https://ruvds.com/wp-content/themes/manual-child/newHeader/img/ruvds_logo.svg" alt="RuVDS Banner"></a>
+        <p class="support-note" data-translate-key="adSupportNote"> (Using partner links helps us keep this tool free. Thank you!) </p>
+    </div>
     
     <!-- 3. Шаблон динамического блока, который был ПОСЛЕ <main> в оригинальном файле -->
     <!-- === ШАБЛОН ДИНАМИЧЕСКОГО БЛОКА === -->
