@@ -157,7 +157,7 @@ button:hover {
 
 @font-face {
     font-family: 'Teko'; 
-    src: url(../../src/fonts/teko.ttf); 
+    src: url(../fonts/teko.ttf); 
 }
 .russo-one-regular {
     font-family: "Russo One", serif;

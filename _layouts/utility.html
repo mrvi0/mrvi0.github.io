@@ -39,7 +39,9 @@
         <!-- Управляется через show_ads: false в Front Matter страницы -->
         {% if page.show_ads != false %}
             <div id="ad-placeholder" class="ad-container">
-                <!-- Сюда JS загрузит рекламу -->
+                <script id="adsDataScript" type="application/json">
+                    {{ site.data.advertisements | jsonify }}
+                </script>
                 <p style="text-align:center; font-size: 0.8em; color: var(--text-color-muted);">Рекламный блок</p>
             </div>
         {% endif %}

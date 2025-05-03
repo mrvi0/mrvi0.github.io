@@ -1,0 +1,20 @@
+# _data/advertisements.yml
+# Список рекламных объявлений
+
+- id: ad_ruvds_banner
+  type: banner_link # Тип для возможной разной обработки в JS
+  html: | # Используем блочный скаляр для многострочного HTML
+    <h4 data-translate-key="adTitle">✨ Поддержка разработки / Полезные ресурсы ✨</h4>
+    <p><strong data-translate-key="adHostingStrong">🚀 Ищешь надежный хостинг?</strong> <span data-translate-key="adHostingTry">Попробуй</span> <a href="https://ruvds.com/ru-rub/pr6841" target="_blank" rel="noopener noreferrer">RuVDS</a>!</p>
+    <a href="https://ruvds.com/ru-rub/pr6841" target="_blank" rel="sponsored noopener" class="ad-link ad-banner ad-banner-ruvds">
+      <img src="https://poiskvps.ru/images/companies/3044a40637ba2666b4d07e3c050dbcd2.svg" alt="RuVDS Banner" loading="lazy">
+    </a>
+
+- id: ad_telegram
+  type: text_link
+  html: |
+    <div class="simple-telegram-promo">
+      <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path d="M41.42,8.29l-5.43,25.76c0,0-0.32,1.54-1.48,1.7-1.16.16-2.89-0.89-3.38-1.38L20.7,26.55l-4.15,3.9c-0.58,0.58-1.06,1.06-2.13,1.06s-1.48-.68-1.7-1.48l-3.21-10.3L2.92,16.85c0,0-1.54-.54-1.54-1.7s1.16-1.48,1.16-1.48L40,6.62c0,0,1.16-0.43,1.48,0S41.42,8.29,41.42,8.29z M19.35,28.46l13.41-8.46c0.54-0.32,0.54-0.64,0-0.86s-0.86-0.32-1.18,0L15.14,26.6l-1.55,5.13L19.35,28.46z"></path></svg>
+      <span>Подписывайся на B4DCAT!</span>
+      <a href="https://t.me/B4DCAT" target="_blank" rel="noopener noreferrer">Перейти</a>
+    </div>
