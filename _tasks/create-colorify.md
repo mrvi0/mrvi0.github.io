@@ -3,8 +3,8 @@ layout: task_detail
 title: "Create Colorify"
 status: "In Progress"
 priority: "Medium"
-project: "Сайт Pages"
-due_date: "2025-05-03"
+project: "Utilities"
+due_date: "2025-05-05"
 ---
 
 # Конвертер цветовых моделей
