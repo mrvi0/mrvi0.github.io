@@ -1,7 +1,7 @@
 ---
 layout: task_detail
 title: "Create Colorify"
-status: "In Progress"
+status: "Done"
 priority: "Medium"
 project: "Utilities"
 due_date: "2025-05-05"
