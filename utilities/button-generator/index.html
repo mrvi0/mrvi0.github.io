@@ -1,0 +1,214 @@
+---
+layout: utility
+title: "CSS Button Generator | Create Custom Buttons"
+description: "Visually design CSS buttons with controls for text, size, border, shadows, and generate the CSS code instantly."
+extra_css:
+  - /assets/css/button-generator-style.css
+extra_js:
+  - /assets/js/button-generator-script.js
+body_class: button-generator-utility
+show_ads: true # Или false, если реклама будет в самой утилите
+---
+
+<div class="button-generator-container">
+
+    <!-- Панель Настроек (Правая) -->
+    <aside class="controls-panel">
+        <h2>Настройки Кнопки</h2>
+
+        <!-- Текст -->
+        <fieldset>
+            <legend>Текст</legend>
+            <div class="control-group">
+                <label for="btnText">Текст кнопки:</label>
+                <input type="text" id="btnText" value="Click Me">
+            </div>
+            <div class="control-group">
+                <label for="btnClassName">Имя класса:</label>
+                <input type="text" id="btnClassName" value="btn-custom" placeholder="btn-custom">
+            </div>
+            <div class="control-group row">
+                <label for="btnFontSize">Размер шрифта:</label>
+                <input type="range" id="btnFontSizeRange" min="8" max="48" value="15" step="1">
+                <input type="number" id="btnFontSizeInput" min="8" max="48" value="15" step="1" class="input-number-small">
+                <span>px</span>
+            </div>
+             <div class="control-group">
+                 <label for="btnFontFamily">Шрифт:</label>
+                 <select id="btnFontFamily">
+                     <option value="inherit">По умолчанию</option>
+                     <option value="Arial, sans-serif">Arial</option>
+                     <option value="Verdana, sans-serif">Verdana</option>
+                     <option value="'Helvetica Neue', Helvetica, sans-serif">Helvetica Neue</option>
+                     <option value="Tahoma, sans-serif">Tahoma</option>
+                     <option value="'Trebuchet MS', sans-serif">Trebuchet MS</option>
+                     <option value="Georgia, serif">Georgia</option>
+                     <option value="'Times New Roman', Times, serif">Times New Roman</option>
+                     <option value="'Courier New', Courier, monospace">Courier New</option>
+                 </select>
+             </div>
+            <div class="control-group checkbox-group">
+                <label><input type="checkbox" id="btnFontBold"> Bold</label>
+                <label><input type="checkbox" id="btnFontItalic"> Italic</label>
+            </div>
+        </fieldset>
+
+        <!-- Размер (Padding) -->
+        <fieldset>
+            <legend>Размер (Отступы)</legend>
+            <div class="control-group row">
+                <label for="btnPaddingV">Вертикальный:</label>
+                <input type="range" id="btnPaddingVRange" min="0" max="50" value="6" step="1">
+                <input type="number" id="btnPaddingVInput" min="0" max="50" value="6" step="1" class="input-number-small">
+                <span>px</span>
+            </div>
+            <div class="control-group row">
+                <label for="btnPaddingH">Горизонтальный:</label>
+                <input type="range" id="btnPaddingHRange" min="0" max="100" value="24" step="1">
+                <input type="number" id="btnPaddingHInput" min="0" max="100" value="24" step="1" class="input-number-small">
+                <span>px</span>
+            </div>
+        </fieldset>
+
+        <!-- Граница -->
+        <fieldset>
+            <legend>Граница</legend>
+            <div class="control-group row">
+                <label for="btnBorderRadius">Скругление:</label>
+                <input type="range" id="btnBorderRadiusRange" min="0" max="50" value="6" step="1">
+                <input type="number" id="btnBorderRadiusInput" min="0" max="50" value="6" step="1" class="input-number-small">
+                <span>px</span>
+            </div>
+            <div class="control-group row">
+                <label for="btnBorderSize">Толщина:</label>
+                <input type="range" id="btnBorderSizeRange" min="0" max="10" value="1" step="1">
+                <input type="number" id="btnBorderSizeInput" min="0" max="10" value="1" step="1" class="input-number-small">
+                <span>px</span>
+            </div>
+             <!-- Добавить выбор цвета границы -->
+             <div class="control-group row color-control">
+                  <label for="btnBorderColor">Цвет границы:</label>
+                  <input type="color" id="btnBorderColor" value="#cccccc">
+                  <input type="text" id="btnBorderColorHex" value="#cccccc" readonly class="input-hex-small">
+             </div>
+        </fieldset>
+
+        <!-- Тень Блока (Box Shadow) -->
+        <fieldset>
+            <legend><label><input type="checkbox" id="enableBoxShadow"> Тень Блока</label></legend>
+            <div class="control-group-multiple" id="boxShadowControls" style="display: none;"> <!-- Изначально скрыто -->
+                <div class="control-group row">
+                    <label for="boxShadowVOffset">Вертикально:</label>
+                    <input type="range" id="boxShadowVOffsetRange" min="-20" max="20" value="1" step="1">
+                    <input type="number" id="boxShadowVOffsetInput" min="-20" max="20" value="1" step="1" class="input-number-small">
+                    <span>px</span>
+                </div>
+                <div class="control-group row">
+                    <label for="boxShadowHOffset">Горизонтально:</label>
+                    <input type="range" id="boxShadowHOffsetRange" min="-20" max="20" value="1" step="1">
+                    <input type="number" id="boxShadowHOffsetInput" min="-20" max="20" value="1" step="1" class="input-number-small">
+                    <span>px</span>
+                </div>
+                <div class="control-group row">
+                    <label for="boxShadowBlur">Размытие:</label>
+                    <input type="range" id="boxShadowBlurRange" min="0" max="50" value="3" step="1">
+                    <input type="number" id="boxShadowBlurInput" min="0" max="50" value="3" step="1" class="input-number-small">
+                    <span>px</span>
+                </div>
+                 <div class="control-group row">
+                    <label for="boxShadowSpread">Размах:</label>
+                    <input type="range" id="boxShadowSpreadRange" min="-20" max="20" value="0" step="1">
+                    <input type="number" id="boxShadowSpreadInput" min="-20" max="20" value="0" step="1" class="input-number-small">
+                    <span>px</span>
+                </div>
+                 <div class="control-group row color-control">
+                     <label for="boxShadowColor">Цвет тени:</label>
+                     <input type="color" id="boxShadowColor" value="#888888">
+                     <input type="text" id="boxShadowColorHex" value="#888888" readonly class="input-hex-small">
+                     <!-- Добавить контрол прозрачности -->
+                     <label for="boxShadowOpacity" class="opacity-label">Прозр:</label>
+                     <input type="range" id="boxShadowOpacityRange" min="0" max="1" value="0.5" step="0.01">
+                     <input type="number" id="boxShadowOpacityInput" min="0" max="1" value="0.5" step="0.01" class="input-number-tiny">
+                </div>
+                <div class="control-group checkbox-group">
+                    <label><input type="checkbox" id="boxShadowInset"> Inset (Внутренняя)</label>
+                </div>
+            </div>
+        </fieldset>
+
+        <!-- Тень Текста (Text Shadow) -->
+        <fieldset>
+            <legend><label><input type="checkbox" id="enableTextShadow"> Тень Текста</label></legend>
+             <div class="control-group-multiple" id="textShadowControls" style="display: none;"> <!-- Изначально скрыто -->
+                 <div class="control-group row">
+                    <label for="textShadowVOffset">Вертикально:</label>
+                    <input type="range" id="textShadowVOffsetRange" min="-10" max="10" value="1" step="1">
+                    <input type="number" id="textShadowVOffsetInput" min="-10" max="10" value="1" step="1" class="input-number-small">
+                    <span>px</span>
+                </div>
+                <div class="control-group row">
+                    <label for="textShadowHOffset">Горизонтально:</label>
+                    <input type="range" id="textShadowHOffsetRange" min="-10" max="10" value="1" step="1">
+                    <input type="number" id="textShadowHOffsetInput" min="-10" max="10" value="1" step="1" class="input-number-small">
+                    <span>px</span>
+                </div>
+                <div class="control-group row">
+                    <label for="textShadowBlur">Размытие:</label>
+                    <input type="range" id="textShadowBlurRange" min="0" max="20" value="1" step="1">
+                    <input type="number" id="textShadowBlurInput" min="0" max="20" value="1" step="1" class="input-number-small">
+                    <span>px</span>
+                </div>
+                 <div class="control-group row color-control">
+                     <label for="textShadowColor">Цвет тени:</label>
+                     <input type="color" id="textShadowColor" value="#555555">
+                     <input type="text" id="textShadowColorHex" value="#555555" readonly class="input-hex-small">
+                     <!-- Добавить контрол прозрачности -->
+                      <label for="textShadowOpacity" class="opacity-label">Прозр:</label>
+                     <input type="range" id="textShadowOpacityRange" min="0" max="1" value="0.8" step="0.01">
+                     <input type="number" id="textShadowOpacityInput" min="0" max="1" value="0.8" step="0.01" class="input-number-tiny">
+                </div>
+            </div>
+        </fieldset>
+
+         <!-- Цвета Кнопки -->
+         <fieldset>
+             <legend>Цвета</legend>
+             <div class="control-group row color-control">
+                 <label for="btnTextColor">Цвет Текста:</label>
+                 <input type="color" id="btnTextColor" value="#FFFFFF">
+                 <input type="text" id="btnTextColorHex" value="#FFFFFF" readonly class="input-hex-small">
+            </div>
+             <div class="control-group row color-control">
+                 <label for="btnBgColor">Цвет Фона:</label>
+                 <input type="color" id="btnBgColor" value="#8A2BE2"> <!-- Purple -->
+                 <input type="text" id="btnBgColorHex" value="#8A2BE2" readonly class="input-hex-small">
+            </div>
+             <!-- TODO: Добавить опции градиента позже -->
+         </fieldset>
+
+    </aside>
+
+    <!-- Центральная/Левая Панель -->
+    <main class="preview-output-panel">
+
+        <!-- Область Превью -->
+        <section class="preview-area">
+            <h2>Превью</h2>
+            <div class="preview-box">
+                <button type="button" id="previewButton">Click Me</button>
+            </div>
+             <!-- TODO: Добавить контролы цвета/градиента под превью? -->
+        </section>
+
+        <!-- Область Вывода CSS -->
+        <section class="output-area">
+            <h2>Сгенерированный CSS</h2>
+             <div class="output-wrapper">
+                 <textarea id="cssOutput" rows="10" readonly></textarea>
+                 <button class="copy-button" data-target="cssOutput" title="Копировать CSS">📄 Копировать</button>
+             </div>
+        </section>
+
+    </main>
+
+</div>

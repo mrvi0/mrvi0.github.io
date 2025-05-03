@@ -7,6 +7,10 @@ title: Утилиты
 
 <ul class="item-list">
     <li>
+        <h2><a href="./button-generator/">CSS Button Generator | Create Custom Buttons</a></h2>
+        <p>Visually design CSS buttons with controls for text, size, border, shadows, and generate the CSS code instantly.</p>
+    </li>
+    <li>
         <h2><a href="./colorify/">Colorify | Convert HEX, RGB, HSL in Real-Time</a></h2>
         <p>Instant color conversion with palette generator and accessibility check.</p>
     </li>
