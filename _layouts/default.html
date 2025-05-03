@@ -5,21 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- --- SEO и Метаданные --- -->
+    <!--  SEO и Метаданные  -->
     <title>{{ page.title | default: site.title }}</title>
     <meta name="description" content="{{ page.description | default: site.description | default: page.excerpt | strip_html | truncatewords: 50 }}">
-    <!-- Можно добавить больше мета-тегов или использовать плагин {% seo %} -->
 
-    <!-- --- Шрифты (если нужны глобально) --- -->
+    <!--  Шрифты (если нужны глобально)  -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Source+Code+Pro&display=swap" rel="stylesheet">
 
-    <!-- --- Основные Стили для Макета и Контента --- -->
+    <!--  Основные Стили для Макета и Контента  -->
     <link rel="stylesheet" href="{{ '/assets/css/layout-styles.css' | relative_url }}"> <!-- Стили для шапки, подвала, структуры -->
     <link rel="stylesheet" href="{{ '/assets/css/content-styles.css' | relative_url }}"> <!-- Стили для Markdown-контента -->
 
-    <!-- --- Дополнительные CSS из Front Matter СТРАНИЦЫ --- -->
+    <!--  Дополнительные CSS из Front Matter СТРАНИЦЫ  -->
     <!-- Позволяет конкретной странице добавить еще свои стили -->
     {% if page.extra_css %}
         {% for css_file in page.extra_css %}
@@ -27,29 +26,26 @@
         {% endfor %}
     {% endif %}
 
-    <!-- {% feed_meta %} -->
-    <!-- Для RSS, если нужно -->
-
 </head>
 
-<body class="{{ page.body_class | default: 'content-page' }}"> <!-- Класс по умолчанию для контентных страниц -->
+<body class="{{ page.body_class | default: 'content-page' }}">
 
     <header class="site-header">
         <nav class="site-nav">
-            {% include navigation.html %} <!-- Включаем навигацию -->
+            {% include navigation.html %}
         </nav>
     </header>
 
     <main class="site-main"> <!-- Основной контейнер для контента -->
 
-        <!-- --- Опциональный Заголовок Страницы --- -->
-        <!-- Управляется через `show_title: false` в Front Matter страницы -->
+        <!--  Опциональный Заголовок Страницы  -->
+        <!-- Управляется через show_title: false в Front Matter страницы -->
         {% if page.show_title != false and page.title %}
-            <h1 class="page-title">{{ page.title }}</h1> <!-- Стилизуется в content-styles.css или layout-styles.css -->
+            <h1 class="page-title">{{ page.title }}</h1> 
         {% endif %}
 
-        <!-- --- Опциональный Рекламный Блок --- -->
-        <!-- Управляется через `show_ads: false` в Front Matter страницы -->
+        <!--  Опциональный Рекламный Блок  -->
+        <!-- Управляется через show_ads: false в Front Matter страницы -->
         {% if page.show_ads != false %}
             <div id="ad-placeholder" class="ad-container">
                 <!-- Сюда JS загрузит рекламу -->
@@ -57,7 +53,7 @@
             </div>
         {% endif %}
 
-        <!-- --- Сюда Jekyll вставит контент из .md или .html файла --- -->
+        <!--  Сюда Jekyll вставит контент из .md или .html файла  -->
         {{ content }}
 
     </main>
@@ -66,7 +62,7 @@
         <div class="footer-content">
             <!-- Стандартное содержимое футера -->
             <p>© {{ site.time | date: '%Y' }} {{ site.author | default: "Твое Имя/Ник" }}.</p>
-            <p><a href="{{ site.github_url | default: '#' }}" target="_blank" rel="noopener noreferrer">Исходный код на GitHub</a></p> <!-- Используем site.github_url из _config.yml -->
+            
 
             <!-- Дополнительный контент из Front Matter страницы -->
             {% if page.footer_extra %}
@@ -77,17 +73,17 @@
         </div>
     </footer>
 
-    <!-- --- Основные Скрипты Сайта (если есть) --- -->
+    <!--  Основные Скрипты Сайта (если есть)  -->
     <!-- <script src="{{ '/assets/js/main.js' | relative_url }}"></script> -->
 
-    <!-- --- Дополнительные JS из Front Matter СТРАНИЦЫ --- -->
+    <!--  Дополнительные JS из Front Matter СТРАНИЦЫ  -->
     {% if page.extra_js %}
         {% for js_file in page.extra_js %}
             <script src="{{ js_file | relative_url }}" {% if page.js_async %}async defer{% endif %}></script>
         {% endfor %}
     {% endif %}
 
-    <!-- --- Скрипт для Рекламного Блока (если показывается) --- -->
+    <!--  Скрипт для Рекламного Блока (если показывается)  -->
     {% if page.show_ads != false %}
         <script src="{{ '/assets/js/ads.js' | relative_url }}"></script>
     {% endif %}

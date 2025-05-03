@@ -1,0 +1,39 @@
+{%- comment -%}
+  Creates a hash/dictionary from an array where elements are alternating keys and values.
+  Input: Array (e.g., ["key1", "value1", "key2", "value2"])
+  Output: Hash (e.g., {"key1" => "value1", "key2" => "value2"})
+  Usage: {{ my_alternating_array | hash_from_pairs }}
+{%- endcomment -%}
+{%- assign result = "" | split: "|" -%}
+{%- assign h = "" | split: "|" -%}
+{%- for i in include.input -%}
+  {%- assign eo = forloop.index | modulo: 2 -%}
+  {%- if eo == 0 -%}
+    {%- assign key = h[0] -%}
+    {%- assign val = i -%}
+    {%- capture updated_result -%}{%- assign temp = result | push: key -%}{%- assign temp = result | push: val -%}{%- endcapture -%}
+    {%- assign h = "" | split: "|" -%}
+  {%- else -%}
+    {%- assign h = "" | split: "|" -%}
+    {%- capture updated_h -%}{%- assign temp = h | push: i -%}{%- endcapture -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign output_hash = {} -%}
+{%- assign keys = "" | split: "|" -%}
+{%- assign values = "" | split: "|" -%}
+{%- for i in result -%}
+  {%- assign eo = forloop.index | modulo: 2 -%}
+  {%- if eo == 1 -%}
+    {%- capture updated_keys -%}{%- assign temp = keys | push: i -%}{%- endcapture -%}
+  {%- else -%}
+    {%- capture updated_values -%}{%- assign temp = values | push: i -%}{%- endcapture -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- for i in (0..keys.size) -%}
+  {%- assign key = keys[i] -%}
+  {%- if key -%}
+    {%- assign value = values[i] -%}
+    {%- assign output_hash = output_hash | push_associative: key, value -%}
+  {%- endif -%}
+{%- endfor -%}
+{{ output_hash }}

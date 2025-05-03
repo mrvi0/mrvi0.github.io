@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: "ru" }}">
+<head>
+    <!-- Весь <head> как в _layouts/page.html -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }} | Трекер Задач</title> <!-- Заголовок страницы -->
+    <meta name="description" content="{{ page.excerpt | strip_html | truncatewords: 50 }}">
+
+    <link rel="stylesheet" href="{{ '/assets/css/layout-styles.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/content-styles.css' | relative_url }}">
+    <!-- Можно добавить стили специфичные для деталей задачи, если нужно -->
+    <!-- <link rel="stylesheet" href="{{ '/assets/css/task-detail.css' | relative_url }}"> -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Source+Code+Pro&display=swap" rel="stylesheet">
+
+    {% if page.extra_css %}{% for css_file in page.extra_css %}<link rel="stylesheet" href="{{ css_file | relative_url }}">{% endfor %}{% endif %}
+</head>
+<body class="{{ page.body_class | default: 'task-detail-page' }}">
+    <header class="site-header">
+         <nav class="site-nav">{% include navigation.html %}</nav>
+    </header>
+    <main class="site-main">
+
+        <!-- Шапка задачи -->
+        <div class="task-detail-header">
+            <h1 class="task-detail-title">{{ page.title | escape }}</h1>
+            <!-- Ссылка "Назад к доске" -->
+             <a href="{{ '/tasks/' | relative_url }}" class="button-secondary back-to-board-link">« Назад к доске</a>
+             <!-- Ссылка на редактирование файла -->
+             <a href="{{ site.github.repository_url }}/edit/{{ site.github.source.branch | default: 'main' }}/{{ page.path }}" target="_blank" class="button edit-task-button-detail">✏️ Редактировать</a>
+        </div>
+
+
+        <!-- Метаданные задачи -->
+        <div class="task-detail-meta">
+             <span class="meta-item status-{{ page.status | downcase | replace: ' ', '-' }}"><strong>Статус:</strong> {{ page.status }}</span>
+             <span class="meta-item priority-{{ page.priority | downcase }}"><strong>Приоритет:</strong> {{ page.priority }}</span>
+             {% if page.project %}<span class="meta-item"><strong>Проект:</strong> {{ page.project }}</span>{% endif %}
+             {% if page.due_date %}<span class="meta-item"><strong>Дедлайн:</strong> {{ page.due_date | date: "%d %B %Y" }}</span>{% endif %}
+             <!-- Добавь другие метаданные, если есть -->
+        </div>
+
+        <!-- Описание задачи -->
+        <div class="task-detail-content">
+            {{ content }} <!-- Сюда вставится описание из Markdown -->
+        </div>
+
+    </main>
+    <footer class="site-footer">
+         <!-- Стандартный футер -->
+         <div class="footer-content">...</div>
+    </footer>
+    <!-- JS -->
+    {% if page.extra_js %}{% for js_file in page.extra_js %}<script src="{{ js_file | relative_url }}" {% if page.js_async %}async defer{% endif %}></script>{% endfor %}{% endif %}
+</body>
+</html>

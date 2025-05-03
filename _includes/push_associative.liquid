@@ -1,0 +1,11 @@
+{%- comment -%}
+  Adds a key-value pair to a hash. Needed because direct assignment is tricky.
+  Usage: {% assign my_hash = my_hash | push_associative: new_key, new_value %}
+{%- endcomment -%}
+{%- assign key_to_add = include.key -%}
+{%- assign value_to_add = include.value -%}
+{%- assign current_hash = include.input -%}
+{%- assign temp_hash = current_hash | default: '{}' -%}
+{%- if current_hash == nil -%}{% assign temp_hash = '{}' %}{% endif -%}
+{%- assign temp_hash[key_to_add] = value_to_add -%}
+{{ temp_hash }}

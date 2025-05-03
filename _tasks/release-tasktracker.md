@@ -1,11 +1,10 @@
 ---
+layout: task_detail
 title: "Реализовать базовый Таск-Трекер на Jekyll"
-status: "In Progress"  # Возможные значения: To Do, In Progress, Done, Archived, Blocked
-priority: "High"       # Возможные значения: High, Medium, Low
-project: "Сайт Pages"  # Для группировки по проектам/контексту
-due_date: "2023-11-20" # Опционально: дедлайн в формате YYYY-MM-DD
-# Можно добавить другие поля: assigned_to, tags и т.д.
-# layout: не нужен, если не планируем делать отдельную страницу для каждой задачи
+status: "In Progress"
+priority: "High"
+project: "Сайт Pages"
+due_date: "2023-11-20"
 ---
 
 Описание задачи:

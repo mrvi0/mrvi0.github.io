@@ -1,0 +1,20 @@
+{%- comment -%}
+  Creates a hash/dictionary from a list of strings, where each string
+  contains a key and value separated by a specified separator.
+  Input: Array of strings (e.g., ["key1:value1", "key2:value2"])
+         Separator string (e.g., ":")
+  Output: Hash (e.g., {"key1" => "value1", "key2" => "value2"})
+
+  Usage: {% assign my_map = my_array_of_strings | map_by_separator: ":" %}
+{%- endcomment -%}
+{%- assign map_output = "" | split: "|" -%}
+{%- assign separator = include.separator | default: ":" -%}
+{%- for item in include.input -%}
+  {%- assign parts = item | split: separator -%}
+  {%- assign key = parts[0] | strip -%}
+  {%- assign value = parts[1] | strip -%}
+  {%- if key != "" -%}
+    {%- capture updated_map -%}{%- assign temp = map_output | push: key -%}{%- assign temp = map_output | push: value -%}{%- endcapture -%}
+  {%- endif -%}
+{%- endfor -%}
+{{ map_output | hash_from_pairs }}

@@ -1,14 +1,15 @@
-title: Моя База Знаний и Инструментов
-description: Персональная вики, заметки, проекты и утилиты.
+title: B4DCAT
+description: B4DCAT
 theme: minima # Можешь выбрать другую тему или создать свою
 # baseurl: "/repository-name" # Раскомментируй и укажи имя репозитория, если это не your-username.github.io
 # url: "https://your-username.github.io" # Раскомментируй и укажи свой URL
 collections:
   tasks:            # Имя коллекции
-    output: false   # Не создавать отдельные HTML-страницы для каждой задачи (мы покажем их списком)
-
+    output: true
+    permalink: /tasks/:title/
+author: Mr Vi
 github:
-  repository_url: https://github.com/mrvi0/mrvi0.github.io # URL репозитория
-  commit_message: "Update task" # Сообщение коммита при обновлении сайта
+  repository_url: https://github.com/mrvi0/mrvi0.github.io
+  commit_message: "Update task" 
   source:
     branch: main

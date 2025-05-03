@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "ru" }}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title | default: site.title }}</title>
+    <meta name="description" content="{{ page.description | default: site.description }}">
+    <!-- {% seo %} --> <!-- SEO-плагин, если используется -->
+
+    <!-- Шрифты (если нужны глобально для шапки/подвала) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Source+Code+Pro&display=swap" rel="stylesheet">
+
+    <!-- Стили ТОЛЬКО для Общей Структуры (Шапка/Подвал) -->
+    <link rel="stylesheet" href="{{ '/assets/css/layout-styles.css' | relative_url }}">
+
+    <!-- Дополнительные CSS из Front Matter СТРАНИЦЫ УТИЛИТЫ -->
+    <!-- Сюда утилита подключит СВОИ стили контента -->
+    {% if page.extra_css %}
+        {% for css_file in page.extra_css %}
+            <link rel="stylesheet" href="{{ css_file | relative_url }}">
+        {% endfor %}
+    {% endif %}
+</head>
+
+<body class="{{ page.body_class | default: 'utility-page' }}"> <!-- Класс по умолчанию для страниц утилит -->
+
+    <header class="site-header">
+        <nav class="site-nav">
+            {% include navigation.html %} <!-- Общая навигация -->
+        </nav>
+    </header>
+
+    <main class="site-main utility-main-container"> <!-- Контейнер для контента утилиты -->
+        <!-- ВАЖНО: В этом макете нет H1, нет рекламного блока по умолчанию. -->
+        <!-- Утилита сама управляет своим содержимым. -->
+
+        {{ content }} <!-- Сюда вставляется ВЕСЬ HTML-код утилиты -->
+
+    </main>
+
+    <footer class="site-footer">
+        <!-- Стандартный футер -->
+        <div class="footer-content">
+            <p>© {{ site.time | date: '%Y' }} {{ site.author | default: "Твое Имя/Ник" }}.</p>
+            <p><a href="{{ site.github_url | default: '#' }}" target="_blank" rel="noopener noreferrer">Исходный код</a></p>
+            {% if page.footer_extra %}
+                <div class="footer-extra-content">{{ page.footer_extra | markdownify }}</div>
+            {% endif %}
+        </div>
+    </footer>
+
+    <!-- Основные скрипты сайта (если есть) -->
+    <!-- <script src="{{ '/assets/js/main.js' | relative_url }}"></script> -->
+
+    <!-- Дополнительные JS из Front Matter СТРАНИЦЫ УТИЛИТЫ -->
+    <!-- Сюда утилита подключит СВОИ скрипты -->
+    {% if page.extra_js %}
+        {% for js_file in page.extra_js %}
+            <script src="{{ js_file | relative_url }}" {% if page.js_async %}async defer{% endif %}></script>
+        {% endfor %}
+    {% endif %}
+
+    <!-- Скрипт для общего рекламного блока здесь НЕ подключается по умолчанию -->
+
+</body>
+
+</html>
