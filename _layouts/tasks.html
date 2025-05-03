@@ -62,10 +62,11 @@
     <footer class="site-footer">
         <!-- Футер как в default.html -->
         <div class="footer-content">
-            <p>© 2023-{{ site.time | date: '%Y' }} {{ page.author | default: "Твое Имя/Ник" }}.</p>
             {% if page.footer_extra %}
                 <div class="footer-extra-content">{{ page.footer_extra | markdownify }}</div>
             {% endif %}
+            <p>{{ site.telegram | markdownify }}</p>
+            <p>© 2023-{{ site.time | date: '%Y' }} {{ site.author | default: "Твое Имя/Ник" }}.</p>
         </div>
     </footer>
 

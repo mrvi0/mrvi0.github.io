@@ -9,7 +9,7 @@
     <title>{{ page.title | default: site.title }}</title>
     <meta name="description" content="{{ page.description | default: site.description }}">
     <!-- {# Сюда можно добавить больше мета-тегов: OpenGraph, Twitter Cards (или использовать плагин jekyll-seo-tag) #} -->
-    <meta name="author" content="{{ page.author | default: site.author }}">
+    <meta name="author" content="{{ site.author | default: site.author }}">
     <meta name="keywords" content="{{ page.keywords | default: site.keywords | join: ', ' }}">
     <!-- {# --- Основные Стили --- #} -->
     <link rel="stylesheet" href="{{ '/assets/css/layout-styles.css' | relative_url }}">
@@ -79,7 +79,7 @@
                 </div>
             {% endif %}
             <!-- {# --- Стандартное Содержимое Футера --- #} -->
-            <p>© 2023-{{ site.time | date: '%Y' }} {{ page.author | default: "Твое Имя/Ник" }}.</p>
+            <p>© 2023-{{ site.time | date: '%Y' }} {{ site.author | default: "Твое Имя/Ник" }}.</p>
         </div>
     </footer>
 
