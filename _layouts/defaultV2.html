@@ -38,12 +38,7 @@
 
     <header class="site-header">
         <nav class="site-nav">
-            <!-- {# Пример навигации (можно вынести в _includes/header.html или _data/navigation.yml) #} -->
-            <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>Главная</a>
-            <a href="{{ '/wiki/' | relative_url }}" {% if page.url contains '/wiki/' %}class="active"{% endif %}>Вики</a>
-            <a href="{{ '/projects/' | relative_url }}" {% if page.url contains '/projects/' %}class="active"{% endif %}>Проекты</a>
-            <a href="{{ '/notes/' | relative_url }}" {% if page.url contains '/notes/' %}class="active"{% endif %}>Заметки</a>
-            <a href="{{ '/utilities/' | relative_url }}" {% if page.url contains '/utilities/' %}class="active"{% endif %}>Утилиты</a>
+            {% include navigation.html %}
         </nav>
     </header>
 

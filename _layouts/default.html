@@ -43,7 +43,8 @@
         {% if page.show_title != false and page.title %}
             <h1 class="page-title">{{ page.title }}</h1> 
         {% endif %}
-
+        <!--  Сюда Jekyll вставит контент из .md или .html файла  -->
+        {{ content }}
         <!--  Опциональный Рекламный Блок  -->
         <!-- Управляется через show_ads: false в Front Matter страницы -->
         {% if page.show_ads != false %}
@@ -52,9 +53,6 @@
                 <p style="text-align:center; font-size: 0.8em; color: var(--text-color-muted);">Рекламный блок</p>
             </div>
         {% endif %}
-
-        <!--  Сюда Jekyll вставит контент из .md или .html файла  -->
-        {{ content }}
 
     </main>
 
