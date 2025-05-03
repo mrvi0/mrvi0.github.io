@@ -78,7 +78,9 @@ jobs:
             *Commit:* [${{ github.sha }}](${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }})
             *Project:* [${{ github.repository }}](${{ github.repository }})
             *Actor:* `${{ github.actor }}`
-            *Commit:* `${{ github.event.head_commit.message }}`
+            
+            *Workflow log:*
+            ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           format: markdown
           disable_web_page_preview: true
 
