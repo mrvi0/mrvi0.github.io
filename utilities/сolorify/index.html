@@ -84,8 +84,58 @@ show_ads: true
         </div>
     </div>
 
-    <!-- Место для будущей истории и градиентов -->
-    <div id="history-section"></div>
-    <div id="gradient-section"></div>
+    <hr class="section-divider"> <!-- Разделитель -->
+
+    <!-- === СЕКЦИЯ ГЕНЕРАТОРА ГРАДИЕНТОВ === -->
+    <div id="gradient-generator-section">
+        <h2>Генератор Градиентов</h2>
+
+        <div class="gradient-controls">
+            <!-- Контролы для Цвета -->
+            <div class="gradient-colors">
+                <fieldset class="color-stop">
+                    <legend>Цвет 1</legend>
+                    <input type="color" class="gradient-color-input" id="gradColor1" value="#462EBD">
+                    <input type="text" class="gradient-hex-preview" readonly> <!-- Опционально: показ HEX -->
+                </fieldset>
+                 <fieldset class="color-stop">
+                    <legend>Цвет 2</legend>
+                    <input type="color" class="gradient-color-input" id="gradColor2" value="#BD2E73">
+                    <input type="text" class="gradient-hex-preview" readonly>
+                </fieldset>
+                <!-- Место для добавления новых цветов -->
+            </div>
+
+             <!-- Контролы для Угла -->
+             <fieldset class="gradient-angle">
+                <legend>Угол</legend>
+                <div class="angle-control">
+                    <input type="range" id="gradientAngleRange" min="0" max="360" value="90" step="1">
+                    <!-- Заменили span на input number -->
+                    <input type="number" id="gradientAngleInput" min="0" max="360" value="90" step="1" class="angle-input-number">
+                    <span class="angle-unit">°</span> <!-- Оставляем только значок градуса -->
+                </div>
+            </fieldset>
+        </div>
+
+        <!-- Превью Градиента -->
+        <div class="gradient-preview-area">
+            <h3>Превью:</h3>
+            <div id="gradient-preview"></div>
+        </div>
+
+        <!-- Вывод CSS -->
+        <div class="gradient-output-area">
+            <label for="gradientCssOutput">CSS код:</label>
+            <div class="output-wrapper">
+                 <textarea id="gradientCssOutput" rows="3" readonly></textarea>
+                 <button class="copy-button" data-target="gradientCssOutput" title="Копировать CSS">📄</button>
+             </div>
+        </div>
+    </div>
+    <!-- === КОНЕЦ СЕКЦИИ ГЕНЕРАТОРА ГРАДИЕНТОВ === -->
+
+    <!-- Место для будущей истории -->
+    <!-- <div id="gradient-history-section"></div> -->
 
 </div>

@@ -12,6 +12,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const hslOutput = document.getElementById('hslOutput');
     const colorPreview = document.getElementById('color-preview');
     const copyButtons = document.querySelectorAll('.copy-button');
+    const gradColorInputs = document.querySelectorAll('.gradient-color-input'); // Получаем НАЧАЛЬНЫЕ инпуты
+    const gradAngleInput = document.getElementById('gradientAngleInput');
+    const gradAngleValueSpan = document.getElementById('gradientAngleValue');
+    const gradPreview = document.getElementById('gradient-preview');
+    const gradCssOutput = document.getElementById('gradientCssOutput');
+    const gradHexPreviews = document.querySelectorAll('.gradient-hex-preview');
+    const gradAngleRange = document.getElementById('gradientAngleRange');
+     // Новый элемент
 
     // ----- Функции Конвертации -----
 
@@ -235,6 +243,84 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    function updateGradientPreview() {
+        const colors = [];
+        document.querySelectorAll('.gradient-color-input').forEach(input => {
+            colors.push(input.value);
+            const hexPreview = input.closest('.color-stop')?.querySelector('.gradient-hex-preview');
+            if (hexPreview) {
+                hexPreview.value = input.value.toUpperCase();
+            }
+        });
+
+        // Читаем значение угла из ЧИСЛОВОГО ПОЛЯ
+        let angle = parseInt(gradAngleInput.value, 10);
+
+        // Валидация угла
+        if (isNaN(angle) || angle < 0) {
+            angle = 0;
+            // gradAngleInput.value = 0; // Опционально: исправлять некорректный ввод
+        } else if (angle > 360) {
+            angle = 360;
+            // gradAngleInput.value = 360; // Опционально
+        }
+
+        // Синхронизируем ползунок с числовым полем (если изменилось числовое поле)
+        // Это важно, чтобы ползунок отражал значение, введенное вручную
+        if (parseInt(gradAngleRange.value, 10) !== angle) {
+             gradAngleRange.value = angle;
+        }
+
+        // Обновляем UI (как и раньше)
+        if (colors.length < 2) {
+            gradPreview.style.background = '#ccc';
+            gradCssOutput.value = '/* Нужно минимум 2 цвета */';
+            return;
+        }
+        const gradientCss = `linear-gradient(${angle}deg, ${colors.join(', ')})`;
+        gradPreview.style.background = gradientCss;
+        gradCssOutput.value = `background: ${gradientCss};`;
+    }
+
+    // Обработчики для НАЧАЛЬНЫХ элементов градиента
+    gradColorInputs.forEach(input => {
+        input.addEventListener('input', updateGradientPreview);
+    });
+
+    // Обработчик для ПОЛЗУНКА угла
+    gradAngleRange.addEventListener('input', () => {
+        // Обновляем числовое поле при движении ползунка
+        gradAngleInput.value = gradAngleRange.value;
+        updateGradientPreview(); // Обновляем градиент
+    });
+
+    // Обработчик для ЧИСЛОВОГО ПОЛЯ угла
+    gradAngleInput.addEventListener('input', () => {
+        // Просто вызываем обновление, т.к. updateGradientPreview
+        // уже читает из gradAngleInput и синхронизирует ползунок
+        updateGradientPreview();
+    });
+
+    // Инициализация градиента при загрузке
+    function initializeGradient() {
+        // Устанавливаем начальные значения для обоих инпутов угла
+        const initialAngle = 90;
+        gradAngleRange.value = initialAngle;
+        gradAngleInput.value = initialAngle;
+        updateGradientPreview();
+    }
+
+    initializeGradient();
+
+    // Обработчики для НАЧАЛЬНЫХ элементов градиента
+    gradColorInputs.forEach(input => {
+        input.addEventListener('input', updateGradientPreview);
+    });
+    gradAngleInput.addEventListener('input', updateGradientPreview);
+
+
+    // Инициализация градиента при загрузке
+    updateGradientPreview();
 
     // ----- Инициализация -----
     function initialize() {
