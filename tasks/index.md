@@ -80,7 +80,6 @@ body_class: kanban-view
                         </span>
                     {% endif %}
                 </div>
-                <p style="font-size: 0.7em; word-break: break-all;">DEBUG URL: {{ task.url | relative_url }}</p>
                 <!-- Описание здесь НЕ выводим -->
             </li>
         {% endfor %}

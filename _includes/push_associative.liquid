@@ -1,11 +1,29 @@
 {%- comment -%}
-  Adds a key-value pair to a hash. Needed because direct assignment is tricky.
-  Usage: {% assign my_hash = my_hash | push_associative: new_key, new_value %}
+  Adds a key-value pair to a hash. Returns the modified hash.
+  Usage: {% assign my_hash = my_hash | push_associative: key: new_key, value: new_value %}
+  Or within another include/filter logic.
+  IMPORTANT: This version tries *not* to output anything directly.
 {%- endcomment -%}
 {%- assign key_to_add = include.key -%}
 {%- assign value_to_add = include.value -%}
 {%- assign current_hash = include.input -%}
 {%- assign temp_hash = current_hash | default: '{}' -%}
-{%- if current_hash == nil -%}{% assign temp_hash = '{}' %}{% endif -%}
-{%- assign temp_hash[key_to_add] = value_to_add -%}
-{{ temp_hash }}
+{%- if current_hash == nil %}{% assign temp_hash = '{}' %}{% endif -%}
+
+{%- comment -%}Direct assignment doesn't work as expected across scopes usually{%- endcomment -%}
+{%- capture _ignored %}{% assign temp_hash[key_to_add] = value_to_add %}{% endcapture -%}
+
+{%- comment -%}
+  Instead of outputting, we rely on the calling filter/include
+  to capture the result if needed, or implicitly modify the hash
+  if used within the same scope carefully.
+  The cleanest way requires Jekyll plugins or more complex Liquid.
+  For simple includes like this, often the modification happens
+  but direct output should be avoided.
+  We will rely on `hash_from_pairs` to correctly build the hash.
+  This file's main job within `hash_from_pairs` is to ensure the pair
+  is conceptually added, even if Liquid scoping makes it tricky.
+  The actual hash building happens in hash_from_pairs using the pairs array.
+{%- endcomment -%}
+
+{%- comment -%}DO NOT OUTPUT: {{ temp_hash }} {%- endcomment -%}

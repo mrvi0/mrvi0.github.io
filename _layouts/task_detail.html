@@ -23,31 +23,52 @@
          <nav class="site-nav">{% include navigation.html %}</nav>
     </header>
     <main class="site-main">
-
-        <!-- Шапка задачи -->
         <div class="task-detail-header">
             <h1 class="task-detail-title">{{ page.title | escape }}</h1>
-            <!-- Ссылка "Назад к доске" -->
-             <a href="{{ '/tasks/' | relative_url }}" class="button-secondary back-to-board-link">« Назад к доске</a>
-             <!-- Ссылка на редактирование файла -->
-             <a href="{{ site.github.repository_url }}/edit/{{ site.github.source.branch | default: 'main' }}/{{ page.path }}" target="_blank" class="button edit-task-button-detail">✏️ Редактировать</a>
+            <div class="task-detail-actions"> <!-- Обертка для кнопок -->
+                <a href="{{ '/tasks/' | relative_url }}" class="button-secondary back-to-board-link">« Назад к доске</a>
+                <a href="{{ site.github.repository_url }}/edit/{{ site.github.source.branch | default: 'main' }}/{{ page.path }}" target="_blank" class="button edit-task-button-detail">✏️ Редактировать</a>
+            </div>
         </div>
 
-
-        <!-- Метаданные задачи -->
-        <div class="task-detail-meta">
-             <span class="meta-item status-{{ page.status | downcase | replace: ' ', '-' }}"><strong>Статус:</strong> {{ page.status }}</span>
-             <span class="meta-item priority-{{ page.priority | downcase }}"><strong>Приоритет:</strong> {{ page.priority }}</span>
-             {% if page.project %}<span class="meta-item"><strong>Проект:</strong> {{ page.project }}</span>{% endif %}
-             {% if page.due_date %}<span class="meta-item"><strong>Дедлайн:</strong> {{ page.due_date | date: "%d %B %Y" }}</span>{% endif %}
-             <!-- Добавь другие метаданные, если есть -->
+        <!-- Метаданные задачи (теперь в виде списка или блоков) -->
+        <div class="task-detail-meta vertical-meta"> <!-- Добавлен класс vertical-meta -->
+             <div class="meta-item status-{{ page.status | downcase | replace: ' ', '-' }}">
+                 <span class="meta-label">Статус:</span>
+                 <span class="meta-value">{{ page.status }}</span>
+             </div>
+             <div class="meta-item priority-{{ page.priority | downcase }}">
+                 <span class="meta-label">Приоритет:</span>
+                 <span class="meta-value">{{ page.priority }}</span>
+             </div>
+             {% if page.project %}
+             <div class="meta-item project-tag"> <!-- Класс для иконки проекта -->
+                 <span class="meta-label">📁 Проект:</span>
+                 <span class="meta-value">{{ page.project }}</span>
+             </div>
+             {% endif %}
+             {% if page.due_date %}
+                 {% assign due_date_obj = page.due_date | date: "%s" %}
+                 {% assign current_date_obj = "now" | date: "%s" %}
+                 {% assign is_overdue = false %}
+                 {% if due_date_obj < current_date_obj %}
+                      {% assign task_status_lower = page.status | downcase %}
+                      {% if task_status_lower != 'done' and task_status_lower != 'archived' %}
+                           {% assign is_overdue = true %}
+                      {% endif %}
+                 {% endif %}
+             <div class="meta-item due-date-tag {% if is_overdue %}overdue{% endif %}"> <!-- Класс для иконки и подсветки -->
+                 <span class="meta-label">🗓️ Дедлайн:</span>
+                 <span class="meta-value">{{ page.due_date | date: "%d %B %Y" }}{% if is_overdue %} (Просрочено!){% endif %}</span>
+             </div>
+             {% endif %}
+             <!-- Добавь другие метаданные по аналогии -->
         </div>
 
         <!-- Описание задачи -->
         <div class="task-detail-content">
-            {{ content }} <!-- Сюда вставится описание из Markdown -->
+            {{ content }}
         </div>
-
     </main>
     <footer class="site-footer">
          <!-- Стандартный футер -->
