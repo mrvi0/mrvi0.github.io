@@ -1,10 +1,10 @@
 ---
 layout: task_detail
 title: "Реализовать базовый Таск-Трекер на Jekyll"
-status: "In Progress"
+status: "Done"
 priority: "High"
 project: "Сайт Pages"
-due_date: "2023-11-20"
+due_date: "2025-05-03"
 ---
 
 Описание задачи:
