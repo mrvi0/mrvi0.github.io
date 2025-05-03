@@ -3,8 +3,8 @@ layout: task_detail
 title: "Каталог бесплатных API"
 status: "To Do"
 priority: "Medium"
-project: ""
-due_date: ""
+project: "Utilities"
+due_date: "2025-05-05"
 ---
 
 # Каталог бесплатных API
