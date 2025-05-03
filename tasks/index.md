@@ -7,25 +7,7 @@ author: Mr Vi
 body_class: kanban-view
 ---
 
-<!-- Включаем пользовательские фильтры Liquid В САМОМ НАЧАЛЕ -->
-{% include map_by_separator.liquid %}
-{% include hash_from_pairs.liquid %}
-{% include push_associative.liquid %}
 
-<!-- Определяем эмодзи для статусов и приоритетов -->
-{% assign status_icons = "" | split: "|" %}
-{% assign temp = status_icons | push: "To Do:📝" %}
-{% assign temp = status_icons | push: "In Progress:⏳" %}
-{% assign temp = status_icons | push: "Blocked:⛔" %}
-{% assign temp = status_icons | push: "Done:✅" %}
-{% assign temp = status_icons | push: "Archived:📦" %}
-{% assign status_map = status_icons | map_by_separator: ":" %}
-
-{% assign priority_icons = "" | split: "|" %}
-{% assign temp = priority_icons | push: "High:🔥" %}
-{% assign temp = priority_icons | push: "Medium:🔸" %}
-{% assign temp = priority_icons | push: "Low:🟢" %}
-{% assign priority_map = priority_icons | map_by_separator: ":" %}
 
 <!-- Фильтр для исключения задач без статуса -->
 {% assign valid_tasks = site.tasks | where_exp: "item", "item.status != nil" %}
@@ -37,6 +19,13 @@ body_class: kanban-view
 <div class="kanban-board">
 
 {% for status_name in status_order %}
+  {% assign column_icon = "" %}
+  {% if status_name == "To Do" %}       {% assign column_icon = "📝" %}
+  {% elsif status_name == "In Progress" %}{% assign column_icon = "⏳" %}
+  {% elsif status_name == "Blocked" %}    {% assign column_icon = "⛔" %}
+  {% elsif status_name == "Done" %}       {% assign column_icon = "✅" %}
+  {% elsif status_name == "Archived" %}   {% assign column_icon = "📦" %}
+  {% endif %}
   {% assign column_icon = status_map[status_name] | default: "" %}
   {% assign group = tasks_by_status | where: "name", status_name | first %}
   <div class="kanban-column status-{{ status_name | downcase | replace: ' ', '-' }}">
@@ -51,7 +40,12 @@ body_class: kanban-view
         <!-- Сортировка -->
         {% assign sorted_tasks = group.items | sort: "title" %}
         {% for task in sorted_tasks %}
-            {% assign priority_icon = priority_map[task.priority] | default: "⚪" %}
+            <!-- Определяем иконку приоритета через if/elsif -->
+            {% assign priority_icon = "⚪" %} <!-- Значение по умолчанию -->
+            {% if task.priority == "High" %}     {% assign priority_icon = "🔥" %}
+            {% elsif task.priority == "Medium" %} {% assign priority_icon = "🔸" %}
+            {% elsif task.priority == "Low" %}    {% assign priority_icon = "🟢" %}
+            {% endif %}
             <!-- Обертка LI для карточки -->
             <li class="task-card priority-{{ task.priority | downcase }}"
                 data-project="{{ task.project | escape }}"
