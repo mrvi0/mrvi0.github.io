@@ -11,131 +11,140 @@ show_ads: true
 ---
 
 <div class="colorify-container">
-    <h1>Color converter</h1>
 
-    <div class="converter-grid">
-        <!-- Превью Цвета -->
-        <div class="color-preview-area">
-            <label for="colorPickerInput" class="color-preview-label" title="Нажмите, чтобы выбрать цвет">
-                <div id="color-preview" style="cursor: pointer;"></div>
-                <!-- Скрытый input type="color" -->
-                <input type="color" id="colorPickerInput" style="visibility: hidden; width: 0; height: 0; padding: 0; border: 0;">
-            </label>
-            <p class="picker-hint">(click)</p> <!-- Подсказка -->
-        </div>
-
-        <!-- Поля Ввода/Вывода -->
-        <div class="color-inputs">
-            <!-- HEX -->
-            <fieldset class="color-group">
-                <legend>HEX</legend>
-                <div class="input-wrapper">
-                    <label for="hexInput">#</label>
-                    <input type="text" id="hexInput" maxlength="7" placeholder="RRGGBB">
-                    <button class="copy-button" data-target="hexInput" title="Копировать HEX">📄</button>
-                </div>
-            </fieldset>
-
-            <!-- RGB -->
-            <fieldset class="color-group">
-                <legend>RGB</legend>
-                <div class="input-row">
-                    <div class="input-wrapper rgb-input">
-                        <label for="rInput">R</label>
-                        <input type="number" id="rInput" min="0" max="255" step="1" placeholder="0-255">
+    <!-- =========================================== -->
+    <!-- === СЕКЦИЯ 1: КОНВЕРТЕР ЦВЕТОВ (RGBA/HSLA/HEX) === -->
+    <!-- =========================================== -->
+    <section id="color-converter-section">
+        <h1>Color Converter</h1>
+        <div class="converter-grid">
+            <!-- Превью Цвета Конвертера -->
+            <div class="color-preview-area">
+                 <label for="converterColorPickerInput" class="color-preview-label" title="Choose Color">
+                    <div id="converter-color-preview"> <!-- Новый ID -->
+                        <!-- Шахматный фон для прозрачности -->
+                        <div class="checkerboard-bg"></div>
+                        <div class="color-layer"></div>
                     </div>
-                    <div class="input-wrapper rgb-input">
-                        <label for="gInput">G</label>
-                        <input type="number" id="gInput" min="0" max="255" step="1" placeholder="0-255">
-                    </div>
-                    <div class="input-wrapper rgb-input">
-                        <label for="bInput">B</label>
-                        <input type="number" id="bInput" min="0" max="255" step="1" placeholder="0-255">
-                    </div>
-                </div>
-                 <div class="output-wrapper">
-                    <input type="text" id="rgbOutput" readonly placeholder="rgb(R, G, B)">
-                    <button class="copy-button" data-target="rgbOutput" title="Копировать RGB">📄</button>
-                 </div>
-            </fieldset>
-
-            <!-- HSL -->
-            <fieldset class="color-group">
-                <legend>HSL</legend>
-                 <div class="input-row">
-                    <div class="input-wrapper hsl-input">
-                        <label for="hInput">H</label>
-                        <input type="number" id="hInput" min="0" max="360" step="1" placeholder="0-360">°
-                    </div>
-                    <div class="input-wrapper hsl-input">
-                        <label for="sInput">S</label>
-                        <input type="number" id="sInput" min="0" max="100" step="1" placeholder="0-100">%
-                    </div>
-                    <div class="input-wrapper hsl-input">
-                        <label for="lInput">L</label>
-                        <input type="number" id="lInput" min="0" max="100" step="1" placeholder="0-100">%
-                    </div>
-                </div>
-                 <div class="output-wrapper">
-                     <input type="text" id="hslOutput" readonly placeholder="hsl(H, S%, L%)">
-                     <button class="copy-button" data-target="hslOutput" title="Копировать HSL">📄</button>
-                 </div>
-            </fieldset>
-        </div>
-    </div>
-
-    <hr class="section-divider"> <!-- Разделитель -->
-
-    <!-- === СЕКЦИЯ ГЕНЕРАТОРА ГРАДИЕНТОВ === -->
-    <div id="gradient-generator-section">
-        <h2>Генератор Градиентов</h2>
-
-        <div class="gradient-controls">
-            <!-- Контролы для Цвета -->
-            <div class="gradient-colors">
-                <fieldset class="color-stop">
-                    <legend>Цвет 1</legend>
-                    <input type="color" class="gradient-color-input" id="gradColor1" value="#462EBD">
-                    <input type="text" class="gradient-hex-preview" readonly> <!-- Опционально: показ HEX -->
-                </fieldset>
-                 <fieldset class="color-stop">
-                    <legend>Цвет 2</legend>
-                    <input type="color" class="gradient-color-input" id="gradColor2" value="#BD2E73">
-                    <input type="text" class="gradient-hex-preview" readonly>
-                </fieldset>
-                <!-- Место для добавления новых цветов -->
+                    <input type="color" id="converterColorPickerInput" style="visibility: hidden; width: 0; height: 0; padding: 0; border: 0;">
+                 </label>
+                 <p class="picker-hint">(Click on scuare)</p>
             </div>
 
-             <!-- Контролы для Угла -->
-             <fieldset class="gradient-angle">
-                <legend>Угол</legend>
-                <div class="angle-control">
-                    <input type="range" id="gradientAngleRange" min="0" max="360" value="90" step="1">
-                    <!-- Заменили span на input number -->
-                    <input type="number" id="gradientAngleInput" min="0" max="360" value="90" step="1" class="angle-input-number">
-                    <span class="angle-unit">°</span> <!-- Оставляем только значок градуса -->
-                </div>
+            <!-- Поля Ввода/Вывода Конвертера -->
+            <div class="color-inputs">
+                <!-- HEX -->
+                <fieldset class="color-group">
+                    <legend>HEX</legend>
+                    <div class="input-wrapper">
+                        <label for="converterHexInput">#</label> <!-- Новый ID -->
+                        <input type="text" id="converterHexInput" maxlength="7" placeholder="RRGGBB">
+                        <button class="copy-button myButton" data-target="converterHexInput" title="Copy HEX">📄</button>
+                    </div>
+                     <small class="alpha-hint">(Transparency is not supported)</small>
+                </fieldset>
+
+                <!-- RGBA -->
+                <fieldset class="color-group">
+                    <legend>RGBA</legend>
+                    <div class="input-row">
+                        <div class="input-wrapper rgb-input"><label for="converterRInput">R</label><input type="number" id="converterRInput" min="0" max="255" step="1"></div>
+                        <div class="input-wrapper rgb-input"><label for="converterGInput">G</label><input type="number" id="converterGInput" min="0" max="255" step="1"></div>
+                        <div class="input-wrapper rgb-input"><label for="converterBInput">B</label><input type="number" id="converterBInput" min="0" max="255" step="1"></div>
+                        <div class="input-wrapper alpha-input"><label for="converterAInput">A</label><input type="number" id="converterAInput" min="0" max="1" step="0.01"></div> <!-- Поле Alpha -->
+                    </div>
+                    <div class="output-wrapper">
+                        <input type="text" id="converterRgbaOutput" readonly placeholder="rgba(R, G, B, A)"> <!-- Новый ID -->
+                        <button class="copy-button myButton" data-target="converterRgbaOutput" title="Copy RGBA">📄</button>
+                     </div>
+                </fieldset>
+
+                <!-- HSLA -->
+                <fieldset class="color-group">
+                    <legend>HSLA</legend>
+                    <div class="input-row">
+                        <div class="input-wrapper hsl-input"><label for="converterHInput">H</label><input type="number" id="converterHInput" min="0" max="360" step="1"><span>°</span></div>
+                        <div class="input-wrapper hsl-input"><label for="converterSInput">S</label><input type="number" id="converterSInput" min="0" max="100" step="1"><span>%</span></div>
+                        <div class="input-wrapper hsl-input"><label for="converterLInput">L</label><input type="number" id="converterLInput" min="0" max="100" step="1"><span>%</span></div>
+                        <div class="input-wrapper alpha-input"><label for="converterAlphaInput">A</label><input type="number" id="converterAlphaInput" min="0" max="1" step="0.01"></div> <!-- Поле Alpha -->
+                    </div>
+                     <div class="output-wrapper">
+                         <input type="text" id="converterHslaOutput" readonly placeholder="hsla(H, S%, L%, A)"> <!-- Новый ID -->
+                         <button class="copy-button myButton" data-target="converterHslaOutput" title="Copy HSLA">📄</button>
+                     </div>
+                </fieldset>
+            </div>
+        </div>
+    </section>
+
+    <hr class="section-divider">
+
+    <!-- =========================================== -->
+    <!-- === СЕКЦИЯ 2: ГЕНЕРАТОР ГРАДИЕНТОВ       === -->
+    <!-- =========================================== -->
+    <section id="gradient-generator-section">
+        <h2>Gradient Generator</h2>
+
+        <div class="gradient-controls"> <!-- Основной контейнер контролов -->
+            <!-- Угол -->
+            <fieldset class="gradient-angle">
+                 <legend>Angle</legend>
+                 <div class="angle-control">
+                     <input type="range" id="gradientAngleRange" min="0" max="360" value="90" step="1">
+                     <input type="number" id="gradientAngleInput" min="0" max="360" value="90" step="1" class="angle-input-number">
+                     <span class="angle-unit">°</span>
+                 </div>
             </fieldset>
+            <!-- Кнопка Добавить -->
+            <button type="button" id="addGradientColorButton" class="button-add-color myButton" title="Add color">+</button>
         </div>
 
-        <!-- Превью Градиента -->
-        <div class="gradient-preview-area">
-            <h3>Превью:</h3>
-            <div id="gradient-preview"></div>
+
+        <!-- Шкала-Превью Градиента -->
+        <div class="gradient-preview-bar-container">
+             <div id="gradient-preview-bar"></div>
         </div>
 
-        <!-- Вывод CSS -->
+
+        <!-- Список Точек Цвета (STOPS) -->
+        <div class="stops-list-section">
+            <h3>Colors</h3>
+            <ul id="gradientStopsList">
+                 <li class="gradient-stop-item" data-index="0" data-is-endpoint="true"> <!-- Нет active-stop по умолчанию -->
+                    <input type="color" class="stop-color-input" value="#1580FA"> <!-- Начальный цвет 1 -->
+                    <span class="stop-hex-label">#1580FA</span>
+                    <input type="number" class="stop-position-input" value="0" disabled>
+                    <span>%</span>
+                 </li>
+                 <li class="gradient-stop-item" data-index="1" data-is-endpoint="true">
+                    <input type="color" class="stop-color-input" value="#10B1C6"> <!-- Начальный цвет 2 -->
+                     <span class="stop-hex-label">#10B1C6</span>
+                     <input type="number" class="stop-position-input" value="100" disabled>
+                     <span>%</span>
+                 </li>
+            </ul>
+        </div>
+
+         <!-- Вывод CSS -->
         <div class="gradient-output-area">
-            <label for="gradientCssOutput">CSS код:</label>
+            <label for="gradientCssOutput">CSS:</label>
             <div class="output-wrapper">
                  <textarea id="gradientCssOutput" rows="3" readonly></textarea>
-                 <button class="copy-button" data-target="gradientCssOutput" title="Копировать CSS">📄</button>
+                 <button class="copy-button myButton" data-target="gradientCssOutput" title="Copy CSS">📄</button>
              </div>
         </div>
-    </div>
-    <!-- === КОНЕЦ СЕКЦИИ ГЕНЕРАТОРА ГРАДИЕНТОВ === -->
 
-    <!-- Место для будущей истории -->
-    <!-- <div id="gradient-history-section"></div> -->
+    </section>
 
-</div>
+    <!-- Шаблон для стопа градиента -->
+    <template id="gradient-stop-list-item-template">
+        <li class="gradient-stop-item" data-is-endpoint="false">
+            <input type="color" class="stop-color-input" value="#FFFFFF">
+            <span class="stop-hex-label">#FFFFFF</span>
+            <input type="number" class="stop-position-input" min="1" max="99" value="50" step="1"> <!-- Убран range -->
+            <span>%</span>
+            <button type="button" class="remove-stop-button" title="Remove color">×</button>
+        </li>
+    </template>
+
+</div> <!-- Конец colorify-container -->
