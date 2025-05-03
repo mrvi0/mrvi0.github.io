@@ -237,7 +237,7 @@
 }
 
 .task-title a.task-title-link:hover {
-    text-decoration: underline; /* Подчеркивание при наведении */
+    text-decoration: none; /* Подчеркивание при наведении */
     color: var(--link-color); /* Цвет ссылки при наведении */
 }
 
