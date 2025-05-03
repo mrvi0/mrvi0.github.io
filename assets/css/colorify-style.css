@@ -1,0 +1,218 @@
+/* assets/css/colorify-style.css */
+
+.colorify-container {
+    max-width: 700px; /* Ограничиваем ширину для удобства */
+    margin: 0 auto 2rem auto; /* Центрируем и добавляем отступ снизу */
+    padding: 1.5rem;
+    background-color: var(--bg-color-lighter, #2a2a4e); /* Фон из layout-styles или дефолт */
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.colorify-container h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--heading-color, #fff);
+    font-size: 1.8em;
+}
+
+.converter-grid {
+    display: grid;
+    grid-template-columns: 150px 1fr; /* Колонка для превью и колонка для инпутов */
+    gap: 2rem; /* Отступ между превью и инпутами */
+    align-items: flex-start; /* Выравниваем по верху */
+}
+
+.color-preview-area {
+    /* Стили для контейнера превью */
+}
+
+#color-preview {
+    width: 100%;
+    padding-top: 100%; /* Делаем квадратным */
+    border-radius: 6px;
+    border: 2px solid var(--border-color, rgba(135, 206, 250, 0.3));
+    background-color: #888; /* Дефолтный фон */
+    transition: background-color 0.3s ease;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+}
+
+.color-inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* Отступ между группами HEX/RGB/HSL */
+}
+
+.color-group {
+    border: 1px solid var(--border-color, rgba(135, 206, 250, 0.3));
+    border-radius: 6px;
+    padding: 0.8rem 1rem 1rem 1rem;
+    margin: 0; /* Убираем дефолтный margin у fieldset */
+}
+
+.color-group legend {
+    padding: 0 0.5em;
+    font-weight: bold;
+    color: var(--text-color-muted, #b3b3cc);
+}
+
+.input-row {
+    display: flex;
+    gap: 0.8rem; /* Отступ между R G B или H S L */
+    margin-bottom: 0.5rem;
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    background-color: rgba(0,0,0, 0.15); /* Фон для поля ввода */
+    padding: 0.4rem 0.6rem;
+    border-radius: 4px;
+    flex-grow: 1; /* Растягиваем поля ввода */
+}
+.input-wrapper label {
+    font-weight: bold;
+    font-size: 0.9em;
+    color: var(--text-color-muted, #b3b3cc);
+}
+.input-wrapper input[type="text"],
+.input-wrapper input[type="number"] {
+    flex-grow: 1;
+    border: none;
+    background: transparent;
+    color: var(--text-color, #e0e0e0);
+    padding: 0.2rem;
+    width: 100%; /* Занимать доступное место */
+    min-width: 40px; /* Минимальная ширина */
+    text-align: center;
+    font-family: var(--font-code, monospace); /* Моноширинный шрифт */
+}
+.input-wrapper input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--link-color); /* Подсветка при фокусе */
+    border-radius: 2px;
+}
+/* Убираем стрелки у number input (опционально) */
+.input-wrapper input[type=number]::-webkit-inner-spin-button,
+.input-wrapper input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.input-wrapper input[type=number] {
+  -moz-appearance: textfield; /* Firefox */
+}
+
+/* Стили для полей HSL, чтобы влезли символы ° % */
+.hsl-input {
+    gap: 0.1rem;
+}
+.hsl-input label {
+    min-width: 1em; /* Чтобы выровнять по H */
+}
+.hsl-input span, .hsl-input label:after { /* Для ° и % */
+    color: var(--text-color-muted, #b3b3cc);
+    font-size: 0.9em;
+    margin-left: 0.1rem;
+}
+
+/* Стили для HEX */
+#hexInput {
+    text-transform: uppercase;
+    text-align: left;
+}
+
+/* Выходные поля (RGB/HSL строки) */
+.output-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+.output-wrapper input[readonly] {
+    flex-grow: 1;
+    background-color: rgba(0,0,0, 0.2);
+    border: 1px solid var(--border-color, rgba(135, 206, 250, 0.2));
+    padding: 0.4rem 0.6rem;
+    border-radius: 4px;
+    font-family: var(--font-code, monospace);
+    color: var(--text-color-muted, #b3b3cc);
+    cursor: text;
+}
+
+/* Кнопка Копировать */
+.copy-button {
+    background: none;
+    border: none;
+    color: var(--text-color-muted, #b3b3cc);
+    font-size: 1.2em;
+    cursor: pointer;
+    padding: 0.2rem;
+    line-height: 1;
+    opacity: 0.7;
+    transition: opacity 0.2s ease, color 0.2s ease;
+}
+.copy-button:hover {
+    opacity: 1;
+    color: var(--link-color);
+}
+
+/* Стиль для индикации ошибки */
+input.input-error {
+    outline: 2px solid #f87171; /* Красная рамка */
+    box-shadow: 0 0 5px rgba(248, 113, 113, 0.5);
+}
+
+.color-preview-area {
+    display: flex; /* Чтобы расположить превью и подсказку */
+    flex-direction: column;
+    align-items: center; /* Центрируем по горизонтали */
+}
+
+/* Обертка для превью, чтобы сделать ее кликабельной */
+.color-preview-label {
+    display: block; /* Занимает всю ширину родителя */
+    width: 100%;    /* Ширина равна родителю (колонка 150px) */
+    cursor: pointer; /* Указываем, что можно кликнуть */
+    margin-bottom: 0.5rem; /* Отступ до подсказки */
+}
+.color-preview-label:hover #color-preview {
+    border-color: var(--link-hover-color, #add8e6); /* Подсветка рамки при наведении */
+}
+
+
+#color-preview {
+    width: 100%;
+    padding-top: 100%;
+    border-radius: 6px;
+    border: 2px solid var(--border-color, rgba(135, 206, 250, 0.3));
+    background-color: #888;
+    transition: background-color 0.3s ease, border-color 0.2s ease; /* Добавлена анимация рамки */
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+}
+
+.picker-hint {
+    font-size: 0.8em;
+    color: var(--text-color-muted);
+    text-align: center;
+    margin: 0;
+}
+
+
+/* Адаптивность */
+@media (max-width: 600px) {
+    .converter-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    .color-preview-area {
+        max-width: 150px;
+        margin: 0 auto;
+        /* Убираем flex-настройки, т.к. label теперь вокруг */
+        /* display: block; */
+        /* align-items: initial; */
+    }
+     .color-preview-label {
+        margin-bottom: 0.5rem;
+    }
+}

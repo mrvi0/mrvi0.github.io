@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title | default: site.title }}</title>
     <meta name="description" content="{{ page.description | default: site.description }}">
-    <!-- {% seo %} --> <!-- SEO-плагин, если используется -->
+     <!-- SEO-плагин, если используется -->
 
     <!-- Шрифты (если нужны глобально для шапки/подвала) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,21 +34,26 @@
     </header>
 
     <main class="site-main utility-main-container"> <!-- Контейнер для контента утилиты -->
-        <!-- ВАЖНО: В этом макете нет H1, нет рекламного блока по умолчанию. -->
-        <!-- Утилита сама управляет своим содержимым. -->
-
         {{ content }} <!-- Сюда вставляется ВЕСЬ HTML-код утилиты -->
-
+        <!--  Опциональный Рекламный Блок  -->
+        <!-- Управляется через show_ads: false в Front Matter страницы -->
+        {% if page.show_ads != false %}
+            <div id="ad-placeholder" class="ad-container">
+                <!-- Сюда JS загрузит рекламу -->
+                <p style="text-align:center; font-size: 0.8em; color: var(--text-color-muted);">Рекламный блок</p>
+            </div>
+        {% endif %}
     </main>
 
     <footer class="site-footer">
         <!-- Стандартный футер -->
         <div class="footer-content">
-            <p>© {{ site.time | date: '%Y' }} {{ site.author | default: "Твое Имя/Ник" }}.</p>
-            <p><a href="{{ site.github_url | default: '#' }}" target="_blank" rel="noopener noreferrer">Исходный код</a></p>
+            
+            
             {% if page.footer_extra %}
                 <div class="footer-extra-content">{{ page.footer_extra | markdownify }}</div>
             {% endif %}
+            <p>© {{ site.time | date: '%Y' }} {{ site.author | default: "Твое Имя/Ник" }}.</p>
         </div>
     </footer>
 
@@ -63,7 +68,10 @@
         {% endfor %}
     {% endif %}
 
-    <!-- Скрипт для общего рекламного блока здесь НЕ подключается по умолчанию -->
+    <!--  Скрипт для Рекламного Блока (если показывается)  -->
+    {% if page.show_ads != false %}
+        <script src="{{ '/assets/js/ads.js' | relative_url }}"></script>
+    {% endif %}
 
 </body>
 

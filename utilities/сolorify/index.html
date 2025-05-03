@@ -1,0 +1,91 @@
+---
+layout: utility # Используем макет для утилит
+title: "Colorify | Convert HEX, RGB, HSL in Real-Time"
+description: "Instant color conversion between HEX, RGB, and HSL formats with a real-time preview."
+extra_css:
+  - /assets/css/colorify-style.css # Стили для этой утилиты
+extra_js:
+  - /assets/js/colorify-script.js  # Скрипт для этой утилиты
+body_class: colorify-utility
+show_ads: true
+---
+
+<div class="colorify-container">
+    <h1>Color converter</h1>
+
+    <div class="converter-grid">
+        <!-- Превью Цвета -->
+        <div class="color-preview-area">
+            <label for="colorPickerInput" class="color-preview-label" title="Нажмите, чтобы выбрать цвет">
+                <div id="color-preview" style="cursor: pointer;"></div>
+                <!-- Скрытый input type="color" -->
+                <input type="color" id="colorPickerInput" style="visibility: hidden; width: 0; height: 0; padding: 0; border: 0;">
+            </label>
+            <p class="picker-hint">(click)</p> <!-- Подсказка -->
+        </div>
+
+        <!-- Поля Ввода/Вывода -->
+        <div class="color-inputs">
+            <!-- HEX -->
+            <fieldset class="color-group">
+                <legend>HEX</legend>
+                <div class="input-wrapper">
+                    <label for="hexInput">#</label>
+                    <input type="text" id="hexInput" maxlength="7" placeholder="RRGGBB">
+                    <button class="copy-button" data-target="hexInput" title="Копировать HEX">📄</button>
+                </div>
+            </fieldset>
+
+            <!-- RGB -->
+            <fieldset class="color-group">
+                <legend>RGB</legend>
+                <div class="input-row">
+                    <div class="input-wrapper rgb-input">
+                        <label for="rInput">R</label>
+                        <input type="number" id="rInput" min="0" max="255" step="1" placeholder="0-255">
+                    </div>
+                    <div class="input-wrapper rgb-input">
+                        <label for="gInput">G</label>
+                        <input type="number" id="gInput" min="0" max="255" step="1" placeholder="0-255">
+                    </div>
+                    <div class="input-wrapper rgb-input">
+                        <label for="bInput">B</label>
+                        <input type="number" id="bInput" min="0" max="255" step="1" placeholder="0-255">
+                    </div>
+                </div>
+                 <div class="output-wrapper">
+                    <input type="text" id="rgbOutput" readonly placeholder="rgb(R, G, B)">
+                    <button class="copy-button" data-target="rgbOutput" title="Копировать RGB">📄</button>
+                 </div>
+            </fieldset>
+
+            <!-- HSL -->
+            <fieldset class="color-group">
+                <legend>HSL</legend>
+                 <div class="input-row">
+                    <div class="input-wrapper hsl-input">
+                        <label for="hInput">H</label>
+                        <input type="number" id="hInput" min="0" max="360" step="1" placeholder="0-360">°
+                    </div>
+                    <div class="input-wrapper hsl-input">
+                        <label for="sInput">S</label>
+                        <input type="number" id="sInput" min="0" max="100" step="1" placeholder="0-100">%
+                    </div>
+                    <div class="input-wrapper hsl-input">
+                        <label for="lInput">L</label>
+                        <input type="number" id="lInput" min="0" max="100" step="1" placeholder="0-100">%
+                    </div>
+                </div>
+                 <div class="output-wrapper">
+                     <input type="text" id="hslOutput" readonly placeholder="hsl(H, S%, L%)">
+                     <button class="copy-button" data-target="hslOutput" title="Копировать HSL">📄</button>
+                 </div>
+            </fieldset>
+        </div>
+    </div>
+
+    <!-- Место для будущей истории и градиентов -->
+    <div id="history-section"></div>
+    <div id="gradient-section"></div>
+
+</div>

@@ -7,6 +7,10 @@ title: Утилиты
 
 <ul class="item-list">
     <li>
+        <h2><a href="./сolorify/">Colorify | Convert HEX, RGB, HSL in Real-Time</a></h2>
+        <p>Instant color conversion with palette generator and accessibility check.</p>
+    </li>
+    <li>
         <h2><a href="./readme-builder/">Dynamic README Builder</a></h2>
         <p>Craft eye-catching READMEs with badges, GIFs, and metrics.</p>
     </li>
