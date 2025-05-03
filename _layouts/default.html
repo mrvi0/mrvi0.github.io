@@ -60,16 +60,15 @@
 
     <footer class="site-footer">
         <div class="footer-content">
-            <!-- Стандартное содержимое футера  -->
-            <p>© {{ site.time | date: '%Y' }} {{ site.author | default: "Твое Имя/Ник" }}.</p>
-            
-
             <!-- Дополнительный контент из Front Matter страницы -->
             {% if page.footer_extra %}
                 <div class="footer-extra-content">
                     {{ page.footer_extra | markdownify }}
                 </div>
             {% endif %}
+            <!-- Стандартное содержимое футера  -->
+            <p>{{ site.telegram | markdownify }}</p>
+            <p>© 2023-{{ site.time | date: '%Y' }} {{ site.author | default: "Твое Имя/Ник" }}.</p>
         </div>
     </footer>
 

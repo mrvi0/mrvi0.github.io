@@ -46,14 +46,16 @@
     </main>
 
     <footer class="site-footer">
-        <!-- Стандартный футер -->
         <div class="footer-content">
-            
-            
+            <!-- Дополнительный контент из Front Matter страницы -->
             {% if page.footer_extra %}
-                <div class="footer-extra-content">{{ page.footer_extra | markdownify }}</div>
+                <div class="footer-extra-content">
+                    {{ page.footer_extra | markdownify }}
+                </div>
             {% endif %}
-            <p>© {{ site.time | date: '%Y' }} {{ site.author | default: "Твое Имя/Ник" }}.</p>
+            <!-- Стандартное содержимое футера  -->
+            <p>{{ site.telegram | markdownify }}</p>
+            <p>© 2023-{{ site.time | date: '%Y' }} {{ site.author | default: "Твое Имя/Ник" }}.</p>
         </div>
     </footer>
 
