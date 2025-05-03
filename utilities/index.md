@@ -7,7 +7,7 @@ title: Утилиты
 
 <ul class="item-list">
     <li>
-        <h2><a href="./сolorify/">Colorify | Convert HEX, RGB, HSL in Real-Time</a></h2>
+        <h2><a href="./colorify/">Colorify | Convert HEX, RGB, HSL in Real-Time</a></h2>
         <p>Instant color conversion with palette generator and accessibility check.</p>
     </li>
     <li>
