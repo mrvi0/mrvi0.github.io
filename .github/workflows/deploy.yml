@@ -43,7 +43,7 @@ jobs:
         id: pages
         uses: actions/configure-pages@v4
       - name: Build with Jekyll
-        run: bundle exec jekyll build
+        run: bundle exec jekyll build --baseurl ''
         env:
           JEKYLL_ENV: production
       - name: Upload artifact
@@ -72,16 +72,13 @@ jobs:
           to: ${{ secrets.TELEGRAM_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           message: |
-            ✅ **Успешный деплой сайта!** ✅
+            ✅ **mrvi0.github.io build Success**
 
-            *Репозиторий:* `${{ github.repository }}`
-            *Ветка:* `${{ github.ref_name }}`
-            *Коммит:* [${{ github.sha }}](${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }})
-            *Автор:* `${{ github.actor }}`
-            *Сообщение:* `${{ github.event.head_commit.message }}`
-
-            *Сайт доступен по адресу:*
-            ${{ needs.deploy.outputs.page_url || steps.deployment.outputs.page_url }}
+            *Branch:* `${{ github.ref_name }}`
+            *Commit:* [${{ github.sha }}](${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }})
+            *Project:* `[${{ github.repository }}](${{ github.repository }})`
+            *Actor:* `${{ github.actor }}`
+            *Commit:* `${{ github.event.head_commit.message }}`
           format: markdown
           disable_web_page_preview: true
 
@@ -97,14 +94,14 @@ jobs:
           to: ${{ secrets.TELEGRAM_CHAT_ID }}
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           message: |
-            ❌ **Ошибка деплоя сайта!** ❌
+            ❌ **mrvi0.github.io build failed**
 
-            *Репозиторий:* `${{ github.repository }}`
-            *Ветка:* `${{ github.ref_name }}`
-            *Коммит:* [${{ github.sha }}](${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }})
-            *Автор:* `${{ github.actor }}`
+            *Branch:* `${{ github.ref_name }}`
+            *Commit:* [${{ github.sha }}](${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }})
+            *Project:* `[${{ github.repository }}](${{ github.repository }})`
+            *Actor:* `${{ github.actor }}`
 
-            *Проверьте логи workflow:*
+            *Workflow log:*
             ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           format: markdown
           disable_web_page_preview: true
