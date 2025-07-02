@@ -23,6 +23,10 @@ title: Утилиты
         <p>Генератор попапов для стримеров</p>
     </li>
     <li>
+        <h2><a href="./stream-qr/">QR Code Generator</a></h2>
+        <p>Генератор QR-кодов для стримов с анимацией</p>
+    </li>
+    <li>
         <h2><a href="./HL/">HL Config Generator</a></h2>
         <p>Генератор конфигов из таблицы</p>
     </li>

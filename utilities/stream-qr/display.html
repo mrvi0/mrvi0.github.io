@@ -3,33 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Отображение блоков</title>
+    <title>Отображение QR-кодов</title>
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-TPQNM8CC');</script>   
-    <link rel="stylesheet" href="../../src/css/main.css">
-    
-    
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+    <link rel="stylesheet" href="../stream-popup/css/main.css">
+    <link rel="stylesheet" href="./css/main.css">
 </head>
 <body>
-    <h1 style="display: none;">Блоки</h1>
+    <h1 style="display: none;">QR-коды</h1>
     <div id="container">
         
     </div>
 
     <script>
-        
         // Получаем параметры из URL
         const urlParams = new URLSearchParams(window.location.search);
-        const direction = urlParams.get('direction'); // Получаем направление
-        const refreshRate = urlParams.get('refreshRate'); // Получаем время обновления
-        
+        const direction = urlParams.get('direction');
+        const refreshRate = urlParams.get('refreshRate');
 
-        console.log('Направление:', direction); // Отладочное сообщение
-        console.log('Время обновления:', refreshRate); // Отладочное сообщение
+        console.log('Направление:', direction);
+        console.log('Время обновления:', refreshRate);
 
         // Добавляем мета-тег для автоматического обновления страницы
         if (refreshRate) {
@@ -37,7 +35,7 @@
             metaTag.httpEquiv = 'refresh';
             metaTag.content = refreshRate;
             document.head.appendChild(metaTag);
-            console.log('Мета-тег добавлен:', metaTag); // Отладочное сообщение
+            console.log('Мета-тег добавлен:', metaTag);
         }
 
         const blocks = [];
@@ -51,7 +49,7 @@
                 }
             }
         });
-        console.log('Блоки:', blocks); // Отладочное сообщение
+        console.log('Блоки:', blocks);
 
         // Показываем блоки для выбранного направления
         const container = document.getElementById('container');
@@ -76,7 +74,7 @@
                             slideIn${capitalizeFirstLetter(direction)} 1s forwards ${delayIn}s,
                             shake 5s infinite alternate ${delayIn}s,
                             slideOut${capitalizeFirstLetter(direction)} 1s forwards ${delayOut}s;
-                        opacity: 1; /* Показываем блок */
+                        opacity: 1;
                         visibility: visible;
                     }
                 `;
@@ -96,15 +94,52 @@
         styleTag.textContent = generateStyles(blocks, direction);
         document.head.appendChild(styleTag);
 
-        // Отображение блоков
+        // Отображение блоков с QR-кодами
         blocks.forEach((block, index) => {
             const div = document.createElement('div');
-            div.className = `block block-${index} ${direction} ${block.logo}`; // Добавляем отладочный класс
+            div.className = `block block-${index} ${direction}`;
             div.style.backgroundColor = decodeURIComponent(block.color);
-            div.innerHTML = `
-                <p class="russo-one-regular">${decodeURIComponent(block.link)}</p>
-                <p>${decodeURIComponent(block.description)}</p>`;
             
+            // Создаем контейнер для QR-кода
+            const qrContainer = document.createElement('div');
+            qrContainer.className = 'qr-code-container';
+            
+            // Создаем canvas для QR-кода
+            const canvas = document.createElement('canvas');
+            const qrSize = parseInt(decodeURIComponent(block.qrSize)) || 60;
+            const qrColor = decodeURIComponent(block.qrColor) || '#000000';
+            const url = decodeURIComponent(block.url);
+            
+            canvas.width = qrSize;
+            canvas.height = qrSize;
+            
+            // Генерируем QR-код
+            QRCode.toCanvas(canvas, url, {
+                width: qrSize,
+                margin: 1,
+                color: {
+                    dark: qrColor,
+                    light: '#FFFFFF'
+                }
+            });
+            
+            qrContainer.appendChild(canvas);
+            
+            // Создаем описание
+            const description = document.createElement('p');
+            description.textContent = decodeURIComponent(block.description);
+            description.style.position = 'absolute';
+            description.style.fontFamily = "'Teko', sans-serif";
+            description.style.margin = '55px 0 0 0';
+            description.style.width = '100%';
+            
+            // Создаем основной контейнер
+            const mainContainer = document.createElement('div');
+            mainContainer.className = 'qr-block';
+            mainContainer.appendChild(qrContainer);
+            mainContainer.appendChild(description);
+            
+            div.appendChild(mainContainer);
             container.appendChild(div);
         });
     </script>

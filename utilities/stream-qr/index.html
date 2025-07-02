@@ -9,64 +9,62 @@
     })(window,document,'script','dataLayer','GTM-TPQNM8CC');</script>
     <!-- End Google Tag Manager -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../src/css/main.css">
+    <link rel="stylesheet" href="../stream-popup/css/main.css">
+    <link rel="stylesheet" href="./css/main.css">
     <title>QR Code Generator</title>
 </head>
 <body>
-    <style>
-        body { 
-            background-color: #1e1e1e; /* Темный фон */
-            color: #fff;
-        }
-    </style>
-    <h1>QR Generator</h1>
+    <h1>QR Code Generator</h1>
     <form id="dataForm">
         
         <div id="blocksContainer"></div>
 
         <!-- Поле для настройки задержки между блоками -->
-        <label for="blockDelay">Delay (seconds):<span style="cursor: pointer;" title="Это время, которое пройдет между исчезновением одного блока и появлением следующего. Применяется ко всем блокам, кроме первого.">❔</span></label>
+        <label for="blockDelay">Задержка между QR-кодами (в секундах):<span style="cursor: pointer;" title="Это время, которое пройдет между исчезновением одного QR-кода и появлением следующего. Применяется ко всем QR-кодам, кроме первого.">❔</span></label>
         <input type="number" id="blockDelay" min="1" value="60"><br><br>
 
         <!-- Кнопка добавления нового блока -->
-        <button type="button" id="addBlock">Add new QR</button><br><br>
+        <button type="button" id="addBlock">Добавить новый QR-код</button><br><br>
 
         <br>
         <div class="direction-select">
-            <label for="direction">Position:</label>
+            <label for="direction">Позиция:</label>
             <select id="direction" name="direction">
-                <option value="right-down" selected>Bottom Right</option>
-                <option value="left-down">Bottom Left</option>
-                <option value="right-up">Top Right</option>
-                <option value="left-up">Top Left</option>
+                <option value="right-down" selected>Правый нижний угол</option>
+                <option value="left-down">Левый нижний угол</option>
+                <option value="right-up">Правый верхний угол</option>
+                <option value="left-up">Левый верхний угол</option>
             </select>
         </div>
         
         <!-- Кнопка генерации ссылки -->
-        <button type="submit" id="generateLink">Generate Link</button>
+        <button type="submit" id="generateLink">Сгенерировать ссылку</button>
     </form>
 
     <div id="output"></div>
     <div class="centerflip">
-        <button class="flippy">How it works?</button>
+        <button class="flippy">Как это работает?</button>
         <div class="flippanel">
-            <p>Сервис для генерации блоков позволяет вам создавать интерактивные элементы, которые появляются на странице в выбранном вами направлении. Вот как это работает:
+            <p>Сервис для генерации QR-кодов позволяет вам создавать интерактивные QR-коды, которые появляются на странице в выбранном вами направлении. Вот как это работает:
                 <ul>
-                    <li><i>Добавление блоков:</i> Вы можете добавлять новые блоки с полями для ссылки (типа t.me/B4DCAT), описания и цвета.</li>
-                    <li><i>Выбор логотипа:</i> Добавьте логотип к блоку из предзагруженных вариантов или оставьте без логотипа.</li>
-                    <li><i>Выбор направления:</i> Выберите сторону, с которой будет появляться каждый блок: вправо вниз, влево вверх, вправо вверх или влево вниз.</li>
-                    <li><i>Задержка между блоками:</i> Установите время задержки между появлением каждого блока. Обычно добавляют 5мин (300сек)</li>
+                    <li><b><i>Добавление QR-кодов:</i></b> Вы можете добавлять новые QR-коды с полями для URL, описания, цвета фона и размера QR-кода.</li>
+                    <li><b><i>Предварительный просмотр:</i></b> Каждый QR-код генерируется в реальном времени для предварительного просмотра.</li>
+                    <li><b><i>Выбор позиции:</i></b> Выберите сторону, с которой будет появляться каждый QR-код: правый нижний, левый нижний, правый верхний или левый верхний угол.</li>
+                    <li><b><i>Задержка между QR-кодами:</i></b> Установите время задержки между появлением каждого QR-кода. Обычно добавляют 5мин (300сек)</li>
                 </ul>
             </p>
             <p>После заполнения всех полей вы можете сгенерировать ссылку на страницу display.html, 
-                где будут отображаться ваши блоки согласно выбранным параметрам.
+                где будут отображаться ваши QR-коды согласно выбранным параметрам.
                 <br> Эту ссылку необходимо вставить в OBS в источник браузер с размером <b>1920x1080</b> или размер вашего экрана
             </p> 
-            <h3>Пример блока</h3>
+            <h3>Пример QR-кода</h3>
             <div style="width: 270px;height: 90px;background-color: #5ebdf1;text-align: center;display: flex;flex-direction: column;align-items: center;justify-content: center;border-radius: 5px;animation: shake 5s infinite alternate 0s;">
-                <p class="russo-one-regular" style="font-size: 1.5rem;margin: -20px 0 0 0;padding: 0;padding: 5px 30px;border-radius: 10px;background-color: #00000033;">t.me/B4DCAT</p>
+                <div style="background: white; padding: 5px; border-radius: 5px; margin-bottom: 5px;">
+                    <canvas id="example-qr" width="60" height="60"></canvas>
+                </div>
                 <p style="position: absolute;font-family: 'Teko', sans-serif;margin: 55px 0 0 0;width: 100%;">ТЕЛЕГРАМ КАНАЛ</p>
             </div>
         </div> 
@@ -74,87 +72,7 @@
     <div class="powered-by">
         <p>Powered by <a href="https://twitch.tv/f_4_t_c_a_t" class="mr-vi" target="_blank">Mr Vi</a></p>
     </div>
-    <script>
-        $(function () {
-            $(".flippy").on("click", function () {
-              $(this).parent().children(".flippanel").slideToggle("normal");
-            });
-          });
-          
-       document.getElementById('addBlock').onclick = function() {
-           const blocksContainer = document.getElementById('blocksContainer');
-            
-           // Создаем новый блок
-           const newBlock = document.createElement('div');
-           newBlock.className = 'blockInput';
-           newBlock.innerHTML = `
-                <label for="link">URL:</label>
-                <input type="text" class="link"><br>
-
-                <label for="description">Desscription:</label>
-                <input type="text" class="description"><br>
-
-                <label for="color">Background color:</label>
-                <input type="color" class="color color-input" value="#5ebdf1"><br>
-                
-                <label for="duration">Duration:</label>
-                <input type="number" class="duration" value="5"><br>
-                <br>
-                <!-- Задержка будет только для последующих блоков -->
-                <input type="hidden" class="delay" value="" required> <!-- Скрытое поле для задержки -->
-               
-                <!-- Кнопка для удаления блока -->
-                <button type='button' class='removeBlock' style="background-color: #f15e5e">Delete QR</button>`;
-           
-           blocksContainer.appendChild(newBlock);
-       };
-
-       // Удаление блока
-       document.getElementById('blocksContainer').addEventListener('click', function(event) {
-           if (event.target.classList.contains('removeBlock')) {
-               event.target.parentElement.remove();
-           }
-       });
-
-       // Генерация ссылки
-       document.getElementById('dataForm').onsubmit = function(event) {
-        event.preventDefault();
     
-        const blocks = [];
-        const blockInputs = document.querySelectorAll('.blockInput');
-    
-        blockInputs.forEach(block => {
-            const link = encodeURIComponent(block.querySelector('.link').value);
-            const description = encodeURIComponent(block.querySelector('.description').value);
-            const color = encodeURIComponent(block.querySelector('.color').value);
-            const delay = (blocks.length === 0) ? '0' : document.getElementById('blockDelay').value;
-            const logo = block.querySelector('#logo').value;
-
-            blocks.push({ link, description, color,logo, delay });
-        });
-    
-        const blockDelay = parseInt(document.getElementById('blockDelay').value);
-        const animationTimePerBlock = 6;
-        const totalAnimationTime = animationTimePerBlock * blocks.length + blockDelay * (blocks.length - 1) + blockDelay;
-    
-        const direction = document.getElementById('direction').value; // Получаем выбранное направление
-        const params = blocks.map((block, index) => `block${index}=${JSON.stringify(block)}`).join('&');
-    
-        const generatedUrl = `https://mrvi0.github.io/utilities/stream-popup/display.html?${params}&refreshRate=${totalAnimationTime}&direction=${direction}`;
-    
-        document.getElementById('output').innerHTML = `
-            <div class='link-container'>
-                <input type='text' value='${generatedUrl}' class='link-input' readonly />
-            </div>`;
-    };
-
-       function copyToClipboard(text) {
-          navigator.clipboard.writeText(text).then(() => {
-              alert("Ссылка скопирована в буфер обмена!");
-          }, (err) => {
-              console.error("Ошибка при копировании текста:", err);
-          });
-      }
-   </script>
+    <script src="./js/qr-generator.js"></script>
 </body>
 </html>
