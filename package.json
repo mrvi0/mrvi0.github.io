@@ -1,0 +1,36 @@
+{
+  "name": "b4dcat-hub",
+  "version": "1.0.0",
+  "description": "Персональный хаб с утилитами, вики, трекером задач и проектами",
+  "main": "index.html",
+  "scripts": {
+    "build": "node build.js",
+    "minify": "node build.js",
+    "dev": "python3 -m http.server 8000",
+    "serve": "python3 -m http.server 8000",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "pwa",
+    "utilities",
+    "wiki",
+    "tasks",
+    "projects",
+    "web-app"
+  ],
+  "author": "Mr Vi",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mrvi0/mrvi0.github.io.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mrvi0/mrvi0.github.io/issues"
+  },
+  "homepage": "https://mrvi0.github.io",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "devDependencies": {},
+  "dependencies": {}
+} 
