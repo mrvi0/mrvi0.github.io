@@ -71,6 +71,11 @@
                 <option value="AI">AI</option>
             </select>
         </div>
+        <div>
+            <label>
+                <input type="checkbox" id="categoryDifferenceCheckbox" checked> Включить расчет разницы между категориями
+            </label>
+        </div>
     </div>
 
     <div id="jsoneditor"></div>
@@ -91,6 +96,7 @@
         });
 
         document.getElementById('convert').addEventListener('click', function() {
+            console.log('=== НАЧАЛО ОБРАБОТКИ ===');
             const fileInput = document.getElementById('upload');
             const file = fileInput.files[0];
 
@@ -99,10 +105,14 @@
                 return;
             }
 
+            console.log('Файл загружен:', file.name);
+
             const reader = new FileReader();
             reader.onload = function(e) {
+                console.log('=== ЧТЕНИЕ ФАЙЛА ===');
                 const data = new Uint8Array(e.target.result);
                 const workbook = XLSX.read(data, { type: 'array' });
+                console.log('Workbook создан, листы:', Object.keys(workbook.Sheets));
 
                 // Получаем лист "Сопоставление номеров"
                 const sheetName = "Сопоставление номеров";
@@ -112,6 +122,7 @@
                     alert(`Лист с названием "${sheetName}" не найден.`);
                     return;
                 }
+                console.log('Лист "Сопоставление номеров" найден');
 
                 // Получаем лист "Базовый тариф"
                 const baseSheetName = "Базовый тариф";
@@ -121,6 +132,7 @@
                     alert(`Лист с названием "${baseSheetName}" не найден.`);
                     return;
                 }
+                console.log('Лист "Базовый тариф" найден');
                 
 
                 // Получаем лист "Ценовые стратегии"
@@ -131,17 +143,34 @@
                     alert(`Лист с названием "${priceStrategyName}" не найден.`);
                     return;
                 }
+                console.log('Лист "Ценовые стратегии" найден');
+
+                // Диагностика структуры листа "Ценовые стратегии"
+                console.log('=== ДИАГНОСТИКА СТРУКТУРЫ ЦЕНОВЫХ СТРАТЕГИЙ ===');
+                for (let row = 1; row <= 15; row++) {
+                    const rowData = {};
+                    for (let col = 0; col <= 5; col++) {
+                        const cell = priceStrategyWorksheet[XLSX.utils.encode_cell({ c: col, r: row })];
+                        if (cell) {
+                            rowData[`${String.fromCharCode(65 + col)}${row}`] = cell.v;
+                        }
+                    }
+                    if (Object.keys(rowData).length > 0) {
+                        console.log(`Строка ${row}:`, rowData);
+                    }
+                }
 
                 const roomFundWorksheet = workbook.Sheets["Номерной фонд"];
                 if (!roomFundWorksheet) {
                     alert(`Лист с названием "${roomFundWorksheet}" не найден.`);
                     return;
                 }
-
+                console.log('Лист "Номерной фонд" найден');
 
                 const ratename = baseWorksheet[`B5`] ? baseWorksheet[`B5`].v : ""; // Значение из ячейки B5
                 const persons = baseWorksheet[`E5`] ? baseWorksheet[`E5`].v : ""; // Значение из ячейки E5
                 const baseKey = `${ratename}_${persons}`; // Формируем base_key
+                console.log('Base key сформирован:', baseKey);
 
                 // Получаем значения для tariffs_comb
                 const breakfast = baseWorksheet[`D5`] ? baseWorksheet[`D5`].v : "0"; // Значение из ячейки D5
@@ -149,9 +178,11 @@
                 const tariffs_comb = {
                     [baseKey]: `${breakfast === "Включен в цену" ? "1" : "0"}_${isRefundableRate}_${persons}` // Формируем tariffs_comb
                 };
+                console.log('Tariffs comb сформирован:', tariffs_comb);
 
                 const jsonOutput = [];
                 const selfId = worksheet[`C6`] ? worksheet[`C6`].v : "";
+                console.log('Self ID:', selfId);
                 let rowIndex = 7; // Начинаем с 7-й строки (E7)
                 const profileTitles = [];
 
@@ -166,9 +197,11 @@
                     profileTitles.push(profileTitle);
                     rowIndex++;
                 }
+                console.log('Найдены профили:', profileTitles);
 
                 // Генерация JSON для каждого профиля
                 profileTitles.forEach((title, index) => {
+                    console.log(`=== ОБРАБОТКА ПРОФИЛЯ ${index}: ${title} ===`);
                     const json = {
                         profile_name: `default${index}`
                         
@@ -177,12 +210,14 @@
                     // Проверяем, включены ли настройки для fill_concurents
                     if (document.getElementById('fillConcurentsCheckbox').checked) {
                         json.fill_concurents = document.getElementById('fillConcurents').value; // Добавляем fill_concurents
+                        console.log('Fill concurents включен:', json.fill_concurents);
                     }
 
                     // Проверяем, включены ли настройки для sales_tempo_depth
                     if (document.getElementById('salesTempoDepthCheckbox').checked) {
                         const salesTempoDepth = document.querySelector('input[name="salesTempoDepth"]:checked').value;
                         json.sales_tempo_depth = salesTempoDepth === "auto" ? "auto" : document.getElementById('manualInput').value; // Добавляем sales_tempo_depth
+                        console.log('Sales tempo depth включен:', json.sales_tempo_depth);
                     }
 
                     
@@ -190,24 +225,88 @@
                     const min_price = {};
                     let rowIndex = 4 + index; // Начинаем с строки 5, 6, 7, ...
                     const startRowIndex = rowIndex; // Запоминаем начальную строку
+                    console.log(`Обрабатываем строку ${rowIndex} для профиля ${index}`);
 
-                    // Проверяем, есть ли данные в строке D5 до столбца O
+                    // Проверяем заголовки месяцев в строке 4 (D4, E4, F4, ...)
+                    const monthHeaders = [];
+                    let columnIndex = 3; // Начинаем с D (4-й столбец)
+                    
+                    // Собираем заголовки месяцев
+                    for (let i = 0; i < 12; i++) {
+                        const headerCell = priceStrategyWorksheet[XLSX.utils.encode_cell({ c: columnIndex, r: 3 })]; // Строка 4
+                        const headerValue = headerCell ? headerCell.v : "";
+                        
+                        // Проверяем, содержит ли заголовок название месяца
+                        const monthPatterns = [
+                            /янв/i, /фев/i, /март/i, /апр/i, /май/i, /июнь/i,
+                            /июль/i, /авг/i, /сент/i, /окт/i, /нояб/i, /дек/i
+                        ];
+                        
+                        const isMonth = monthPatterns.some(pattern => pattern.test(headerValue));
+                        
+                        // Альтернативная проверка - если заголовок содержит "Мин цена" и название месяца
+                        const alternativeCheck = /мин цена/i.test(headerValue) && monthPatterns.some(pattern => pattern.test(headerValue));
+                        
+                        const finalIsMonth = isMonth || alternativeCheck;
+                        
+                        monthHeaders.push({
+                            column: columnIndex,
+                            value: headerValue,
+                            isMonth: finalIsMonth,
+                            monthNumber: finalIsMonth ? i + 1 : null // Номер месяца (1-12)
+                        });
+                        console.log(`Заголовок ${i+1}: "${headerValue}" (месяц: ${finalIsMonth}, номер: ${i + 1})`);
+                        columnIndex++;
+                    }
+
+                    // Проверяем, есть ли данные в строке с ценами
                     const hasData = !!priceStrategyWorksheet[XLSX.utils.encode_cell({ c: 3, r: rowIndex })];
+                    console.log('Есть данные в строке с ценами:', hasData);
+                    
+                    // Дополнительная диагностика - проверяем несколько строк
+                    for (let testRow = rowIndex - 2; testRow <= rowIndex + 2; testRow++) {
+                        const testCell = priceStrategyWorksheet[XLSX.utils.encode_cell({ c: 3, r: testRow })];
+                        console.log(`Строка ${testRow}, колонка D:`, testCell ? testCell.v : 'пусто');
+                    }
+                    
                     if (hasData) {
-                        let columnIndex = 3; // Начинаем с D (4-й столбец)
-                        for (let month = 1; month <= 12; month++) {
-                            const priceCell = priceStrategyWorksheet[XLSX.utils.encode_cell({ c: columnIndex, r: rowIndex })]; // Получаем ячейку
-                            const price = priceCell ? priceCell.v : 0; // Значение ячейки
-                            min_price[month] = [price]; // Добавляем цену в объект с ключом месяца
-                            columnIndex++; // Переходим к следующему месяцу
+                        // Проверяем, все ли месяцы заполнены
+                        const allMonthsFilled = monthHeaders.every(header => {
+                            if (!header.isMonth) return true; // Пропускаем кастомные периоды
+                            const priceCell = priceStrategyWorksheet[XLSX.utils.encode_cell({ c: header.column, r: rowIndex })];
+                            return priceCell && priceCell.v !== undefined && priceCell.v !== null && priceCell.v !== "";
+                        });
+                        console.log('Все месяцы заполнены:', allMonthsFilled);
+
+                        if (allMonthsFilled) {
+                            // Если все месяцы заполнены, берем данные по месяцам
+                            monthHeaders.forEach(header => {
+                                if (header.isMonth && header.monthNumber) {
+                                    const priceCell = priceStrategyWorksheet[XLSX.utils.encode_cell({ c: header.column, r: rowIndex })];
+                                    const price = priceCell ? priceCell.v : 0;
+                                    min_price[header.monthNumber] = [price];
+                                    console.log(`Месяц ${header.monthNumber}: цена ${price}`);
+                                }
+                            });
+                        } else {
+                            // Если не все месяцы заполнены, берем значение из "минимальная цена по всем месяцам"
+                            const basePriceCell = priceStrategyWorksheet[XLSX.utils.encode_cell({ c: 2, r: startRowIndex })]; // Ячейка C
+                            const basePrice = basePriceCell ? basePriceCell.v : 0;
+                            console.log('Используем базовую цену для всех месяцев:', basePrice);
+                            
+                            // Заполняем только месяцы (1-12)
+                            for (let month = 1; month <= 12; month++) {
+                                min_price[month] = [basePrice];
+                            }
                         }
                     } else {
-                        // Если D5 не пустое, берем одно значение из C для всех месяцев
+                        // Если нет данных в строке с ценами, берем значение из "минимальная цена по всем месяцам"
+                        const basePriceCell = priceStrategyWorksheet[XLSX.utils.encode_cell({ c: 2, r: startRowIndex })]; // Ячейка C
+                        const basePrice = basePriceCell ? basePriceCell.v : 0;
+                        console.log('Нет данных в строке, используем базовую цену:', basePrice);
+                        
                         for (let month = 1; month <= 12; month++) {
-                            const priceCell = priceStrategyWorksheet[XLSX.utils.encode_cell({ c: 2, r: startRowIndex })]; // Получаем ячейку из C5, C6 и т.д.
-                            const price = priceCell ? priceCell.v : 0; // Значение ячейки
-                            min_price[month] = [price]; // Добавляем одно значение в объект с ключом месяца
-                            
+                            min_price[month] = [basePrice];
                         }
                     }
                     const select = document.getElementById('combination');
@@ -297,11 +396,94 @@
                         isFirstKey = false; // Устанавливаем флаг, что это не первый ключ
                     }
 
+                    // Обработка разницы между категориями
+                    const categoryDifferenceEnabled = document.getElementById('categoryDifferenceCheckbox').checked;
+                    console.log('Чекбокс расчета разницы категорий:', categoryDifferenceEnabled);
+                    
+                    if (categoryDifferenceEnabled) {
+                        console.log('=== ОБРАБОТКА РАЗНИЦЫ КАТЕГОРИЙ ===');
+                        console.log('TODO: Нужно найти правильные ячейки для данных разницы категорий');
+                        console.log('Текущий профиль:', title);
+                        console.log('Индекс профиля:', index);
+                        
+                        // ВРЕМЕННО: комментируем неправильную логику
+                        /*
+                        // Ищем строку с данными для текущего профиля
+                        let diffRowIndex = 4 + index; // Начинаем с строки 5, 6, 7, ...
+                        
+                        // Читаем данные разницы категорий
+                        const dependentCategoryCell = priceStrategyWorksheet[XLSX.utils.encode_cell({ c: 0, r: diffRowIndex })]; // A5, A6, A7, ...
+                        const baseCategoryCell = priceStrategyWorksheet[XLSX.utils.encode_cell({ c: 1, r: diffRowIndex })]; // B5, B6, B7, ...
+                        const differenceTypeCell = priceStrategyWorksheet[XLSX.utils.encode_cell({ c: 2, r: diffRowIndex })]; // C5, C6, C7, ...
+                        const differenceValueCell = priceStrategyWorksheet[XLSX.utils.encode_cell({ c: 3, r: diffRowIndex })]; // D5, D6, D7, ...
+                        
+                        const dependentCategory = dependentCategoryCell ? dependentCategoryCell.v : "";
+                        const baseCategory = baseCategoryCell ? baseCategoryCell.v : "";
+                        const differenceType = differenceTypeCell ? differenceTypeCell.v : "";
+                        const differenceValue = differenceValueCell ? parseFloat(differenceValueCell.v) : 0;
+                        
+                        console.log('Данные разницы категорий:', {
+                            dependentCategory,
+                            baseCategory,
+                            differenceType,
+                            differenceValue,
+                            baseCategoryType: typeof baseCategory
+                        });
+                        
+                        // Если указана базовая категория, обрабатываем зависимость
+                        if (baseCategory && String(baseCategory).trim() !== "") {
+                            console.log('Базовая категория найдена:', baseCategory);
+                            // Находим profile_name базовой категории
+                            const baseProfileIndex = profileTitles.findIndex(profileTitle => 
+                                profileTitle.toLowerCase().includes(String(baseCategory).toLowerCase())
+                            );
+                            
+                            console.log('Индекс базового профиля:', baseProfileIndex);
+                            
+                            if (baseProfileIndex !== -1) {
+                                const baseProfileName = `default${baseProfileIndex}`;
+                                
+                                // Добавляем зависимость
+                                json.half_cat = baseProfileName;
+                                
+                                // Устанавливаем тип зависимости
+                                if (differenceType && differenceType.toLowerCase().includes("гибк")) {
+                                    json.can_upper = true;
+                                } else {
+                                    json.can_upper = false;
+                                }
+                                
+                                // Обновляем intercept
+                                json.intercept[baseKey] = differenceValue;
+                                
+                                console.log('Зависимость добавлена:', {
+                                    half_cat: json.half_cat,
+                                    can_upper: json.can_upper,
+                                    intercept: json.intercept[baseKey]
+                                });
+                            } else {
+                                console.log('Базовый профиль не найден для категории:', baseCategory);
+                                console.log('Доступные профили:', profileTitles);
+                            }
+                        } else {
+                            console.log('Базовая категория не указана или пустая');
+                        }
+                        */
+                    } else {
+                        console.log('Расчет разницы категорий отключен');
+                    }
+
                     jsonOutput.push(json); // Добавляем объект JSON в массив
+                    console.log(`Профиль ${index} добавлен в результат`);
                 });
 
+                console.log('=== ФИНАЛЬНЫЙ РЕЗУЛЬТАТ ===');
+                console.log('Количество профилей:', jsonOutput.length);
+                console.log('JSON результат:', jsonOutput);
+                
                 // Выводим результат в JSONEditor
                 editor.set(jsonOutput);
+                console.log('Результат установлен в JSONEditor');
             };
             reader.readAsArrayBuffer(file);
         });

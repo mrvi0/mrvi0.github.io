@@ -34,6 +34,21 @@ select, input[type="text"] {
     color: #f4f4f4;
 }
 
+input[type="checkbox"] {
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+.settings div {
+    margin-bottom: 15px;
+}
+
+.settings label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
 button {
     width: 100%;
     padding: 10px;
