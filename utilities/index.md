@@ -34,5 +34,9 @@ title: Утилиты
         <h2><a href="./vkhost/">VK Token Generator</a></h2>
         <p>Генератор токенов для приложений VK</p>
     </li>
+    <li>
+        <h2><a href="./pas/">Password Generator</a></h2>
+        <p>Генератор случайных паролей с API для curl запросов</p>
+    </li>
     <!-- Добавь сюда ссылки на другие утилиты -->
 </ul>
