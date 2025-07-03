@@ -1,0 +1,16 @@
+# Minified libraries
+**/*.min.js
+**/qrcode.min.js
+
+# External libraries
+node_modules/
+vendor/
+
+# Build outputs
+dist/
+build/
+_site/
+
+# Generated files
+*.min.css
+*.min.js 
