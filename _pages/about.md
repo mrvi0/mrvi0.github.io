@@ -30,12 +30,51 @@ keywords: Mr Vi, about, developer, software
         </div>
 
         <hr class="terminal-hr">
+        
         <div class="terminal-line">
             <span class="prompt">$</span>
-            <span class="command">echo "Подробнее о моих навыках:"</span>
+            <span class="command">./skills.sh</span>
         </div>
+        
         <div class="output">
-            <a href="/skills/" class="nav-button">Перейти к навыкам</a>
+            <h3>Программирование</h3>
+            {% for skill in site.data.skills.programming_languages %}
+            <div class="skill-item">
+                <div class="skill-header">
+                    <span class="skill-name">{{ skill.name }}</span>
+                    <span class="skill-level">{{ skill.level }}%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: {{ skill.level }}%"></div>
+                </div>
+            </div>
+            {% endfor %}
+
+            <h3>Фреймворки</h3>
+            {% for skill in site.data.skills.frameworks %}
+            <div class="skill-item">
+                <div class="skill-header">
+                    <span class="skill-name">{{ skill.name }}</span>
+                    <span class="skill-level">{{ skill.level }}%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: {{ skill.level }}%"></div>
+                </div>
+            </div>
+            {% endfor %}
+
+            <h3>Инструменты</h3>
+            {% for skill in site.data.skills.tools %}
+            <div class="skill-item">
+                <div class="skill-header">
+                    <span class="skill-name">{{ skill.name }}</span>
+                    <span class="skill-level">{{ skill.level }}%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: {{ skill.level }}%"></div>
+                </div>
+            </div>
+            {% endfor %}
         </div>
     </div>
 </div> 
