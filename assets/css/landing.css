@@ -218,13 +218,32 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 8px;
-    margin-top: 8px;
+    margin: 16px 0;
 }
 
 .file-item {
-    color: var(--terminal-text-dim);
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    background: var(--terminal-header-bg);
+    border: 1px solid var(--terminal-border);
+    border-radius: 4px;
+    color: var(--terminal-text);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    font-family: 'JetBrains Mono', monospace;
     font-size: 14px;
-    padding: 4px 0;
+}
+
+.file-item:hover {
+    border-color: var(--terminal-text);
+    background: var(--terminal-bg);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 255, 0, 0.1);
+}
+
+.file-item:active {
+    transform: translateY(0);
 }
 
 /* Сообщения */

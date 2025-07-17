@@ -1,67 +1,82 @@
 <!DOCTYPE html>
-<html>
-   <head>
-      <meta charset="UTF-8">
-      <title>Получить access token</title>
-      <!-- Google Tag Manager -->
-      <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-      })(window,document,'script','dataLayer','GTM-TPQNM8CC');</script>
-      <link rel="shortcut icon" href="https://vk.com/images/icons/favicons/fav_logo_2x.ico">
-      <meta property="og:image" content="https://pp.userapi.com/c849136/v849136341/12ae10/azCBaliVP7E.jpg" />
-      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
-      <meta name="description" content="Получить access token для пользователя или группы ВКонтакте">
-      <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
-      <link rel="stylesheet" type="text/css" href="style.css" media="screen">
-      <script defer src="script.js"></script>
-   </head>
-   <body>
-      <section class="page-header">
-         <h1 class="project-name">Получить access token</h1>
-         <h2 class="project-tagline">Выберите приложение</h2>
-         <div id="apps_block"></div>
-      </section>
-      <section class="main-content">
-         <h3>Инструкция</h3>
-         <ol>
-            <li>Выберите приложение
-            <li>Нажмите на него
-            <li>Затем нажмите "разрешить"
-            <li>Скопируйте часть адресной строки от <span>access_token=</span> до <span>&expires_in</span>
-         </ol>
-         <h3><a href="/">Вернуться на главную</a></h3>
-      </section>
-      <footer style="text-align:center;">
-         <section><p style="color: #555555;">Source <a href="https://github.com/vkhost/vkhost.github.io">VKHost</a></p></section>
-      </footer>
-      <div id="myModal" class="modal">
-         <div class="modal-content">
-            <div class="modal-header">
-               <span id="close_button">&times;</span>
-               <h3>Настройки</h3>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VK Token Generator - B4DCAT</title>
+    <meta name="description" content="Генератор токенов VK">
+    <link rel="stylesheet" href="/assets/css/layout-styles.css">
+    <link rel="stylesheet" href="/assets/css/vkhost.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="terminal-container">
+        <div class="terminal-header">
+            <div class="terminal-buttons">
+                <span class="terminal-button close"></span>
+                <span class="terminal-button minimize"></span>
+                <span class="terminal-button maximize"></span>
             </div>
-            <div class="modal-body">
-               <p>Тип токена</p>
-               <input type="radio" id="token_type_user" class="pcheck" name="type" checked><label for="token_type_user" class="btn">Пользователь</label><input type="radio" id="token_type_group" class="pcheck" name="type"><label for="token_type_group" class="btn">Сообщество</label>
-               <p>ID приложения</p>
-               <input placeholder="6121396" value="6121396" class="btn" type="number" id="app_id">
-               <div id="group_block" style="display:none">
-                  <p>ID сообщества (через запятую, если их несколько)</p>
-                  <input placeholder="123,456" class="btn" id="group_id">
-               </div>
-               <p>Права [<span id="uncheck">снять все</span>]</p>
-               <div id="permissions" class="pblock"></div>
-               <div id="gpermissions" class="pblock" style="display:none"></div>
-               <p id="offline_warning">Не убирайте право "Доступ в любое время", если планируете использовать токен с другого IP адреса, например на хостинге<br><br>Также обратите внимание, что методы для работы с аудиозаписями и сообщениями работают только с одобренными приложениями. Подробнее: <a href="https://vk.com/dev/audio_api" target="_blank">Отключение публичного API для аудио</a>, <a href="https://vk.com/dev/messages_api" target="_blank">Ограничение Messages API</a></p>
-               <span class="modal_bottom_text">Актуальный список прав доступа здесь: <a href="https://vk.com/dev/permissions" target="_blank">Права доступа приложения</a></span>
+            <div class="terminal-title">VK Token Generator</div>
+        </div>
+        
+        <div class="terminal-content">
+            <div class="terminal-line">
+                <span class="prompt">$</span>
+                <span class="command">./vk-token-generator.sh</span>
             </div>
-            <div class="modal-footer">
-               <div style="display: none;" id="err_msg">Ошибка: заполните все поля</div>
-               <div align="right"><button class="btn" id="submit">Получить</button></div>
+            
+            <div class="output">
+                <div class="vk-generator-container">
+                    <div class="input-section">
+                        <h3>Настройки токена</h3>
+                        <div class="control-group">
+                            <label for="appId">ID приложения:</label>
+                            <input type="number" id="appId" placeholder="Введите ID приложения VK" class="terminal-input">
+                        </div>
+                        
+                        <div class="control-group">
+                            <label for="scope">Права доступа:</label>
+                            <div class="scope-checkboxes">
+                                <label><input type="checkbox" value="friends"> Друзья</label>
+                                <label><input type="checkbox" value="photos"> Фотографии</label>
+                                <label><input type="checkbox" value="audio"> Аудио</label>
+                                <label><input type="checkbox" value="video"> Видео</label>
+                                <label><input type="checkbox" value="docs"> Документы</label>
+                                <label><input type="checkbox" value="notes"> Заметки</label>
+                                <label><input type="checkbox" value="pages"> Страницы</label>
+                                <label><input type="checkbox" value="status"> Статус</label>
+                                <label><input type="checkbox" value="wall"> Стена</label>
+                                <label><input type="checkbox" value="groups"> Группы</label>
+                                <label><input type="checkbox" value="messages"> Сообщения</label>
+                                <label><input type="checkbox" value="offline"> Офлайн</label>
+                            </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label for="redirectUri">URI перенаправления:</label>
+                            <input type="url" id="redirectUri" placeholder="https://example.com/callback" class="terminal-input">
+                        </div>
+                        
+                        <button id="generateToken" class="terminal-button-action">Сгенерировать токен</button>
+                    </div>
+                    
+                    <div class="preview-section">
+                        <h3>Результат</h3>
+                        <div class="token-result" id="tokenResult">
+                            <div class="token-placeholder">Токен появится здесь</div>
+                        </div>
+                        
+                        <div class="token-actions">
+                            <button id="copyToken" class="terminal-button-action" disabled>Копировать токен</button>
+                            <button id="openAuth" class="terminal-button-action" disabled>Открыть авторизацию</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-         </div>
-      </div>
-   </body>
+        </div>
+    </div>
+
+    <script src="/assets/js/vkhost.js"></script>
+</body>
 </html>

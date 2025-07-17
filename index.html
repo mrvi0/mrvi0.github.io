@@ -45,6 +45,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="/assets/css/landing.css">
+    <link rel="stylesheet" href="/assets/css/ads.css">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 
     <!-- Yandex.Metrika counter -->
@@ -84,12 +85,12 @@
             <div class="output">
                 <div class="ascii-art">
 ```
-██████╗ ██████╗ ██████╗ ██████╗ ██████╗ █████╗ ████████╗
-██╔════╝██╔═══██╗██╔═══██╗██╔═══██╗██╔═══██╗██╔══██╗╚══██╔══╝
-██║     ██║   ██║██║   ██║██║   ██║██║   ██║███████║   ██║   
-██║     ██║   ██║██║   ██║██║   ██║██║   ██║██╔══██║   ██║   
-╚██████╗╚██████╔╝╚██████╔╝╚██████╔╝╚██████╔╝██║  ██║   ██║   
- ╚═════╝ ╚═════╝  ╚═════╝  ╚═════╝  ╚═════╝ ╚═╝  ╚═╝   ╚═╝   
+███╗   ███╗██████╗ ██╗   ██╗██╗ ██████╗ 
+████╗ ████║██╔══██╗██║   ██║██║██╔═████╗
+██╔████╔██║██████╔╝██║   ██║██║██║██╔██║
+██║╚██╔╝██║██╔══██╗╚██╗ ██╔╝██║████╔╝██║
+██║ ╚═╝ ██║██║  ██║ ╚████╔╝ ██║╚██████╔╝
+╚═╝     ╚═╝╚═╝  ╚═╝  ╚═══╝  ╚═╝ ╚═════╝    
 ```
                 </div>
                 
@@ -100,21 +101,22 @@
                 <div class="features">
                     <h3>Возможности:</h3>
                     <ul>
-                        <li>🎨 <strong>CSS Button Generator</strong> — визуальный генератор CSS кнопок</li>
-                        <li>🌈 <strong>Colorify</strong> — конвертер цветов и генератор градиентов</li>
-                        <li>📱 <strong>QR Code Generator</strong> — генератор QR-кодов</li>
-                        <li>🎬 <strong>Stream Popup</strong> — генератор попапов для стримеров</li>
-                        <li>📋 <strong>README Builder</strong> — генератор README файлов</li>
-                        <li>🔧 <strong>HL Config Generator</strong> — генератор конфигов из таблицы</li>
+                        <li>CSS Button Generator — визуальный генератор CSS кнопок</li>
+                        <li>Colorify — конвертер цветов и генератор градиентов</li>
+                        <li>QR Code Generator — генератор QR-кодов</li>
+                        <li>Stream Popup — генератор попапов для стримеров</li>
+                        <li>README Builder — генератор README файлов</li>
+                        <li>VK Token Generator — генератор токенов VK</li>
+                        <li>Free API Catalog — каталог бесплатных API</li>
                     </ul>
                 </div>
                 
                 <div class="navigation">
                     <h3>Навигация:</h3>
                     <div class="nav-buttons">
-                        <a href="/utilities/" class="nav-button">🚀 Утилиты</a>
-                        <a href="https://github.com/mrvi0" class="nav-button">📦 GitHub</a>
-                        <a href="https://t.me/B4DCAT" class="nav-button">💬 Telegram</a>
+                        <a href="/utilities/" class="nav-button">Утилиты</a>
+                        <a href="https://github.com/mrvi0" class="nav-button">GitHub</a>
+                        <a href="https://t.me/B4DCAT" class="nav-button">Telegram</a>
                     </div>
                 </div>
                 
@@ -125,15 +127,14 @@
                 
                 <div class="output">
                     <div class="file-list">
-                        <div class="file-item">📁 button-generator/</div>
-                        <div class="file-item">📁 colorify/</div>
-                        <div class="file-item">📁 stream-qr/</div>
-                        <div class="file-item">📁 stream-popup/</div>
-                        <div class="file-item">📁 readme-builder/</div>
-                        <div class="file-item">📁 vkhost/</div>
-                        <div class="file-item">📁 free-api/</div>
-                        <div class="file-item">📁 HL/</div>
-                        <div class="file-item">📁 test/</div>
+                        <a href="/utilities/button-generator/" class="file-item">📁 button-generator/</a>
+                        <a href="/utilities/colorify/" class="file-item">📁 colorify/</a>
+                        <a href="/utilities/stream-qr/" class="file-item">📁 stream-qr/</a>
+                        <a href="/utilities/stream-popup/" class="file-item">📁 stream-popup/</a>
+                        <a href="/utilities/readme-builder/" class="file-item">📁 readme-builder/</a>
+                        <a href="/utilities/vkhost/" class="file-item">📁 vkhost/</a>
+                        <a href="/utilities/free-api/" class="file-item">📁 free-api/</a>
+                        <a href="/utilities/test/" class="file-item">📁 test/</a>
                     </div>
                 </div>
                 
@@ -155,8 +156,16 @@
         </div>
     </div>
 
+    <!-- Рекламный блок -->
+    <div id="ad-placeholder" class="ad-container">
+        <script id="adsDataScript" type="application/json">
+            {{ site.data.advertisements | jsonify }}
+        </script>
+    </div>
+
     <!-- Scripts -->
     <script src="/assets/js/landing.js"></script>
+    <script src="/assets/js/ads.js"></script>
     
     <!-- PWA Service Worker Registration -->
     <script>
