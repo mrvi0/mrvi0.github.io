@@ -18,9 +18,6 @@ collections:
   posts:
     output: true
     permalink: /:collection/:title/
-  pages:
-    output: true
-    permalink: /:title/
 
 # Defaults
 defaults:
@@ -29,11 +26,6 @@ defaults:
       type: "posts"
     values:
       layout: "post"
-  - scope:
-      path: ""
-      type: "pages"
-    values:
-      layout: "default"
 
 # Plugins
 plugins:
@@ -68,7 +60,6 @@ exclude:
 
 # Include files
 include:
-  - _pages
   - _posts
   - _layouts
   - _includes

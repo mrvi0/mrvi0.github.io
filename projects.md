@@ -24,36 +24,52 @@ keywords: Mr Vi, projects, portfolio, github
         <div class="output">
             <div class="file-list">
                 <a href="https://github.com/mrvi0" class="file-item">📁 GitHub Profile</a>
-                <a href="#" class="file-item">🚀 Project 1</a>
-                <a href="#" class="file-item">🔧 Project 2</a>
-                <a href="#" class="file-item">📱 Project 3</a>
+                <a href="https://github.com/mrvi0/mrvi0.github.io" class="file-item">🌐 Personal Website</a>
+                <a href="#" class="file-item">🤖 AI Assistant</a>
+                <a href="#" class="file-item">📋 Task Manager</a>
             </div>
             
             <div class="description">
                 <h3>🎯 Активные проекты</h3>
                 <div class="project-item">
-                    <h4>Personal Website</h4>
-                    <p>Персональный сайт на Jekyll с терминальным интерфейсом</p>
-                    <span class="tech-stack">Jekyll, HTML, CSS, JavaScript</span>
+                    <h4>🌐 Personal Website</h4>
+                    <p>Персональный сайт на Jekyll с терминальным интерфейсом. Включает блог, портфолио проектов и PWA функциональность.</p>
+                    <span class="tech-stack">Jekyll, HTML, CSS, JavaScript, PWA</span>
+                    <div class="project-links">
+                        <a href="https://github.com/mrvi0/mrvi0.github.io" class="project-link">📁 GitHub</a>
+                        <a href="https://mrvi0.github.io" class="project-link">🌐 Live Demo</a>
+                    </div>
                 </div>
                 
                 <div class="project-item">
-                    <h4>Terminal Theme</h4>
-                    <p>Тема в стиле терминала для веб-приложений</p>
-                    <span class="tech-stack">CSS, JavaScript, PWA</span>
+                    <h4>🤖 AI Assistant</h4>
+                    <p>ИИ помощник для разработчиков с интеграцией различных API и поддержкой естественного языка.</p>
+                    <span class="tech-stack">Python, AI, API, NLP</span>
+                    <div class="project-links">
+                        <a href="#" class="project-link">📁 GitHub</a>
+                        <a href="#" class="project-link">🚀 Demo</a>
+                    </div>
                 </div>
                 
                 <h3>🔮 В разработке</h3>
                 <div class="project-item">
-                    <h4>AI Assistant</h4>
-                    <p>ИИ помощник для разработчиков</p>
-                    <span class="tech-stack">Python, AI, API</span>
+                    <h4>📋 Task Manager</h4>
+                    <p>Менеджер задач с терминальным интерфейсом и интеграцией с различными сервисами.</p>
+                    <span class="tech-stack">Node.js, React, TypeScript, API</span>
+                    <div class="project-links">
+                        <a href="#" class="project-link">📁 GitHub</a>
+                        <a href="#" class="project-link">🚀 Demo</a>
+                    </div>
                 </div>
                 
                 <div class="project-item">
-                    <h4>Task Manager</h4>
-                    <p>Менеджер задач с терминальным интерфейсом</p>
-                    <span class="tech-stack">Node.js, React, TypeScript</span>
+                    <h4>🔧 Terminal Tools</h4>
+                    <p>Набор утилит для командной строки, повышающих продуктивность разработчика.</p>
+                    <span class="tech-stack">Python, Shell, CLI</span>
+                    <div class="project-links">
+                        <a href="#" class="project-link">📁 GitHub</a>
+                        <a href="#" class="project-link">📦 Package</a>
+                    </div>
                 </div>
             </div>
             
