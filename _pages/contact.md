@@ -30,7 +30,7 @@ keywords: Mr Vi, contact, telegram, github
                     <div class="contact-item">
                         <span class="contact-icon">📧</span>
                         <span class="contact-label">Email:</span>
-                        <a href="mailto:contact@mrvi.dev" class="contact-link">contact@mrvi.dev</a>
+                        <a href="mailto:support@b4dcat.ru" class="contact-link">support@b4dcat.ru</a>
                     </div>
                     
                     <div class="contact-item">
