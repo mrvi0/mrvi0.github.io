@@ -6,6 +6,10 @@
   url: "/about/"
   icon: "user"
 
+- title: "Навыки"
+  url: "/skills/"
+  icon: "skills"
+
 - title: "Проекты"
   url: "/projects/"
   icon: "rocket"

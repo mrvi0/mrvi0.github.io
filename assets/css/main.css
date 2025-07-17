@@ -304,6 +304,45 @@ body {
     padding-left: 16px;
 }
 
+/* Skills */
+.skill-item {
+    margin-bottom: var(--spacing-md);
+}
+
+.skill-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-xs);
+}
+
+.skill-name {
+    color: var(--text-color);
+    font-family: var(--font-code);
+    font-weight: bold;
+}
+
+.skill-level {
+    color: var(--text-color-muted);
+    font-family: var(--font-code);
+    font-size: 12px;
+}
+
+.skill-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(0, 255, 0, 0.1);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.skill-progress {
+    height: 100%;
+    background: var(--text-color);
+    transition: width 0.3s ease;
+}
+
 /* Content Sections */
 .description {
     margin: var(--spacing-lg) 0;
