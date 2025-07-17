@@ -16,6 +16,13 @@
     --terminal-button-yellow: #ffbd2e;
     --terminal-button-green: #27ca3f;
     
+    /* Spacing */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    
     /* Fonts */
     --font-main: 'JetBrains Mono', 'Courier New', monospace;
     --font-code: 'JetBrains Mono', 'Courier New', monospace;
@@ -99,8 +106,9 @@ body {
 
 /* Terminal Content */
 .terminal-content {
-    padding: 20px;
+    padding: var(--spacing-lg);
     min-height: 400px;
+    line-height: 1.8;
 }
 
 /* Terminal Lines */
@@ -135,7 +143,7 @@ body {
 
 /* Output */
 .output {
-    margin: 16px 0;
+    margin: var(--spacing-md) 0;
     color: var(--text-color);
 }
 
@@ -298,13 +306,14 @@ body {
 
 /* Content Sections */
 .description {
-    margin: 20px 0;
+    margin: var(--spacing-lg) 0;
 }
 
 .description p {
     color: var(--text-color);
     font-family: var(--font-code);
-    line-height: 1.6;
+    line-height: 1.8;
+    margin-bottom: var(--spacing-md);
 }
 
 .features {
@@ -313,9 +322,10 @@ body {
 
 .features h3 {
     color: var(--heading-color);
-    margin-bottom: 12px;
+    margin-bottom: var(--spacing-md);
     font-family: var(--font-code);
     font-weight: bold;
+    margin-top: var(--spacing-lg);
 }
 
 .features ul {
@@ -339,14 +349,15 @@ body {
 }
 
 .navigation {
-    margin: 20px 0;
+    margin: var(--spacing-lg) 0;
 }
 
 .navigation h3 {
     color: var(--heading-color);
-    margin-bottom: 12px;
+    margin-bottom: var(--spacing-md);
     font-family: var(--font-code);
     font-weight: bold;
+    margin-top: var(--spacing-lg);
 }
 
 .nav-buttons {
