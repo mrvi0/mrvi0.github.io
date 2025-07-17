@@ -3,30 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>B4DCAT - Персональный Хаб Разработчика</title>
-    <meta name="description" content="Персональный хаб с утилитами, вики, трекером задач и проектами. Коллекция веб-инструментов для разработчиков.">
-    <meta name="keywords" content="утилиты, вики, задачи, проекты, разработка, инструменты, CSS, JavaScript, веб-разработка">
+    <title>B4DCAT - Утилиты для разработчиков</title>
+    <meta name="description" content="Коллекция веб-утилит для разработчиков. Генераторы, конвертеры и инструменты.">
+    <meta name="keywords" content="утилиты, разработка, инструменты, CSS, JavaScript, генераторы">
     <meta name="author" content="Mr Vi">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://mrvi0.github.io/">
-    <meta property="og:title" content="B4DCAT - Персональный Хаб Разработчика">
-    <meta property="og:description" content="Персональный хаб с утилитами, вики, трекером задач и проектами. Коллекция веб-инструментов для разработчиков.">
+    <meta property="og:title" content="B4DCAT - Утилиты для разработчиков">
+    <meta property="og:description" content="Коллекция веб-утилит для разработчиков. Генераторы, конвертеры и инструменты.">
     <meta property="og:image" content="https://mrvi0.github.io/assets/img/og-image.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://mrvi0.github.io/">
-    <meta property="twitter:title" content="B4DCAT - Персональный Хаб Разработчика">
-    <meta property="twitter:description" content="Персональный хаб с утилитами, вики, трекером задач и проектами. Коллекция веб-инструментов для разработчиков.">
+    <meta property="twitter:title" content="B4DCAT - Утилиты для разработчиков">
+    <meta property="twitter:description" content="Коллекция веб-утилит для разработчиков. Генераторы, конвертеры и инструменты.">
     <meta property="twitter:image" content="https://mrvi0.github.io/assets/img/og-image.png">
 
     <!-- PWA Manifest -->
     <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#6366f1">
+    <meta name="theme-color" content="#00ff00">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="B4DCAT">
     <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 
@@ -45,7 +45,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="/assets/css/landing.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript">
@@ -65,60 +65,97 @@
     <!-- /Yandex.Metrika counter -->
 </head>
 <body>
-    <!-- Контейнер для анимированного фона tsParticles -->
-    <div id="tsparticles"></div>
-
-    <main class="content">
-        <header class="header-animate">
-            <h1>Добро пожаловать!</h1>
-            <p>Это <span id="typed-element"></span></p>
-        </header>
-
-        <nav class="nav-animate">
-            <h2>Навигация:</h2>
-            <ul>
-                <li><a href="/utilities/">🚀 Утилиты</a></li>
-                <li><a href="/wiki/">📚 Персональная Вики</a></li>
-                <li><a href="/tasks/">📝 Задачи</a></li>
-                <li><a href="/projects/">💡 Проекты</a></li>
-            </ul>
-        </nav>
-
-        <section class="features-animate">
-            <h2>Что вы найдете здесь:</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🎨</div>
-                    <h3>CSS Button Generator</h3>
-                    <p>Визуальный генератор CSS кнопок с настройкой всех параметров стиля</p>
+    <div class="terminal-container">
+        <div class="terminal-header">
+            <div class="terminal-buttons">
+                <span class="terminal-button close"></span>
+                <span class="terminal-button minimize"></span>
+                <span class="terminal-button maximize"></span>
+            </div>
+            <div class="terminal-title">B4DCAT Terminal</div>
+        </div>
+        
+        <div class="terminal-content">
+            <div class="terminal-line">
+                <span class="prompt">$</span>
+                <span class="command">cat /etc/b4dcat/README.md</span>
+            </div>
+            
+            <div class="output">
+                <div class="ascii-art">
+```
+██████╗ ██████╗ ██████╗ ██████╗ ██████╗ █████╗ ████████╗
+██╔════╝██╔═══██╗██╔═══██╗██╔═══██╗██╔═══██╗██╔══██╗╚══██╔══╝
+██║     ██║   ██║██║   ██║██║   ██║██║   ██║███████║   ██║   
+██║     ██║   ██║██║   ██║██║   ██║██║   ██║██╔══██║   ██║   
+╚██████╗╚██████╔╝╚██████╔╝╚██████╔╝╚██████╔╝██║  ██║   ██║   
+ ╚═════╝ ╚═════╝  ╚═════╝  ╚═════╝  ╚═════╝ ╚═╝  ╚═╝   ╚═╝   
+```
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🌈</div>
-                    <h3>Colorify</h3>
-                    <p>Конвертер цветов между форматами HEX, RGB, HSL с генератором градиентов</p>
+                
+                <div class="description">
+                    <p>B4DCAT — коллекция веб-утилит для разработчиков. Предоставляет мощные инструменты для генерации, конвертации и работы с различными форматами данных.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📱</div>
-                    <h3>QR Generator</h3>
-                    <p>Генератор QR-кодов с настройкой размера и цвета</p>
+                
+                <div class="features">
+                    <h3>Возможности:</h3>
+                    <ul>
+                        <li>🎨 <strong>CSS Button Generator</strong> — визуальный генератор CSS кнопок</li>
+                        <li>🌈 <strong>Colorify</strong> — конвертер цветов и генератор градиентов</li>
+                        <li>📱 <strong>QR Code Generator</strong> — генератор QR-кодов</li>
+                        <li>🎬 <strong>Stream Popup</strong> — генератор попапов для стримеров</li>
+                        <li>📋 <strong>README Builder</strong> — генератор README файлов</li>
+                        <li>🔧 <strong>HL Config Generator</strong> — генератор конфигов из таблицы</li>
+                    </ul>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📋</div>
-                    <h3>Task Tracker</h3>
-                    <p>Kanban-доска для управления задачами с поддержкой GitHub</p>
+                
+                <div class="navigation">
+                    <h3>Навигация:</h3>
+                    <div class="nav-buttons">
+                        <a href="/utilities/" class="nav-button">🚀 Утилиты</a>
+                        <a href="https://github.com/mrvi0" class="nav-button">📦 GitHub</a>
+                        <a href="https://t.me/B4DCAT" class="nav-button">💬 Telegram</a>
+                    </div>
+                </div>
+                
+                <div class="terminal-line">
+                    <span class="prompt">$</span>
+                    <span class="command">ls /utilities/</span>
+                </div>
+                
+                <div class="output">
+                    <div class="file-list">
+                        <div class="file-item">📁 button-generator/</div>
+                        <div class="file-item">📁 colorify/</div>
+                        <div class="file-item">📁 stream-qr/</div>
+                        <div class="file-item">📁 stream-popup/</div>
+                        <div class="file-item">📁 readme-builder/</div>
+                        <div class="file-item">📁 vkhost/</div>
+                        <div class="file-item">📁 free-api/</div>
+                        <div class="file-item">📁 HL/</div>
+                        <div class="file-item">📁 test/</div>
+                    </div>
+                </div>
+                
+                <div class="terminal-line">
+                    <span class="prompt">$</span>
+                    <span class="command">echo "Добро пожаловать в B4DCAT!"</span>
+                </div>
+                
+                <div class="output">
+                    <span class="success">Добро пожаловать в B4DCAT!</span>
+                </div>
+                
+                <div class="terminal-line">
+                    <span class="prompt">$</span>
+                    <span class="command" id="typing-command"></span>
+                    <span class="cursor">█</span>
                 </div>
             </div>
-        </section>
-
-        <footer class="footer-animate">
-            <p>© 2025 Mr Vi. Сделано с ❤️ и кодом.</p>
-            <p><a href="https://github.com/mrvi0" target="_blank" rel="noopener noreferrer">GitHub</a> | <a href="https://t.me/B4DCAT" target="_blank" rel="noopener noreferrer">Telegram</a></p>
-        </footer>
-    </main>
+        </div>
+    </div>
 
     <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.10.1/tsparticles.bundle.min.js"></script>
-    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
     <script src="/assets/js/landing.js"></script>
     
     <!-- PWA Service Worker Registration -->

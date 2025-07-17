@@ -107,3 +107,97 @@ const options = {
 };
 
 const typed = new Typed('#typed-element', options); 
+
+// Терминальный эффект печати
+document.addEventListener('DOMContentLoaded', function() {
+    const typingCommand = document.getElementById('typing-command');
+    const commands = [
+        'help',
+        'ls -la',
+        'cat README.md',
+        'echo "Hello, World!"',
+        'git status',
+        'npm install',
+        'python --version',
+        'node --version'
+    ];
+    
+    let currentCommandIndex = 0;
+    let currentCharIndex = 0;
+    let isDeleting = false;
+    
+    function typeCommand() {
+        const currentCommand = commands[currentCommandIndex];
+        
+        if (isDeleting) {
+            // Удаляем символы
+            typingCommand.textContent = currentCommand.substring(0, currentCharIndex - 1);
+            currentCharIndex--;
+        } else {
+            // Добавляем символы
+            typingCommand.textContent = currentCommand.substring(0, currentCharIndex + 1);
+            currentCharIndex++;
+        }
+        
+        // Скорость печати
+        let typeSpeed = isDeleting ? 50 : 100;
+        
+        // Если команда напечатана полностью
+        if (!isDeleting && currentCharIndex === currentCommand.length) {
+            // Пауза перед удалением
+            typeSpeed = 2000;
+            isDeleting = true;
+        } else if (isDeleting && currentCharIndex === 0) {
+            // Переходим к следующей команде
+            isDeleting = false;
+            currentCommandIndex = (currentCommandIndex + 1) % commands.length;
+            typeSpeed = 500;
+        }
+        
+        setTimeout(typeCommand, typeSpeed);
+    }
+    
+    // Запускаем печать через 2 секунды
+    setTimeout(typeCommand, 2000);
+    
+    // Добавляем интерактивность к кнопкам терминала
+    const terminalButtons = document.querySelectorAll('.terminal-button');
+    
+    terminalButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Добавляем эффект нажатия
+            this.style.transform = 'scale(0.9)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+            }, 100);
+        });
+    });
+    
+    // Добавляем эффект фокуса для навигационных кнопок
+    const navButtons = document.querySelectorAll('.nav-button');
+    
+    navButtons.forEach(button => {
+        button.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-2px)';
+        });
+        
+        button.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    });
+    
+    // Добавляем эффект для файлов в списке
+    const fileItems = document.querySelectorAll('.file-item');
+    
+    fileItems.forEach(item => {
+        item.addEventListener('mouseenter', function() {
+            this.style.color = 'var(--terminal-text)';
+            this.style.transform = 'translateX(4px)';
+        });
+        
+        item.addEventListener('mouseleave', function() {
+            this.style.color = 'var(--terminal-text-dim)';
+            this.style.transform = 'translateX(0)';
+        });
+    });
+}); 
