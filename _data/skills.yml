@@ -1,41 +1,41 @@
 programming_languages:
-  - name: JavaScript
+  - name: "JavaScript"
     level: 90
-    icon: 🟨
-  - name: TypeScript
+    icon: "js"
+  - name: "TypeScript"
     level: 85
-    icon: 🔵
-  - name: Python
+    icon: "ts"
+  - name: "Python"
     level: 80
-    icon: 🐍
-  - name: HTML/CSS
+    icon: "python"
+  - name: "HTML/CSS"
     level: 95
-    icon: 🌐
+    icon: "html"
 
 frameworks:
-  - name: React
+  - name: "React"
     level: 85
-    icon: ⚛️
-  - name: Vue.js
+    icon: "react"
+  - name: "Vue.js"
     level: 80
-    icon: 💚
-  - name: Node.js
+    icon: "vue"
+  - name: "Node.js"
     level: 85
-    icon: 🟢
-  - name: Jekyll
+    icon: "node"
+  - name: "Jekyll"
     level: 90
-    icon: 💎
+    icon: "jekyll"
 
 tools:
-  - name: Git
+  - name: "Git"
     level: 90
-    icon: 📝
-  - name: Docker
+    icon: "git"
+  - name: "Docker"
     level: 75
-    icon: 🐳
-  - name: Linux
+    icon: "docker"
+  - name: "Linux"
     level: 85
-    icon: 🐧
-  - name: VS Code
+    icon: "linux"
+  - name: "VS Code"
     level: 95
-    icon: 💻 
+    icon: "vscode" 

@@ -1,19 +1,19 @@
 - name: GitHub
   url: https://github.com/mrvi0
-  icon: 🐙
-  username: @mrvi0
+  icon: github
+  username: "@mrvi0"
 
 - name: Telegram
   url: https://t.me/B4DCAT
-  icon: 💬
-  username: @B4DCAT
+  icon: telegram
+  username: "@B4DCAT"
 
 - name: Email
-  url: mailto:contact@mrvi.dev
-  icon: 📧
-  username: contact@mrvi.dev
+  url: mailto:support@b4dcat.ru
+  icon: email
+  username: "support@b4dcat.ru"
 
 - name: LinkedIn
-  url: #
-  icon: 💼
-  username: Mr Vi 
+  url: "#"
+  icon: linkedin
+  username: "Mr Vi" 
