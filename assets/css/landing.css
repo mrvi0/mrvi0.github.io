@@ -5,63 +5,85 @@
     box-sizing: border-box;
 }
 
+:root {
+    --primary-color: #6366f1;
+    --primary-hover: #4f46e5;
+    --secondary-color: #8b5cf6;
+    --accent-color: #06b6d4;
+    --background: #f8fafc;
+    --surface: #ffffff;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --border: #e2e8f0;
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
 body {
     font-family: 'Montserrat', sans-serif;
-    background-color: #1a1a2e; /* Темно-синий фон */
-    color: #e0e0e0; /* Светлый текст */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: var(--text-primary);
     line-height: 1.6;
-    overflow-x: hidden; /* Предотвращаем горизонтальный скролл */
+    overflow-x: hidden;
     min-height: 100vh;
-    display: flex; /* Используем Flexbox для центрирования */
+    display: flex;
     justify-content: center;
     align-items: center;
 }
 
 /* Контейнер для фона tsParticles */
 #tsparticles {
-    position: fixed; /* Фиксируем фон */
+    position: fixed;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
-    z-index: -1; /* Отправляем фон назад */
+    z-index: -1;
 }
 
 /* Основной контейнер контента */
 .content {
     text-align: center;
-    padding: 40px 20px;
-    max-width: 800px;
+    padding: 3rem 2rem;
+    max-width: 900px;
     margin: auto;
-    background-color: rgba(26, 26, 46, 0.6); /* Полупрозрачный фон для контента */
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    z-index: 1; /* Убеждаемся, что контент над фоном */
-    backdrop-filter: blur(5px); /* Эффект размытия фона под блоком (если поддерживается) */
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 24px;
+    box-shadow: var(--shadow-lg);
+    z-index: 1;
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 /* Заголовок */
 h1 {
-    font-size: 3em;
-    margin-bottom: 0.5em;
-    color: #f0f0f0; /* Яркий белый для заголовка */
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none;
 }
 
 /* Подзаголовок и Typed.js */
 p {
-    font-size: 1.2em;
-    margin-bottom: 1.5em;
-    color: #b3b3cc; /* Чуть приглушенный цвет */
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    color: var(--text-secondary);
+    font-weight: 400;
 }
 
 #typed-element {
-    color: #87CEFA; /* Светло-голубой для печатающегося текста */
-    font-family: 'Source Code Pro', monospace; /* Моноширинный шрифт */
+    color: var(--accent-color);
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 600;
 }
 
 .typed-cursor {
-    color: #87CEFA;
+    color: var(--accent-color);
     opacity: 1;
     animation: blink 0.7s infinite;
 }
@@ -74,99 +96,206 @@ p {
 
 /* Навигация */
 nav h2 {
-    font-size: 1.5em;
-    margin-bottom: 1em;
-    color: #f0f0f0;
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+    font-weight: 600;
 }
 
 nav ul {
     list-style: none;
     padding: 0;
-    display: flex;
-    flex-wrap: wrap; /* Перенос ссылок на новую строку на маленьких экранах */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
     justify-content: center;
-    gap: 15px; /* Пространство между ссылками */
 }
 
 nav li {
-    margin-bottom: 10px; /* Небольшой отступ снизу для каждого элемента */
+    margin-bottom: 0;
 }
 
 nav a {
     text-decoration: none;
-    color: #e0e0e0;
-    background-color: rgba(135, 206, 250, 0.2); /* Полупрозрачный фон для ссылок */
-    padding: 10px 20px;
-    border-radius: 25px; /* Скругленные углы */
-    transition: all 0.3s ease; /* Плавный переход для hover-эффекта */
-    display: inline-block; /* Чтобы padding работал корректно */
-    border: 1px solid rgba(135, 206, 250, 0.4);
+    color: var(--text-primary);
+    background: var(--surface);
+    padding: 1.25rem 1.5rem;
+    border-radius: 16px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: block;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
+}
+
+nav a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.5s;
+}
+
+nav a:hover::before {
+    left: 100%;
 }
 
 nav a:hover,
 nav a:focus {
-    background-color: rgba(135, 206, 250, 0.5);
-    color: #1a1a2e; /* Темный текст при наведении */
-    transform: translateY(-3px) scale(1.05); /* Небольшой подъем и увеличение */
-    box-shadow: 0 4px 8px rgba(135, 206, 250, 0.3);
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: transparent;
+}
+
+/* Секция особенностей */
+.features-animate {
+    animation: fadeInUp 1s ease-out 1.2s forwards;
+    opacity: 0;
+    margin-top: 3rem;
+}
+
+.features-animate h2 {
+    font-size: 1.75rem;
+    margin-bottom: 2rem;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.feature-card {
+    background: var(--surface);
+    padding: 1.5rem;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: center;
+}
+
+.feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-color);
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.feature-card h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+}
+
+.feature-card p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 0;
+    line-height: 1.5;
 }
 
 /* Футер */
 footer {
-    margin-top: 3em;
-    font-size: 0.9em;
-    color: #b3b3cc;
+    margin-top: 3rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
 }
 
 footer a {
-    color: #87CEFA; /* Светло-голубой для ссылок в футере */
+    color: var(--primary-color);
     text-decoration: none;
     transition: color 0.3s ease;
+    font-weight: 500;
 }
 
 footer a:hover,
 footer a:focus {
-    color: #ffffff;
+    color: var(--primary-hover);
     text-decoration: underline;
 }
 
 /* Анимации появления элементов */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+@keyframes fadeInUp {
+    from { 
+        opacity: 0; 
+        transform: translateY(30px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
 }
 
 .header-animate {
-    animation: fadeIn 1s ease-out 0.5s forwards;
-    opacity: 0; /* Начальное состояние для анимации */
+    animation: fadeInUp 1s ease-out 0.3s forwards;
+    opacity: 0;
 }
 
 .nav-animate {
-    animation: fadeIn 1s ease-out 1s forwards;
+    animation: fadeInUp 1s ease-out 0.6s forwards;
     opacity: 0;
 }
 
 .footer-animate {
-    animation: fadeIn 1s ease-out 1.5s forwards;
+    animation: fadeInUp 1s ease-out 1.5s forwards;
     opacity: 0;
 }
 
 /* Адаптивность */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     h1 {
-        font-size: 2.2em;
+        font-size: 2.5rem;
     }
     p {
-        font-size: 1em;
+        font-size: 1.1rem;
     }
     nav ul {
-        flex-direction: column; /* Ссылки в столбик на маленьких экранах */
-        gap: 10px;
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
     }
-     nav a {
-        padding: 8px 15px;
+    nav a {
+        padding: 1rem 1.25rem;
     }
     .content {
-        padding: 20px 15px;
+        padding: 2rem 1.5rem;
+        margin: 1rem;
+    }
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    .feature-card {
+        padding: 1.25rem;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2rem;
+    }
+    .content {
+        padding: 1.5rem 1rem;
+    }
+    .features-animate h2 {
+        font-size: 1.5rem;
     }
 }
