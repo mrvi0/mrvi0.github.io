@@ -1,0 +1,96 @@
+# Site settings
+title: Mr Vi
+email: 
+description: >- 
+  Персональный сайт Mr Vi
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://mrvi0.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+twitter_username: 
+github_username: mrvi0
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: pretty
+
+# Collections
+collections:
+  posts:
+    output: true
+    permalink: /:collection/:title/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - .git/
+  - .github/
+  - README.md
+  - package.json
+  - package-lock.json
+  - yarn.lock
+  - .eslintrc.js
+  - .eslintignore
+  - .prettierrc
+  - .prettierignore
+  - .gitignore
+  - .bundle/
+  - .jekyll-cache/
+  - _site/
+  - .sass-cache/
+
+# Include files
+include:
+  - _pages
+  - _posts
+  - _layouts
+  - _includes
+  - _sass
+  - _data
+  - assets
+  - images
+  - files
+  - favicon.ico
+  - robots.txt
+  - sitemap.xml
+  - manifest.json
+  - sw.js
+  - offline.html
+
+# Sass settings
+sass:
+  sass_dir: _sass
+  style: compressed
+
+# Kramdown settings
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    block:
+      line_numbers: false
+      start_line: 1 

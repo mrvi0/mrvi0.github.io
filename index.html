@@ -1,88 +1,28 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mr Vi - Personal Hub</title>
-    <meta name="description" content="Персональный хаб Mr Vi">
-    <meta name="keywords" content="Mr Vi, developer, personal">
-    <meta name="author" content="Mr Vi">
+---
+layout: default
+title: Главная
+description: Персональный хаб Mr Vi
+keywords: Mr Vi, developer, personal
+---
+
+<div class="terminal-container">
+    <div class="terminal-header">
+        <div class="terminal-buttons">
+            <span class="terminal-button close"></span>
+            <span class="terminal-button minimize"></span>
+            <span class="terminal-button maximize"></span>
+        </div>
+        <div class="terminal-title">Mr Vi Terminal</div>
+    </div>
     
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://mrvi0.github.io/">
-    <meta property="og:title" content="Mr Vi - Personal Hub">
-    <meta property="og:description" content="Персональный хаб Mr Vi">
-    <meta property="og:image" content="https://mrvi0.github.io/assets/img/og-image.png">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://mrvi0.github.io/">
-    <meta property="twitter:title" content="Mr Vi - Personal Hub">
-    <meta property="twitter:description" content="Персональный хаб Mr Vi">
-    <meta property="twitter:image" content="https://mrvi0.github.io/assets/img/og-image.png">
-
-    <!-- PWA Manifest -->
-    <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#00ff00">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Mr Vi">
-    <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
-
-    <!-- Favicons -->
-    <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon">
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32x32.png"> 
-    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16x16.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="/assets/img/favicon-192.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="/assets/img/favicon-512.png">
-
-    <!-- Preconnect for performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdn.jsdelivr.net">
-    <link rel="preconnect" href="https://unpkg.com">
-
-    <!-- Styles -->
-    <link rel="stylesheet" href="/assets/css/main.css">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
-
-    <!-- Yandex.Metrika counter -->
-    <script type="text/javascript">
-        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();
-        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a);
-        })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-    
-        ym(99850299, "init", {
-            clickmap:true,
-            trackLinks:true,
-            accurateTrackBounce:true
-        });
-    </script>
-    <noscript><div><img src="https://mc.yandex.ru/watch/99850299" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-    <!-- /Yandex.Metrika counter -->
-</head>
-<body>
-    <div class="terminal-container">
-        <div class="terminal-header">
-            <div class="terminal-buttons">
-                <span class="terminal-button close"></span>
-                <span class="terminal-button minimize"></span>
-                <span class="terminal-button maximize"></span>
-            </div>
-            <div class="terminal-title">Mr Vi Terminal</div>
+    <div class="terminal-content">
+        <div class="terminal-line">
+            <span class="prompt">$</span>
+            <span class="command">whoami</span>
         </div>
         
-        <div class="terminal-content">
-            <div class="terminal-line">
-                <span class="prompt">$</span>
-                <span class="command">whoami</span>
-            </div>
-            
-            <div class="output">
-                <div class="ascii-art">
+        <div class="output">
+            <div class="ascii-art">
 ```
 ███╗   ███╗██████╗ ██╗   ██╗██╗ ██████╗ 
 ████╗ ████║██╔══██╗██║   ██║██║██╔═████╗
@@ -91,54 +31,44 @@
 ██║ ╚═╝ ██║██║  ██║ ╚████╔╝ ██║╚██████╔╝
 ╚═╝     ╚═╝╚═╝  ╚═╝  ╚═══╝  ╚═╝ ╚═════╝ 
 ```
+            </div>
+            
+            <div class="description">
+                <p>Привет! Я Mr Vi — разработчик и создатель различных проектов.</p>
+            </div>
+            
+            <div class="navigation">
+                <h3>Навигация:</h3>
+                <div class="nav-buttons">
+                    <a href="/about/" class="nav-button">👨‍💻 О себе</a>
+                    <a href="/projects/" class="nav-button">🚀 Проекты</a>
+                    <a href="/blog/" class="nav-button">📝 Блог</a>
+                    <a href="/contact/" class="nav-button">📞 Контакты</a>
                 </div>
-                
-                <div class="description">
-                    <p>Привет! Я Mr Vi — разработчик и создатель различных проектов.</p>
+            </div>
+            
+            <div class="navigation">
+                <h3>Социальные сети:</h3>
+                <div class="nav-buttons">
+                    <a href="https://github.com/mrvi0" class="nav-button">🐙 GitHub</a>
+                    <a href="https://t.me/B4DCAT" class="nav-button">💬 Telegram</a>
                 </div>
-                
-                <div class="navigation">
-                    <h3>Ссылки:</h3>
-                    <div class="nav-buttons">
-                        <a href="https://github.com/mrvi0" class="nav-button">GitHub</a>
-                        <a href="https://t.me/B4DCAT" class="nav-button">Telegram</a>
-                    </div>
-                </div>
-                
-                <div class="terminal-line">
-                    <span class="prompt">$</span>
-                    <span class="command">echo "Добро пожаловать!"</span>
-                </div>
-                
-                <div class="output">
-                    <span class="success">Добро пожаловать!</span>
-                </div>
-                
-                <div class="terminal-line">
-                    <span class="prompt">$</span>
-                    <span class="command" id="typing-command"></span>
-                    <span class="cursor">█</span>
-                </div>
+            </div>
+            
+            <div class="terminal-line">
+                <span class="prompt">$</span>
+                <span class="command">echo "Добро пожаловать!"</span>
+            </div>
+            
+            <div class="output">
+                <span class="success">Добро пожаловать!</span>
+            </div>
+            
+            <div class="terminal-line">
+                <span class="prompt">$</span>
+                <span class="command" id="typing-command"></span>
+                <span class="cursor">█</span>
             </div>
         </div>
     </div>
-
-    <!-- Scripts -->
-    <script src="/assets/js/main.js"></script>
-    
-    <!-- PWA Service Worker Registration -->
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
-                    .then(registration => {
-                        console.log('SW registered: ', registration);
-                    })
-                    .catch(registrationError => {
-                        console.log('SW registration failed: ', registrationError);
-                    });
-            });
-        }
-    </script>
-</body>
-</html> 
+</div> 

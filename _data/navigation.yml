@@ -1,0 +1,19 @@
+- title: Главная
+  url: /
+  icon: 🏠
+
+- title: О себе
+  url: /about/
+  icon: 👨‍💻
+
+- title: Проекты
+  url: /projects/
+  icon: 🚀
+
+- title: Блог
+  url: /blog/
+  icon: 📝
+
+- title: Контакты
+  url: /contact/
+  icon: 📞 

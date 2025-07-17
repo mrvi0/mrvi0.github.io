@@ -172,6 +172,105 @@ body {
     color: var(--link-hover-color);
 }
 
+/* Contact List */
+.contact-list {
+    margin: 16px 0;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    padding: 8px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.contact-item:hover {
+    background: rgba(0, 255, 0, 0.05);
+}
+
+.contact-icon {
+    margin-right: 12px;
+    font-size: 18px;
+}
+
+.contact-label {
+    color: var(--text-color);
+    font-weight: bold;
+    margin-right: 8px;
+    min-width: 80px;
+}
+
+.contact-link {
+    color: var(--link-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.contact-link:hover {
+    color: var(--link-hover-color);
+    text-decoration: underline;
+}
+
+/* Project Items */
+.project-item {
+    margin-bottom: 20px;
+    padding: 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: rgba(0, 255, 0, 0.02);
+}
+
+.project-item h4 {
+    color: var(--heading-color);
+    margin-bottom: 8px;
+    font-family: var(--font-code);
+    font-weight: bold;
+}
+
+.project-item p {
+    color: var(--text-color);
+    margin-bottom: 8px;
+    font-family: var(--font-code);
+}
+
+.tech-stack {
+    color: var(--text-color-muted);
+    font-size: 12px;
+    font-family: var(--font-code);
+    background: rgba(0, 255, 0, 0.1);
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+/* Git Log */
+.git-log {
+    margin: 8px 0;
+    font-family: var(--font-code);
+    font-size: 14px;
+}
+
+.git-log div {
+    color: var(--text-color);
+    margin-bottom: 4px;
+    padding-left: 16px;
+}
+
+/* Ping Result */
+.ping-result {
+    margin: 8px 0;
+    font-family: var(--font-code);
+    font-size: 14px;
+}
+
+.ping-result div {
+    color: var(--text-color);
+    margin-bottom: 2px;
+    padding-left: 16px;
+}
+
 /* Content Sections */
 .description {
     margin: 20px 0;

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <rect width="1200" height="630" fill="#000000"/>
+  <rect x="50" y="50" width="1100" height="530" fill="none" stroke="#00ff00" stroke-width="4" rx="10"/>
+  
+  <!-- Terminal header -->
+  <rect x="50" y="50" width="1100" height="60" fill="#1a1a1a"/>
+  <circle cx="80" cy="80" r="8" fill="#ff5f56"/>
+  <circle cx="110" cy="80" r="8" fill="#ffbd2e"/>
+  <circle cx="140" cy="80" r="8" fill="#27ca3f"/>
+  <text x="600" y="85" font-family="monospace" font-size="24" fill="#00ff00" text-anchor="middle">Mr Vi Terminal</text>
+  
+  <!-- ASCII Art -->
+  <text x="600" y="200" font-family="monospace" font-size="16" fill="#00ff00" text-anchor="middle">
+    ███╗   ███╗██████╗ ██╗   ██╗██╗ ██████╗
+  </text>
+  <text x="600" y="220" font-family="monospace" font-size="16" fill="#00ff00" text-anchor="middle">
+    ████╗ ████║██╔══██╗██║   ██║██║██╔═████╗
+  </text>
+  <text x="600" y="240" font-family="monospace" font-size="16" fill="#00ff00" text-anchor="middle">
+    ██╔████╔██║██████╔╝██║   ██║██║██║██╔██║
+  </text>
+  <text x="600" y="260" font-family="monospace" font-size="16" fill="#00ff00" text-anchor="middle">
+    ██║╚██╔╝██║██╔══██╗╚██╗ ██╔╝██║████╔╝██║
+  </text>
+  <text x="600" y="280" font-family="monospace" font-size="16" fill="#00ff00" text-anchor="middle">
+    ██║ ╚═╝ ██║██║  ██║ ╚████╔╝ ██║╚██████╔╝
+  </text>
+  <text x="600" y="300" font-family="monospace" font-size="16" fill="#00ff00" text-anchor="middle">
+    ╚═╝     ╚═╝╚═╝  ╚═╝  ╚═══╝  ╚═╝ ╚═════╝
+  </text>
+  
+  <!-- Description -->
+  <text x="600" y="380" font-family="monospace" font-size="20" fill="#00ff00" text-anchor="middle">
+    Developer & Creator
+  </text>
+  <text x="600" y="410" font-family="monospace" font-size="16" fill="#00cc00" text-anchor="middle">
+    Personal Hub & Portfolio
+  </text>
+  
+  <!-- Terminal prompt -->
+  <text x="200" y="500" font-family="monospace" font-size="18" fill="#00ff00">
+    $ whoami
+  </text>
+  <text x="200" y="530" font-family="monospace" font-size="18" fill="#00ff00">
+    Mr Vi
+  </text>
+  <text x="200" y="560" font-family="monospace" font-size="18" fill="#00ff00">
+    $ echo "Hello, World!"
+  </text>
+</svg> 
