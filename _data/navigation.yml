@@ -3,17 +3,17 @@
   icon: "home"
 
 - title: "О себе"
-  url: "/about.html"
+  url: "/about/"
   icon: "user"
 
 - title: "Проекты"
-  url: "/projects.html"
+  url: "/projects/"
   icon: "rocket"
 
 - title: "Блог"
-  url: "/blog.html"
+  url: "/blog/"
   icon: "blog"
 
 - title: "Контакты"
-  url: "/contact.html"
+  url: "/contact/"
   icon: "contact" 
