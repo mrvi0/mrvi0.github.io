@@ -13,8 +13,8 @@ title: История изменений (Коммиты)
 
 <script>
     // Параметры вашего репозитория
-    const owner = 'YOUR_GITHUB_USERNAME'; // <<< Замени на свой юзернейм
-    const repo = 'YOUR_REPOSITORY_NAME'; // <<< Замени на имя репозитория
+    const owner = 'mrvi0'; // GitHub username
+    const repo = 'mrvi0.github.io'; // Repository name
     const commitsList = document.getElementById('commits-list');
     const maxCommits = 15; // Сколько коммитов показать
 
