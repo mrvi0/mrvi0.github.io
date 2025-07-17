@@ -18,6 +18,9 @@ collections:
   posts:
     output: true
     permalink: /:collection/:title/
+  pages:
+    output: true
+    permalink: /:title/
 
 # Defaults
 defaults:
