@@ -667,3 +667,54 @@ body {
         font-size: 8px;
     }
 } 
+
+.terminal-hr {
+    border: none;
+    border-top: 1.5px dashed var(--border-color);
+    margin: var(--spacing-lg) 0;
+    opacity: 0.7;
+}
+
+.terminal-line {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--spacing-sm);
+    font-family: var(--font-code);
+}
+
+.terminal-line .prompt {
+    color: var(--text-color);
+    margin-right: 8px;
+    font-weight: bold;
+}
+
+.terminal-line .command {
+    color: var(--text-color);
+    font-family: var(--font-code);
+    font-weight: bold;
+}
+
+.terminal-output-nav {
+    margin: var(--spacing-md) 0 var(--spacing-lg) 0;
+    display: flex;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+}
+
+.terminal-output-nav .nav-button {
+    color: var(--link-color);
+    text-decoration: none;
+    padding: 8px 16px;
+    border: 1.5px solid var(--terminal-border);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    font-family: var(--font-code);
+    font-size: 14px;
+    background: transparent;
+}
+
+.terminal-output-nav .nav-button:hover {
+    background: rgba(0, 255, 0, 0.1);
+    color: var(--link-hover-color);
+    border-color: var(--link-hover-color);
+} 

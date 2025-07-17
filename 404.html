@@ -4,6 +4,8 @@ title: 404 - Страница не найдена
 description: Страница не найдена
 ---
 
+{% include terminal_nav.html %}
+
 <div class="terminal-container">
     <div class="terminal-header">
         <div class="terminal-buttons">
@@ -13,22 +15,11 @@ description: Страница не найдена
         </div>
         <div class="terminal-title">Mr Vi Terminal - 404</div>
     </div>
-    
     <div class="terminal-content">
         <div class="terminal-line">
             <span class="prompt">$</span>
-            <span class="command">cd /path/to/page</span>
+            <span class="command">./404.sh</span>
         </div>
-        
-        <div class="output">
-            <span class="error">bash: cd: /path/to/page: No such file or directory</span>
-        </div>
-        
-        <div class="terminal-line">
-            <span class="prompt">$</span>
-            <span class="command">ls -la /</span>
-        </div>
-        
         <div class="output">
             <div class="ascii-art">
 ```
@@ -40,12 +31,10 @@ description: Страница не найдена
 ╚═╝     ╚═╝╚═╝  ╚═╝  ╚═══╝  ╚═╝ ╚═════╝ 
 ```
             </div>
-            
             <div class="description">
-                <h3>❌ Ошибка 404</h3>
+                <h3>Ошибка 404</h3>
                 <p>Страница, которую вы ищете, не существует или была перемещена.</p>
-                
-                <h3>🔍 Что можно сделать:</h3>
+                <h3>Что можно сделать:</h3>
                 <ul>
                     <li>Проверить правильность URL</li>
                     <li>Вернуться на <a href="/" class="nav-button">главную страницу</a></li>
@@ -53,29 +42,11 @@ description: Страница не найдена
                     <li>Связаться со мной, если это ошибка</li>
                 </ul>
             </div>
-            
-            <div class="terminal-line">
-                <span class="prompt">$</span>
-                <span class="command">find / -name "*.html" 2>/dev/null | head -5</span>
-            </div>
-            
-            <div class="output">
-                <span class="success">Доступные страницы:</span>
-                <div class="file-list">
-                    <a href="/" class="file-item">/index.html</a>
-                    <a href="/about/" class="file-item">/about/</a>
-                    <a href="/projects/" class="file-item">/projects/</a>
-                    <a href="/contact/" class="file-item">/contact/</a>
-                </div>
-            </div>
-            
-            <div class="terminal-line">
-                <span class="prompt">$</span>
-                <span class="command">echo "Спасибо за понимание!"</span>
-            </div>
-            
-            <div class="output">
-                <span class="success">Спасибо за понимание!</span>
+            <div class="file-list">
+                <a href="/" class="file-item">/index.html</a>
+                <a href="/about/" class="file-item">/about/</a>
+                <a href="/projects/" class="file-item">/projects/</a>
+                <a href="/contact/" class="file-item">/contact/</a>
             </div>
         </div>
     </div>

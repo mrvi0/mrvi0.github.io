@@ -5,6 +5,8 @@ description: Портфолио проектов Mr Vi
 keywords: Mr Vi, projects, portfolio, github
 ---
 
+{% include terminal_nav.html %}
+
 <div class="terminal-container">
     <div class="terminal-header">
         <div class="terminal-buttons">
@@ -14,13 +16,11 @@ keywords: Mr Vi, projects, portfolio, github
         </div>
         <div class="terminal-title">Mr Vi Terminal - Projects</div>
     </div>
-    
     <div class="terminal-content">
         <div class="terminal-line">
             <span class="prompt">$</span>
-            <span class="command">ls -la projects/</span>
+            <span class="command">./projects.sh</span>
         </div>
-        
         <div class="output">
             <div class="file-list">
                 <a href="https://github.com/mrvi0" class="file-item">GitHub Profile</a>
@@ -28,7 +28,7 @@ keywords: Mr Vi, projects, portfolio, github
                 <a href="#" class="file-item">AI Assistant</a>
                 <a href="#" class="file-item">Task Manager</a>
             </div>
-            
+            <hr class="terminal-hr">
             <div class="description">
                 <h3>Активные проекты</h3>
                 <div class="project-item">
@@ -40,7 +40,6 @@ keywords: Mr Vi, projects, portfolio, github
                         <a href="https://mrvi0.github.io" class="project-link">Live Demo</a>
                     </div>
                 </div>
-                
                 <div class="project-item">
                     <h4>AI Assistant</h4>
                     <p>ИИ помощник для разработчиков с интеграцией различных API и поддержкой естественного языка.</p>
@@ -50,7 +49,9 @@ keywords: Mr Vi, projects, portfolio, github
                         <a href="#" class="project-link">Demo</a>
                     </div>
                 </div>
-                
+            </div>
+            <hr class="terminal-hr">
+            <div class="description">
                 <h3>В разработке</h3>
                 <div class="project-item">
                     <h4>Task Manager</h4>
@@ -61,7 +62,6 @@ keywords: Mr Vi, projects, portfolio, github
                         <a href="#" class="project-link">Demo</a>
                     </div>
                 </div>
-                
                 <div class="project-item">
                     <h4>Terminal Tools</h4>
                     <p>Набор утилит для командной строки, повышающих продуктивность разработчика.</p>
@@ -70,22 +70,6 @@ keywords: Mr Vi, projects, portfolio, github
                         <a href="#" class="project-link">GitHub</a>
                         <a href="#" class="project-link">Package</a>
                     </div>
-                </div>
-            </div>
-            
-            <div class="terminal-line">
-                <span class="prompt">$</span>
-                <span class="command">git log --oneline -5</span>
-            </div>
-            
-            <div class="output">
-                <span class="success">Последние коммиты:</span>
-                <div class="git-log">
-                    <div>abc1234 Update website design</div>
-                    <div>def5678 Add PWA support</div>
-                    <div>ghi9012 Fix responsive layout</div>
-                    <div>jkl3456 Add terminal animations</div>
-                    <div>mno7890 Initial commit</div>
                 </div>
             </div>
         </div>
